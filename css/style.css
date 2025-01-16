@@ -1,0 +1,394 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background-color: white;
+  color: black;
+  line-height: 1.6;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  border-bottom: 4px solid black;
+  z-index: 1000;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  border-color: black;
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 black;
+}
+
+/* Sections */
+.section {
+  padding: 6rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Start Section */
+#start {
+  background-color: white;
+  text-align: center;
+}
+
+.glitch {
+  font-size: 3rem;
+  font-weight: bold;
+  position: relative;
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  animation: glitch 500ms infinite;
+}
+
+.name {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  border: 5px solid black;
+  display: inline-block;
+  padding: 1rem 2rem;
+  transform: rotate(-2deg);
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.redes-link {
+  text-decoration: none;
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.redes-link:hover {
+  background-color: black;
+  color: white;
+}
+
+/* About Section */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-text {
+  font-size: 1.2rem;
+  border: 4px solid black;
+  padding: 2rem;
+  background-color: white;
+  transform: rotate(1deg);
+}
+
+.image-placeholder {
+  width: 75%;
+  aspect-ratio: 1;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transform: rotate(-2deg);
+  border: 4px solid black;
+}
+
+.contenido-imagen {
+  width: 100%;
+  height: 100%;
+}
+
+.about-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-placeholder {
+  height: 100%;
+  width: 35%;
+  aspect-ratio: 1;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transform: rotate(-2deg);
+  border: 4px solid black;
+}
+
+/* Projects Section */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  border: 4px solid black;
+  padding: 2rem;
+  background-color: white;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translate(-8px, -8px);
+  box-shadow: 8px 8px 0 black;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-link {
+  text-decoration: none;
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.project-link:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Skills Section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  border: 4px solid black;
+  padding: 1.5rem;
+  background-color: white;
+}
+
+.skill-level {
+  height: 20px;
+  background-color: black;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.skill-level::before {
+  content: attr(data-level) "%";
+  position: absolute;
+  right: 0;
+  top: -1.5rem;
+  font-weight: bold;
+}
+
+/* Contact Section */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  border: 4px solid black;
+  padding: 2rem;
+  background-color: white;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 3px solid black;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  background-color: white;
+  cursor: text;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: none;
+}
+
+.form-group label {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.form-group input:focus ~ label,
+.form-group textarea:focus ~ label,
+.form-group input:valid ~ label,
+.form-group textarea:valid ~ label {
+  transform: translateY(-1.5rem);
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0 0.5rem;
+}
+
+.submit-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  font-family: "Courier New", monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 black;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 4px solid black;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .name {
+    font-size: 3rem;
+  }
+
+  .glitch {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
