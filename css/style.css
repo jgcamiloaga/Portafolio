@@ -120,6 +120,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  padding: 2rem 0;
 }
 
 .about-text {
@@ -141,31 +142,13 @@ body {
   font-weight: bold;
   transform: rotate(-2deg);
   border: 4px solid black;
+  margin: 0 auto; /* Centrar la imagen */
 }
 
 .contenido-imagen {
   width: 100%;
   height: 100%;
-}
-
-.about-video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.video-placeholder {
-  height: 100%;
-  width: 35%;
-  aspect-ratio: 1;
-  background-color: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  transform: rotate(-2deg);
-  border: 4px solid black;
+  object-fit: cover; /* Asegura que la imagen cubra bien el contenedor */
 }
 
 .projects-grid {
@@ -441,6 +424,22 @@ body {
   transform: rotate(-45deg);
 }
 
+@media (max-width: 1024px) {
+  .about-content {
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+    padding: 1.5rem;
+  }
+
+  .image-placeholder {
+    width: 85%;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-header {
     display: flex;
@@ -516,6 +515,24 @@ body {
 
   .about-content {
     grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 1rem 0;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    padding: 1.5rem;
+    transform: rotate(0deg); /* Eliminamos la rotación en móvil */
+    order: 2; /* Movemos el texto debajo de la imagen */
+    margin: 0 1rem; /* Añadimos margen lateral */
+  }
+
+  .image-placeholder {
+    width: 80%;
+    max-width: 300px; /* Limitamos el ancho máximo */
+    transform: rotate(0deg); /* Eliminamos la rotación en móvil */
+    order: 1; /* Movemos la imagen arriba */
+    margin: 0 auto; /* Centramos la imagen */
   }
 
   .name {
@@ -528,5 +545,111 @@ body {
 
   .title {
     font-size: 1.5rem;
+  }
+}
+
+/* Media queries para móviles pequeños */
+@media (max-width: 480px) {
+  .nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease,
+      transform 0.5s ease, padding 0.5s ease-in-out;
+    padding: 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 1rem 0;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s;
+  }
+
+  .nav-links.active .nav-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .nav-links.active .nav-link:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  .nav-links.active .nav-link:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  .nav-links.active .nav-link:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  .nav-links.active .nav-link:nth-child(4) {
+    transition-delay: 0.4s;
+  }
+  .nav-links.active .nav-link:nth-child(5) {
+    transition-delay: 0.5s;
+  }
+  .nav-links.active .nav-link:nth-child(6) {
+    transition-delay: 0.6s;
+  }
+
+  .about-content {
+    gap: 2rem;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+    padding: 1.25rem;
+    border-width: 3px;
+  }
+
+  .image-placeholder {
+    width: 90%;
+    border-width: 3px;
+  }
+
+  /* Ajustamos el padding general de la sección */
+  #about.section {
+    padding: 4rem 1rem;
+  }
+}
+
+/* Aseguramos que la sección tenga el padding correcto en móvil */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+
+  .container {
+    padding: 0 1rem;
   }
 }
