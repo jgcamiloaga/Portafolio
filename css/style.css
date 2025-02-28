@@ -1,3 +1,4 @@
+/* Reset y estilos base */
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +13,7 @@ body {
   line-height: 1.6;
 }
 
+/* Navegación */
 .nav {
   position: fixed;
   top: 0;
@@ -57,6 +59,55 @@ body {
   box-shadow: 4px 4px 0 black;
 }
 
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background: black;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: black;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(8px);
+}
+
+.menu-toggle.active .hamburger {
+  background: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+  transform: rotate(45deg);
+}
+
+.menu-toggle.active .hamburger::after {
+  transform: rotate(-45deg);
+}
+
+/* Estructura base */
 .section {
   padding: 6rem 2rem;
   min-height: 100vh;
@@ -70,19 +121,10 @@ body {
   width: 100%;
 }
 
+/* Sección de inicio */
 #start {
   background-color: white;
   text-align: center;
-}
-
-.glitch {
-  font-size: 3rem;
-  font-weight: bold;
-  position: relative;
-  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-  animation: glitch 500ms infinite;
 }
 
 .name {
@@ -115,6 +157,7 @@ body {
   color: white;
 }
 
+/* Sección About */
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -142,15 +185,16 @@ body {
   font-weight: bold;
   transform: rotate(-2deg);
   border: 4px solid black;
-  margin: 0 auto; /* Centrar la imagen */
+  margin: 0 auto;
 }
 
 .contenido-imagen {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que la imagen cubra bien el contenedor */
+  object-fit: cover;
 }
 
+/* Sección Projects */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -192,6 +236,7 @@ body {
   color: white;
 }
 
+/* Sección Education */
 .education-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -232,6 +277,7 @@ body {
   font-size: 0.9rem;
 }
 
+/* Sección Skills */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -260,6 +306,7 @@ body {
   font-weight: bold;
 }
 
+/* Formulario de contacto */
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
@@ -324,6 +371,7 @@ body {
   box-shadow: 4px 4px 0 black;
 }
 
+/* Footer */
 .footer {
   text-align: center;
   padding: 2rem;
@@ -339,6 +387,59 @@ body {
 .footer-link:hover {
   font-weight: bold;
   cursor: pointer;
+}
+
+/* Animación inicial de carga */
+.initial-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.initial-loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-text {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  animation: loadingText 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: opacity;
+}
+
+/* Animaciones para la sección de inicio */
+.animate-title {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.animate-title.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efecto glitch mejorado */
+.glitch {
+  font-size: 3rem;
+  font-weight: bold;
+  position: relative;
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  animation: glitch 500ms infinite;
+  will-change: text-shadow;
 }
 
 @keyframes glitch {
@@ -377,53 +478,20 @@ body {
   }
 }
 
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
+/* Animación para las secciones al hacer scroll */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
 }
 
-.hamburger {
-  display: block;
-  position: relative;
-  width: 24px;
-  height: 2px;
-  background: black;
-  transition: all 0.3s ease-in-out;
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.hamburger::before,
-.hamburger::after {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 2px;
-  background: black;
-  transition: all 0.3s ease-in-out;
-}
-
-.hamburger::before {
-  transform: translateY(-8px);
-}
-
-.hamburger::after {
-  transform: translateY(8px);
-}
-
-.menu-toggle.active .hamburger {
-  background: transparent;
-}
-
-.menu-toggle.active .hamburger::before {
-  transform: rotate(45deg);
-}
-
-.menu-toggle.active .hamburger::after {
-  transform: rotate(-45deg);
-}
-
+/* Media Queries */
 @media (max-width: 1024px) {
   .about-content {
     gap: 2rem;
@@ -467,8 +535,10 @@ body {
     max-height: 0;
     opacity: 0;
     transform: translateY(-20px);
-    transition: max-height 0.5s ease-in-out, opacity 0.5s ease,
-      transform 0.5s ease, padding 0.5s ease-in-out;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity, max-height;
     padding: 0;
   }
 
@@ -494,6 +564,7 @@ body {
     transform: translateX(0);
   }
 
+  /* Delays escalonados para los enlaces */
   .nav-links.active .nav-link:nth-child(1) {
     transition-delay: 0.1s;
   }
@@ -522,17 +593,17 @@ body {
   .about-text {
     font-size: 1rem;
     padding: 1.5rem;
-    transform: rotate(0deg); /* Eliminamos la rotación en móvil */
-    order: 2; /* Movemos el texto debajo de la imagen */
-    margin: 0 1rem; /* Añadimos margen lateral */
+    transform: rotate(0deg);
+    order: 2;
+    margin: 0 1rem;
   }
 
   .image-placeholder {
     width: 80%;
-    max-width: 300px; /* Limitamos el ancho máximo */
-    transform: rotate(0deg); /* Eliminamos la rotación en móvil */
-    order: 1; /* Movemos la imagen arriba */
-    margin: 0 auto; /* Centramos la imagen */
+    max-width: 300px;
+    transform: rotate(0deg);
+    order: 1;
+    margin: 0 auto;
   }
 
   .name {
@@ -546,82 +617,17 @@ body {
   .title {
     font-size: 1.5rem;
   }
+
+  .section {
+    padding: 4rem 1rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
 }
 
-/* Media queries para móviles pequeños */
 @media (max-width: 480px) {
-  .nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 1rem 0;
-  }
-
-  .nav-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    width: 100%;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: max-height 0.5s ease-in-out, opacity 0.5s ease,
-      transform 0.5s ease, padding 0.5s ease-in-out;
-    padding: 0;
-  }
-
-  .nav-links.active {
-    display: flex;
-    max-height: 500px;
-    opacity: 1;
-    transform: translateY(0);
-    padding: 1rem 0;
-  }
-
-  .nav-link {
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transition-delay: 0s;
-  }
-
-  .nav-links.active .nav-link {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .nav-links.active .nav-link:nth-child(1) {
-    transition-delay: 0.1s;
-  }
-  .nav-links.active .nav-link:nth-child(2) {
-    transition-delay: 0.2s;
-  }
-  .nav-links.active .nav-link:nth-child(3) {
-    transition-delay: 0.3s;
-  }
-  .nav-links.active .nav-link:nth-child(4) {
-    transition-delay: 0.4s;
-  }
-  .nav-links.active .nav-link:nth-child(5) {
-    transition-delay: 0.5s;
-  }
-  .nav-links.active .nav-link:nth-child(6) {
-    transition-delay: 0.6s;
-  }
-
   .about-content {
     gap: 2rem;
   }
@@ -637,19 +643,193 @@ body {
     border-width: 3px;
   }
 
-  /* Ajustamos el padding general de la sección */
   #about.section {
     padding: 4rem 1rem;
   }
+
+  .name {
+    font-size: 2.5rem;
+    padding: 0.75rem 1.5rem;
+    border-width: 4px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .project-card,
+  .education-card,
+  .skill-card {
+    padding: 1.25rem;
+    border-width: 3px;
+  }
 }
 
-/* Aseguramos que la sección tenga el padding correcto en móvil */
-@media (max-width: 768px) {
-  .section {
-    padding: 4rem 1rem;
+/* Keyframes */
+@keyframes loadingText {
+  0% {
+    opacity: 0.3;
   }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 
-  .container {
-    padding: 0 1rem;
+@keyframes glitchShow {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
   }
+  2% {
+    transform: translateX(3px);
+  }
+  4% {
+    transform: translateX(-3px);
+  }
+  6% {
+    transform: translateX(3px);
+  }
+  8% {
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(41px, 9999px, 44px, 0);
+    transform: skew(0.15deg);
+  }
+  5% {
+    clip: rect(45px, 9999px, 46px, 0);
+    transform: skew(0.45deg);
+  }
+  10% {
+    clip: rect(49px, 9999px, 40px, 0);
+    transform: skew(0.65deg);
+  }
+  15% {
+    clip: rect(42px, 9999px, 41px, 0);
+    transform: skew(0.45deg);
+  }
+  20% {
+    clip: rect(46px, 9999px, 47px, 0);
+    transform: skew(0.25deg);
+  }
+  100% {
+    clip: rect(41px, 9999px, 44px, 0);
+    transform: skew(0.15deg);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(40px, 9999px, 45px, 0);
+    transform: skew(0.25deg);
+  }
+  5% {
+    clip: rect(44px, 9999px, 48px, 0);
+    transform: skew(0.55deg);
+  }
+  10% {
+    clip: rect(48px, 9999px, 41px, 0);
+    transform: skew(0.75deg);
+  }
+  15% {
+    clip: rect(41px, 9999px, 40px, 0);
+    transform: skew(0.55deg);
+  }
+  20% {
+    clip: rect(45px, 9999px, 46px, 0);
+    transform: skew(0.35deg);
+  }
+  100% {
+    clip: rect(40px, 9999px, 45px, 0);
+    transform: skew(0.25deg);
+  }
+}
+
+
+/* Animaciones de Scroll */
+.scroll-animation {
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Animación desde abajo */
+.scroll-animation.from-bottom {
+  transform: translateY(100px);
+}
+
+/* Animación desde arriba */
+.scroll-animation.from-top {
+  transform: translateY(-100px);
+}
+
+/* Animación desde la izquierda */
+.scroll-animation.from-left {
+  transform: translateX(-100px);
+}
+
+/* Animación desde la derecha */
+.scroll-animation.from-right {
+  transform: translateX(100px);
+}
+
+/* Animación de zoom */
+.scroll-animation.zoom {
+  transform: scale(0.5);
+}
+
+/* Animación de rotación */
+.scroll-animation.rotate {
+  transform: rotate(-180deg);
+}
+
+/* Estado activo para todas las animaciones */
+.scroll-animation.active {
+  opacity: 1;
+  transform: translate(0) scale(1) rotate(0);
+}
+
+/* Ajustes de tiempo para las animaciones */
+.scroll-animation.delay-1 { transition-delay: 0.1s; }
+.scroll-animation.delay-2 { transition-delay: 0.2s; }
+.scroll-animation.delay-3 { transition-delay: 0.3s; }
+.scroll-animation.delay-4 { transition-delay: 0.4s; }
+.scroll-animation.delay-5 { transition-delay: 0.5s; }
+
+/* Botón de volver arriba */
+.scroll-top-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top-button.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-top-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
