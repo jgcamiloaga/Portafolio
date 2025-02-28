@@ -1,17 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    navLinks.classList.toggle("active");
   });
 
   // Cerrar el menú al hacer clic en un enlace
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      menuToggle.classList.remove('active');
-      navLinks.classList.remove('active');
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuToggle.classList.remove("active");
+      navLinks.classList.remove("active");
     });
   });
 });
@@ -131,4 +131,78 @@ window.addEventListener("scroll", () => {
       link.style.color = "black";
     }
   });
+});
+
+// Animación de carga inicial
+document.addEventListener("DOMContentLoaded", () => {
+  // Mostrar animación de carga por 2 segundos
+  setTimeout(() => {
+    document.querySelector(".initial-loading").classList.add("hide");
+    startPageAnimations();
+  }, 1500);
+});
+
+// Iniciar animaciones de la página
+function startPageAnimations() {
+  // Animar títulos de la sección inicial
+  const titles = document.querySelectorAll(".animate-title");
+  titles.forEach((title, index) => {
+    setTimeout(() => {
+      title.classList.add("show");
+    }, 500 * index);
+  });
+
+  // Activar efecto glitch
+  const glitchText = document.querySelector(".glitch");
+  if (glitchText) {
+    glitchText.classList.add("show");
+  }
+}
+
+// Animación al hacer scroll
+function handleScrollAnimations() {
+  const sections = document.querySelectorAll(".fade-in-section");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+}
+
+// Iniciar observador de scroll
+handleScrollAnimations();
+
+// Función para animar elementos secuencialmente
+function animateSequentially(elements, delayBetween = 200) {
+  elements.forEach((element, index) => {
+    setTimeout(() => {
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+    }, index * delayBetween);
+  });
+}
+
+// Aplicar animaciones secuenciales a los elementos de navegación
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach((link) => {
+    link.style.opacity = "0";
+    link.style.transform = "translateY(-20px)";
+    link.style.transition = "all 0.5s ease";
+  });
+
+  // Comenzar animación después de un pequeño delay
+  setTimeout(() => {
+    animateSequentially(navLinks);
+  }, 1500); // Después de la animación de carga
 });
