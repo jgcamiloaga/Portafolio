@@ -142,19 +142,44 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Estilos base para los contenedores de enlaces */
+.redes-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.redes-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .redes-link {
   text-decoration: none;
   color: black;
-  border: 2px solid black;
-  padding: 0.5rem 1rem;
+  border: 3px solid black;
+  padding: 0.5rem 1.5rem;
   font-weight: bold;
   transition: all 0.3s ease;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: white;
 }
 
 .redes-link:hover {
-  background-color: black;
-  color: white;
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 black;
+  background-color: white;
+  color: black;
+}
+
+.redes-link:active {
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 black;
 }
 
 /* Sección About */
