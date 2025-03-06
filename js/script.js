@@ -268,7 +268,7 @@ function initializeLoadingAnimation() {
   setTimeout(() => {
     loadingScreen.classList.add("hide");
     startPageAnimations();
-  }, 500);
+  }, 100);
 }
 
 // Iniciar animaciones de la página después de la carga
