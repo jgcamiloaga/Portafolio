@@ -527,8 +527,8 @@ body {
   font-weight: bold;
   position: relative;
   text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   animation: glitch 500ms infinite;
   will-change: text-shadow;
 }
@@ -543,6 +543,25 @@ body {
 }
 
 /* Animaciones de entrada */
+/* Animación para las secciones al hacer scroll */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Asegúrate de que esta regla sea específica */
+.scroll-animation.active {
+  opacity: 1 !important;
+  transform: translate(0) scale(1) rotate(0) rotateX(0) rotateY(0) !important;
+}
+
 .scroll-animation.from-bottom {
   transform: translateY(100px);
 }
@@ -721,159 +740,159 @@ body {
 
 @keyframes float {
   0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0.2;
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.2;
   }
   50% {
-      transform: translateY(-60px) rotate(180deg);
-      opacity: 0.4;
+    transform: translateY(-60px) rotate(180deg);
+    opacity: 0.4;
   }
   100% {
-      transform: translateY(0) rotate(360deg);
-      opacity: 0.2;
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.2;
   }
 }
 
 /* Keyframes */
 @keyframes loadingText {
   0% {
-      opacity: 0.3;
+    opacity: 0.3;
   }
   50% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      opacity: 0.3;
+    opacity: 0.3;
   }
 }
 
 @keyframes glitch {
   0% {
-      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-          -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-          0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
   14% {
-      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-          -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-          0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
   15% {
-      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-          0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-          -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
   49% {
-      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-          0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-          -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
   50% {
-      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-          0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
   }
   99% {
-      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-          0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
   }
   100% {
-      text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
-          -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-          -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 }
 
 @keyframes glitchShow {
   0% {
-      opacity: 1;
-      transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
   }
   2% {
-      transform: translateX(3px);
+    transform: translateX(3px);
   }
   4% {
-      transform: translateX(-3px);
+    transform: translateX(-3px);
   }
   6% {
-      transform: translateX(3px);
+    transform: translateX(3px);
   }
   8% {
-      transform: translateX(0);
+    transform: translateX(0);
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
 @keyframes glitch-anim {
   0% {
-      clip: rect(41px, 9999px, 44px, 0);
-      transform: skew(0.15deg);
+    clip: rect(41px, 9999px, 44px, 0);
+    transform: skew(0.15deg);
   }
   5% {
-      clip: rect(45px, 9999px, 46px, 0);
-      transform: skew(0.45deg);
+    clip: rect(45px, 9999px, 46px, 0);
+    transform: skew(0.45deg);
   }
   10% {
-      clip: rect(49px, 9999px, 40px, 0);
-      transform: skew(0.65deg);
+    clip: rect(49px, 9999px, 40px, 0);
+    transform: skew(0.65deg);
   }
   15% {
-      clip: rect(42px, 9999px, 41px, 0);
-      transform: skew(0.45deg);
+    clip: rect(42px, 9999px, 41px, 0);
+    transform: skew(0.45deg);
   }
   20% {
-      clip: rect(46px, 9999px, 47px, 0);
-      transform: skew(0.25deg);
+    clip: rect(46px, 9999px, 47px, 0);
+    transform: skew(0.25deg);
   }
   100% {
-      clip: rect(41px, 9999px, 44px, 0);
-      transform: skew(0.15deg);
+    clip: rect(41px, 9999px, 44px, 0);
+    transform: skew(0.15deg);
   }
 }
 
 @keyframes glitch-anim2 {
   0% {
-      clip: rect(40px, 9999px, 45px, 0);
-      transform: skew(0.25deg);
+    clip: rect(40px, 9999px, 45px, 0);
+    transform: skew(0.25deg);
   }
   5% {
-      clip: rect(44px, 9999px, 48px, 0);
-      transform: skew(0.55deg);
+    clip: rect(44px, 9999px, 48px, 0);
+    transform: skew(0.55deg);
   }
   10% {
-      clip: rect(48px, 9999px, 41px, 0);
-      transform: skew(0.75deg);
+    clip: rect(48px, 9999px, 41px, 0);
+    transform: skew(0.75deg);
   }
   15% {
-      clip: rect(41px, 9999px, 40px, 0);
-      transform: skew(0.55deg);
+    clip: rect(41px, 9999px, 40px, 0);
+    transform: skew(0.55deg);
   }
   20% {
-      clip: rect(45px, 9999px, 46px, 0);
-      transform: skew(0.35deg);
+    clip: rect(45px, 9999px, 46px, 0);
+    transform: skew(0.35deg);
   }
   100% {
-      clip: rect(40px, 9999px, 45px, 0);
-      transform: skew(0.25deg);
+    clip: rect(40px, 9999px, 45px, 0);
+    transform: skew(0.25deg);
   }
 }
 
 @keyframes reveal {
   0% {
-      transform: scaleX(0);
+    transform: scaleX(0);
   }
   100% {
-      transform: scaleX(1);
+    transform: scaleX(1);
   }
 }
 
 @keyframes reveal-text {
   0% {
-      clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 100% 0 0);
   }
   100% {
-      clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -909,280 +928,287 @@ body {
 /* Media queries para responsive de proyectos */
 @media (max-width: 1400px) {
   .projects-grid {
-      grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1100px) {
   .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 767px) {
   .projects-grid {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
-  
+
   .project-preview {
-      height: 180px;
+    height: 180px;
   }
-  
+
+  /* Corregido: Eliminamos la opacidad por defecto en móviles */
   .project-overlay {
-      opacity: 0.9;
-      background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
   }
-  
+
+  /* Añadimos una clase para controlar la visibilidad en móviles */
+  .project-card.active-mobile .project-overlay {
+    opacity: 1;
+  }
+
   .project-description {
-      display: block;
-      font-size: 0.85rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
   .project-preview {
-      height: 160px;
+    height: 160px;
   }
-  
+
   .project-overlay h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
   }
-  
+
   .project-overlay p {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
-  
+
   .project-description {
-      font-size: 0.8rem;
-      line-height: 1.3;
+    font-size: 0.8rem;
+    line-height: 1.3;
   }
-  
+
   .project-links {
-      padding: 1rem;
+    padding: 1rem;
   }
-  
+
   .project-link {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
 
 /* Media Queries generales */
 @media (max-width: 1024px) {
   .about-content {
-      gap: 2rem;
-      padding: 1rem 0;
+    gap: 2rem;
+    padding: 1rem 0;
   }
 
   .about-text {
-      font-size: 1.1rem;
-      padding: 1.5rem;
+    font-size: 1.1rem;
+    padding: 1.5rem;
   }
 
   .image-placeholder {
-      width: 85%;
+    width: 85%;
   }
-  
+
   .section {
-      padding: 5rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .nav-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
   }
 
   .nav-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .menu-toggle {
-      display: block;
+    display: block;
   }
 
   .nav-links {
-      width: 100%;
-      flex-direction: column;
-      gap: 1rem;
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-          transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, opacity, max-height;
-      padding: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity, max-height;
+    padding: 0;
   }
 
   .nav-links.active {
-      display: flex;
-      max-height: 500px;
-      opacity: 1;
-      transform: translateY(0);
-      padding: 1rem 0;
+    display: flex;
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 1rem 0;
   }
 
   .nav-link {
-      width: 100%;
-      text-align: center;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      transition-delay: 0s;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s;
   }
 
   .nav-links.active .nav-link {
-      opacity: 1;
-      transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
   }
 
   /* Delays escalonados para los enlaces */
   .nav-links.active .nav-link:nth-child(1) {
-      transition-delay: 0.1s;
+    transition-delay: 0.1s;
   }
   .nav-links.active .nav-link:nth-child(2) {
-      transition-delay: 0.2s;
+    transition-delay: 0.2s;
   }
   .nav-links.active .nav-link:nth-child(3) {
-      transition-delay: 0.3s;
+    transition-delay: 0.3s;
   }
   .nav-links.active .nav-link:nth-child(4) {
-      transition-delay: 0.4s;
+    transition-delay: 0.4s;
   }
   .nav-links.active .nav-link:nth-child(5) {
-      transition-delay: 0.5s;
+    transition-delay: 0.5s;
   }
   .nav-links.active .nav-link:nth-child(6) {
-      transition-delay: 0.6s;
+    transition-delay: 0.6s;
   }
 
   .about-content {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      padding: 1rem 0;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 1rem 0;
   }
 
   .about-text {
-      font-size: 1rem;
-      padding: 1.5rem;
-      transform: rotate(0deg);
-      order: 2;
-      margin: 0 1rem;
+    font-size: 1rem;
+    padding: 1.5rem;
+    transform: rotate(0deg);
+    order: 2;
+    margin: 0 1rem;
   }
 
   .image-placeholder {
-      width: 80%;
-      max-width: 300px;
-      transform: rotate(0deg);
-      order: 1;
-      margin: 0 auto;
+    width: 80%;
+    max-width: 300px;
+    transform: rotate(0deg);
+    order: 1;
+    margin: 0 auto;
   }
 
   .name {
-      font-size: 3rem;
+    font-size: 3rem;
   }
 
   .glitch {
-      font-size: 2rem;
+    font-size: 2rem;
   }
 
   .title {
-      font-size: 1.5rem;
+    font-size: 1.5rem;
   }
 
   .section {
-      padding: 4rem 1rem;
+    padding: 4rem 1rem;
   }
 
   .container {
-      padding: 0 1rem;
+    padding: 0 1rem;
   }
-  
+
   .redes-links {
-      gap: 1rem;
+    gap: 1rem;
   }
-  
+
   .redes-link {
-      padding: 0.4rem 1rem;
-      font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
   }
-  
-  .education-grid, .skills-grid {
-      gap: 1.5rem;
+
+  .education-grid,
+  .skills-grid {
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .about-content {
-      gap: 2rem;
+    gap: 2rem;
   }
 
   .about-text {
-      font-size: 0.95rem;
-      padding: 1.25rem;
-      border-width: 3px;
+    font-size: 0.95rem;
+    padding: 1.25rem;
+    border-width: 3px;
   }
 
   .image-placeholder {
-      width: 90%;
-      border-width: 3px;
+    width: 90%;
+    border-width: 3px;
   }
 
   #about.section {
-      padding: 4rem 1rem;
+    padding: 4rem 1rem;
   }
 
   .name {
-      font-size: 2.5rem;
-      padding: 0.75rem 1.5rem;
-      border-width: 4px;
+    font-size: 2.5rem;
+    padding: 0.75rem 1.5rem;
+    border-width: 4px;
   }
 
   .title {
-      font-size: 1.25rem;
+    font-size: 1.25rem;
   }
 
   .education-card,
   .skill-card {
-      padding: 1.25rem;
-      border-width: 3px;
+    padding: 1.25rem;
+    border-width: 3px;
   }
-  
+
   .education-title {
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
-  
-  .education-description, .skill-card {
-      font-size: 0.85rem;
+
+  .education-description,
+  .skill-card {
+    font-size: 0.85rem;
   }
-  
+
   .contact-form {
-      padding: 1.5rem;
-      border-width: 3px;
+    padding: 1.5rem;
+    border-width: 3px;
   }
-  
-  .form-group input, .form-group textarea {
-      padding: 0.4rem;
-      font-size: 0.9rem;
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.4rem;
+    font-size: 0.9rem;
   }
-  
+
   .submit-button {
-      padding: 0.8rem 1.5rem;
+    padding: 0.8rem 1.5rem;
   }
-  
+
   .footer {
-      padding: 1.5rem;
-      font-size: 0.9rem;
+    padding: 1.5rem;
+    font-size: 0.9rem;
   }
 }
-
