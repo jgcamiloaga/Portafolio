@@ -6,10 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeProjectCards();
   initializeSkillsAnimation();
   initializeContactForm();
-  initializeScrollAnimations();
+  initializeScrollAnimationsFunc();
   initializeLoadingAnimation();
   createParticles();
   initializeScrollTopButton();
+
+  // Añadir manualmente los eventos moveCard a las tarjetas de proyectos
+  setupProjectCardEvents();
 });
 
 // ===== NAVEGACIÓN =====
@@ -42,7 +45,7 @@ function initializeNavigation() {
   // Animación secuencial de los enlaces de navegación
   setTimeout(() => {
     animateSequentially(navLinksItems);
-  }, 1500);
+  }, 1000);
 
   // Resaltado de sección activa
   initializeActiveSection(navLinksItems);
@@ -89,13 +92,81 @@ function initializeSmoothScrolling() {
 
 // ===== TARJETAS DE PROYECTOS =====
 function initializeProjectCards() {
-  // Efecto de inclinación en las tarjetas de proyectos
-  document.querySelectorAll(".project-card").forEach((card) => {
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-      card.style.boxShadow = "";
-    });
+  const projectCards = document.querySelectorAll("#projects .project-card");
+
+  // Detectar si es un dispositivo táctil
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  projectCards.forEach((card) => {
+    // Limpiar cualquier evento previo para evitar duplicados
+    card.removeEventListener("mouseleave", resetCard);
+    card.removeEventListener("touchstart", handleTouchStart);
+    card.removeEventListener("touchend", handleTouchEnd);
+
+    if (isTouchDevice) {
+      // En dispositivos táctiles, usamos eventos touch
+      card.addEventListener("touchstart", handleTouchStart);
+      card.addEventListener("touchend", handleTouchEnd);
+
+      // Eliminar el atributo onmousemove para evitar conflictos en dispositivos táctiles
+      card.removeAttribute("onmousemove");
+    } else {
+      // En dispositivos no táctiles, aseguramos que el evento mouseleave esté activo
+      card.addEventListener("mouseleave", resetCard);
+
+      // Asegurarnos de que el evento mousemove esté correctamente configurado
+      card.setAttribute("onmousemove", "moveCard(event)");
+    }
   });
+
+  console.log(`Inicializadas ${projectCards.length} tarjetas de proyectos`);
+}
+
+// Función para configurar eventos de tarjetas de proyectos
+function setupProjectCardEvents() {
+  const projectCards = document.querySelectorAll("#projects .project-card");
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  projectCards.forEach((card) => {
+    if (!isTouchDevice) {
+      // Añadir el evento mousemove directamente
+      card.addEventListener("mousemove", moveCard);
+      card.addEventListener("mouseleave", resetCard);
+    } else {
+      // En dispositivos táctiles
+      card.addEventListener("touchstart", handleTouchStart);
+      card.addEventListener("touchend", handleTouchEnd);
+    }
+  });
+
+  console.log(
+    `Configurados eventos para ${projectCards.length} tarjetas de proyectos`
+  );
+}
+
+// Función para manejar el inicio del toque
+function handleTouchStart(e) {
+  e.preventDefault();
+  const card = e.currentTarget;
+
+  // Alternar la clase active-mobile para mostrar/ocultar el overlay
+  card.classList.toggle("active-mobile");
+
+  // Si la tarjeta está activa, aplicar efecto de elevación
+  if (card.classList.contains("active-mobile")) {
+    card.style.transform = "translate(-8px, -8px)";
+    card.style.boxShadow = "8px 8px 0 black";
+  } else {
+    resetCard({ currentTarget: card });
+  }
+}
+
+// Función para manejar el fin del toque
+function handleTouchEnd(e) {
+  // No hacemos nada aquí, ya que queremos que el overlay permanezca visible
+  // hasta que el usuario toque nuevamente
 }
 
 // Función para el efecto de inclinación
@@ -113,6 +184,27 @@ function moveCard(e) {
 
   card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(-8px, -8px)`;
   card.style.boxShadow = "8px 8px 0 black";
+
+  // Asegurarse de que el overlay sea visible
+  const overlay = card.querySelector(".project-overlay");
+  if (overlay) {
+    overlay.style.opacity = "1";
+  }
+}
+
+// Función para resetear la tarjeta
+function resetCard(e) {
+  const card = e.currentTarget;
+  card.style.transform = "";
+  card.style.boxShadow = "";
+
+  // Ocultar el overlay al salir (solo en dispositivos no táctiles)
+  if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+    const overlay = card.querySelector(".project-overlay");
+    if (overlay) {
+      overlay.style.opacity = "";
+    }
+  }
 }
 
 // ===== ANIMACIÓN DE HABILIDADES =====
@@ -176,9 +268,10 @@ function initializeContactForm() {
 }
 
 // ===== ANIMACIONES DE SCROLL =====
-function initializeScrollAnimations() {
+function initializeScrollAnimationsFunc() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
+  console.log(`Se encontraron ${fadeInSections.length} secciones con fade-in`);
 
   const fadeObserver = new IntersectionObserver(
     (entries) => {
@@ -199,7 +292,12 @@ function initializeScrollAnimations() {
   handleScrollAnimations();
 
   // Escuchar eventos de scroll
-  window.addEventListener("scroll", function () {
+  window.addEventListener("scroll", () => {
+    handleScrollAnimations();
+  });
+
+  // También ejecutar en resize para manejar cambios de orientación
+  window.addEventListener("resize", () => {
     handleScrollAnimations();
   });
 }
@@ -334,7 +432,7 @@ function initializeScrollTopButton() {
   const scrollTopButton = document.querySelector(".scroll-top-button");
   if (!scrollTopButton) return;
 
-  window.addEventListener("scroll", function () {
+  window.addEventListener("scroll", () => {
     if (window.pageYOffset > 300) {
       scrollTopButton.classList.add("active");
     } else {
@@ -342,7 +440,7 @@ function initializeScrollTopButton() {
     }
   });
 
-  scrollTopButton.addEventListener("click", function () {
+  scrollTopButton.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
