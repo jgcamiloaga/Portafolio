@@ -196,7 +196,16 @@ body {
   border: 4px solid black;
   padding: 2rem;
   background-color: white;
-  transform: rotate(1deg);
+  transform: rotate(0deg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-image {
+  display: flex;
+  justify-content: flex-end; /* Alinear a la derecha */
 }
 
 .image-placeholder {
@@ -208,47 +217,48 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  transform: rotate(-2deg);
+  transform: rotate(0deg);
   border: 4px solid black;
-  margin: 0 auto;
 }
 
 .contenido-imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: rotate(0deg);
 }
 
 /* Sección Projects mejorada */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
   margin-top: 2rem;
 }
 
 .project-card {
   border: 4px solid black;
   background-color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.project-card:hover {
-  transform: translate(-8px, -8px);
-  box-shadow: 8px 8px 0 black;
+  transform-style: preserve-3d !important;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+  position: relative;
+  min-height: 400px;
+  will-change: transform;
 }
 
 .project-preview {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 250px;
   overflow: hidden;
   border-bottom: 4px solid black;
+  transform-style: preserve-3d !important;
 }
 
 .project-image {
@@ -256,10 +266,7 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
-}
-
-.project-card:hover .project-image {
-  transform: scale(1.05);
+  transform: rotate(0deg);
 }
 
 .project-overlay {
@@ -268,16 +275,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem;
   opacity: 0;
   transition: opacity 0.3s ease;
   text-align: center;
+  transform-style: preserve-3d !important;
+  backface-visibility: hidden;
 }
 
 .project-card:hover .project-overlay {
@@ -285,40 +294,47 @@ body {
 }
 
 .project-overlay h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.project-overlay p {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
   font-weight: bold;
 }
 
+.project-overlay p {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
 .project-description {
-  font-size: 0.9rem;
+  font-size: 1rem;
   max-width: 90%;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .project-links {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 1.5rem;
+  padding: 1.8rem;
   justify-content: center;
   background-color: white;
   margin-top: auto;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 .project-link {
   text-decoration: none;
   color: black;
   border: 3px solid black;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   font-weight: bold;
   transition: all 0.3s ease;
   cursor: pointer;
   text-transform: uppercase;
+  position: relative;
+  letter-spacing: 1px;
 }
 
 .project-link:hover {
@@ -327,7 +343,7 @@ body {
   transform: translateY(-3px);
 }
 
-/* Sección Education */
+/* Sección Education con animación completamente diferente */
 .education-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -339,33 +355,107 @@ body {
   border: 2px solid black;
   padding: 1.5rem;
   background-color: white;
-  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
+}
+
+/* Nueva animación para las tarjetas de educación - completamente diferente */
+.education-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
 }
 
 .education-card:hover {
-  transform: translate(-8px, -8px);
-  box-shadow: 8px 8px 0 black;
+  transform: translateY(-15px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-color: black;
+  border-width: 2px;
+}
+
+.education-card:hover::before {
+  transform: translateY(0) rotate(10deg) scale(2);
 }
 
 .education-year {
+  display: inline-block;
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 0.5rem;
   color: #666;
+  transition: all 0.3s ease;
+  padding: 0.2rem 0.5rem;
+  background-color: transparent;
+  border-radius: 3px;
 }
 
 .education-title {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.education-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.education-card:hover .education-title {
+  transform: translateX(5px);
+}
+
+.education-card:hover .education-title::after {
+  width: 100%;
+}
+
+.education-card:hover .education-year {
+  color: white;
+  background-color: black;
 }
 
 .education-school {
   font-weight: bold;
   margin-bottom: 1rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .education-description {
   font-size: 0.9rem;
+  transform: translateY(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.education-card:hover .education-school {
+  transform: translateX(-5px);
+}
+
+.education-card:hover .education-description {
+  transform: translateY(-3px);
+  opacity: 1;
 }
 
 /* Sección Skills */
@@ -928,7 +1018,7 @@ body {
 /* Media queries para responsive de proyectos */
 @media (max-width: 1400px) {
   .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -936,64 +1026,12 @@ body {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: 767px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-preview {
-    height: 180px;
-  }
-
-  /* Corregido: Eliminamos la opacidad por defecto en móviles */
-  .project-overlay {
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-
-  /* Añadimos una clase para controlar la visibilidad en móviles */
-  .project-card.active-mobile .project-overlay {
-    opacity: 1;
-  }
-
-  .project-description {
-    font-size: 0.85rem;
+  .about-content {
+    gap: 3rem;
   }
 }
 
-@media (max-width: 480px) {
-  .project-preview {
-    height: 160px;
-  }
-
-  .project-overlay h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .project-overlay p {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .project-description {
-    font-size: 0.8rem;
-    line-height: 1.3;
-  }
-
-  .project-links {
-    padding: 1rem;
-  }
-
-  .project-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-}
-
-/* Media Queries generales */
 @media (max-width: 1024px) {
   .about-content {
     gap: 2rem;
@@ -1003,6 +1041,10 @@ body {
   .about-text {
     font-size: 1.1rem;
     padding: 1.5rem;
+  }
+
+  .about-image {
+    justify-content: center;
   }
 
   .image-placeholder {
@@ -1101,15 +1143,32 @@ body {
     padding: 1.5rem;
     transform: rotate(0deg);
     order: 2;
-    margin: 0 1rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+  }
+
+  .about-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    order: 1;
   }
 
   .image-placeholder {
     width: 80%;
     max-width: 300px;
     transform: rotate(0deg);
-    order: 1;
-    margin: 0 auto;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .project-card {
+    min-height: 350px;
   }
 
   .name {
@@ -1156,6 +1215,7 @@ body {
     font-size: 0.95rem;
     padding: 1.25rem;
     border-width: 3px;
+    width: 90%;
   }
 
   .image-placeholder {
@@ -1165,6 +1225,10 @@ body {
 
   #about.section {
     padding: 4rem 1rem;
+  }
+
+  .project-card {
+    min-height: 300px;
   }
 
   .name {
