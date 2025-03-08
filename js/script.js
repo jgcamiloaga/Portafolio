@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   createParticles();
   initializeScrollTopButton();
 
-  // Inicializar el efecto 3D para las tarjetas de proyectos
-  initializeCardTilt();
-
   // Inicializar animaciones para tarjetas de educación
   initializeEducationCards();
 });
@@ -80,140 +77,138 @@ function initializeActiveSection(navLinks) {
 
 // ===== SMOOTH SCROLLING =====
 function initializeSmoothScrolling() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return; // Evitar errores con enlaces vacíos
+  try {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return; // Evitar errores con enlaces vacíos
 
-      const target = document.querySelector(targetId);
-      if (target) {
-        // Usar window.scrollTo en lugar de scrollIntoView para mayor compatibilidad
-        const targetPosition =
-          target.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-      }
+        const target = document.querySelector(targetId);
+        if (target) {
+          // Usar window.scrollTo en lugar de scrollIntoView para mayor compatibilidad
+          const targetPosition =
+            target.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
     });
-  });
+  } catch (error) {
+    console.error("Error en smooth scrolling:", error);
+  }
 }
 
-// ===== TARJETAS DE PROYECTOS =====
+// ===== TARJETAS DE PROYECTOS - NUEVA ANIMACIÓN ESPECTACULAR =====
 function initializeProjectCards() {
+  // Crear la estructura interna de cada tarjeta
   const projectCards = document.querySelectorAll("#projects .project-card");
 
-  // Detectar si es un dispositivo táctil
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
   projectCards.forEach((card) => {
-    // Asegurarse de que la tarjeta tenga el estilo transform-style: preserve-3d
-    card.style.transformStyle = "preserve-3d";
+    // Obtener elementos internos originales
+    const previewEl = card.querySelector(".project-preview");
+    const imageEl = card.querySelector(".project-image");
+    const overlayEl = card.querySelector(".project-overlay");
+    const titleEl = overlayEl ? overlayEl.querySelector("h3") : null;
+    const subtitleEl = overlayEl ? overlayEl.querySelector("p") : null;
+    const descriptionEl = overlayEl
+      ? overlayEl.querySelector(".project-description")
+      : null;
+    const linksEl = card.querySelector(".project-links");
 
-    if (isTouchDevice) {
-      // En dispositivos táctiles, usamos eventos touch
-      card.addEventListener("touchstart", handleTouchStart);
-      card.addEventListener("touchend", handleTouchEnd);
-    } else {
-      // En dispositivos no táctiles, usamos eventos de mouse
-      card.addEventListener("mousemove", moveCard);
-      card.addEventListener("mouseleave", resetCard);
-      card.addEventListener("mouseenter", enterCard);
+    // Crear la estructura de tarjeta con flip 3D
+    const cardInner = document.createElement("div");
+    cardInner.className = "project-card-inner";
+
+    // Crear el frente de la tarjeta
+    const cardFront = document.createElement("div");
+    cardFront.className = "project-card-front";
+
+    // Crear la parte trasera de la tarjeta
+    const cardBack = document.createElement("div");
+    cardBack.className = "project-card-back";
+
+    // Mover los elementos al frente de la tarjeta
+    if (previewEl) {
+      cardFront.appendChild(previewEl.cloneNode(true));
     }
+
+    // Crear info contenedor
+    const infoContainer = document.createElement("div");
+    infoContainer.className = "project-info";
+
+    // Añadir título y subtítulo al frente
+    if (titleEl && subtitleEl) {
+      const frontTitle = document.createElement("h3");
+      frontTitle.className = "project-title";
+      frontTitle.textContent = titleEl.textContent;
+
+      const frontSubtitle = document.createElement("p");
+      frontSubtitle.className = "project-subtitle";
+      frontSubtitle.textContent = subtitleEl.textContent;
+
+      infoContainer.appendChild(frontTitle);
+      infoContainer.appendChild(frontSubtitle);
+    }
+
+    // Añadir indicador de flip
+    const flipIndicator = document.createElement("div");
+    flipIndicator.className = "flip-indicator";
+    flipIndicator.textContent = "VOLTEAR →";
+    infoContainer.appendChild(flipIndicator);
+
+    cardFront.appendChild(infoContainer);
+
+    // Configurar la parte trasera de la tarjeta
+    if (titleEl) {
+      const backTitle = document.createElement("h3");
+      backTitle.textContent = titleEl.textContent;
+      cardBack.appendChild(backTitle);
+    }
+
+    if (descriptionEl) {
+      const backDescription = document.createElement("p");
+      backDescription.className = "project-description";
+      backDescription.textContent = descriptionEl.textContent;
+      cardBack.appendChild(backDescription);
+    }
+
+    // Clonar los enlaces
+    if (linksEl) {
+      cardBack.appendChild(linksEl.cloneNode(true));
+    }
+
+    // Añadir efecto de brillo
+    const shineEffect = document.createElement("div");
+    shineEffect.className = "shine-effect";
+    cardFront.appendChild(shineEffect);
+
+    // Ensamblar la tarjeta
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+
+    // Vaciar la tarjeta original y añadir la nueva estructura
+    card.innerHTML = "";
+    card.appendChild(cardInner);
+
+    // Añadir eventos para animaciones
+    card.addEventListener("mouseenter", () => {
+      shineEffect.style.animation = "shine 1s forwards";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      shineEffect.style.animation = "none";
+      setTimeout(() => {
+        shineEffect.style.transform = "translateX(-100%)";
+      }, 50);
+    });
   });
 
-  console.log(`Inicializadas ${projectCards.length} tarjetas de proyectos`);
-}
-
-// Función para inicializar el efecto de inclinación 3D
-function initializeCardTilt() {
-  // Esta función ahora está integrada en initializeProjectCards
-  console.log("Efecto de inclinación 3D inicializado correctamente");
-}
-
-// Función para cuando el mouse entra en la tarjeta
-function enterCard(e) {
-  const card = e.currentTarget;
-
-  // Añadir una transición suave al entrar
-  card.style.transition = "transform 0.2s ease-out";
-  setTimeout(() => {
-    card.style.transition = "none"; // Quitar la transición después para que el movimiento sea fluido
-  }, 200);
-
-  // Aplicar efecto inicial de agrandamiento
-  card.style.transform = "scale(1.05)";
-
-  // Mostrar overlay
-  const overlay = card.querySelector(".project-overlay");
-  if (overlay) {
-    overlay.style.opacity = "1";
-  }
-}
-
-// Función para el efecto de inclinación
-function moveCard(e) {
-  const card = e.currentTarget;
-  const rect = card.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
-
-  // Aumentar el factor de rotación para un efecto más visible
-  const rotateX = ((y - centerY) / 10) * 1.5;
-  const rotateY = ((centerX - x) / 10) * 1.5;
-
-  // Aplicar transformación 3D con perspectiva
-  card.style.transform = `perspective(1000px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-  // Asegurarse de que el overlay sea visible
-  const overlay = card.querySelector(".project-overlay");
-  if (overlay) {
-    overlay.style.opacity = "1";
-  }
-}
-
-// Función para resetear la tarjeta
-function resetCard(e) {
-  const card = e.currentTarget;
-
-  // Añadir transición suave al salir
-  card.style.transition = "transform 0.5s ease";
-
-  // Resetear transformación
-  card.style.transform = "";
-
-  // Ocultar overlay
-  const overlay = card.querySelector(".project-overlay");
-  if (overlay) {
-    overlay.style.opacity = "";
-  }
-}
-
-// Función para manejar el inicio del toque
-function handleTouchStart(e) {
-  e.preventDefault();
-  const card = e.currentTarget;
-
-  // Alternar la clase active-mobile para mostrar/ocultar el overlay
-  card.classList.toggle("active-mobile");
-
-  // Si la tarjeta está activa, aplicar efecto de elevación
-  if (card.classList.contains("active-mobile")) {
-    card.style.transform = "scale(1.05)";
-  } else {
-    card.style.transform = "";
-  }
-}
-
-// Función para manejar el fin del toque
-function handleTouchEnd(e) {
-  // No hacemos nada aquí, ya que queremos que el overlay permanezca visible
-  // hasta que el usuario toque nuevamente
+  console.log(
+    `Inicializadas ${projectCards.length} tarjetas de proyectos con animación 3D espectacular`
+  );
 }
 
 // ===== TARJETAS DE EDUCACIÓN =====
@@ -309,7 +304,7 @@ function initializeEducationCards() {
         if (!wasActive) {
           card.classList.add("active-touch");
           card.style.transform = "translateY(-15px)";
-          card.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.1)";
+          card.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.2)";
           card.style.zIndex = "10";
 
           // Animar elementos internos
@@ -366,7 +361,8 @@ function animateSkillLevels(skillLevels) {
     const level = skill.getAttribute("data-level");
     skill.style.width = "0%";
     setTimeout(() => {
-      skill.style.transition = "width 1s ease-in-out";
+      skill.style.transition =
+        "width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
       skill.style.width = `${level}%`;
     }, 200);
   });
