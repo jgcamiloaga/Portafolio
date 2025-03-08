@@ -6,13 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeProjectCards();
   initializeSkillsAnimation();
   initializeContactForm();
-  initializeScrollAnimationsFunc();
+  initializeScrollAnimations();
   initializeLoadingAnimation();
   createParticles();
   initializeScrollTopButton();
 
-  // Añadir manualmente los eventos moveCard a las tarjetas de proyectos
-  setupProjectCardEvents();
+  // Inicializar el efecto 3D para las tarjetas de proyectos
+  initializeCardTilt();
+
+  // Inicializar animaciones para tarjetas de educación
+  initializeEducationCards();
 });
 
 // ===== NAVEGACIÓN =====
@@ -80,9 +83,16 @@ function initializeSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return; // Evitar errores con enlaces vacíos
+
+      const target = document.querySelector(targetId);
       if (target) {
-        target.scrollIntoView({
+        // Usar window.scrollTo en lugar de scrollIntoView para mayor compatibilidad
+        const targetPosition =
+          target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: targetPosition,
           behavior: "smooth",
         });
       }
@@ -99,74 +109,48 @@ function initializeProjectCards() {
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   projectCards.forEach((card) => {
-    // Limpiar cualquier evento previo para evitar duplicados
-    card.removeEventListener("mouseleave", resetCard);
-    card.removeEventListener("touchstart", handleTouchStart);
-    card.removeEventListener("touchend", handleTouchEnd);
+    // Asegurarse de que la tarjeta tenga el estilo transform-style: preserve-3d
+    card.style.transformStyle = "preserve-3d";
 
     if (isTouchDevice) {
       // En dispositivos táctiles, usamos eventos touch
       card.addEventListener("touchstart", handleTouchStart);
       card.addEventListener("touchend", handleTouchEnd);
-
-      // Eliminar el atributo onmousemove para evitar conflictos en dispositivos táctiles
-      card.removeAttribute("onmousemove");
     } else {
-      // En dispositivos no táctiles, aseguramos que el evento mouseleave esté activo
+      // En dispositivos no táctiles, usamos eventos de mouse
+      card.addEventListener("mousemove", moveCard);
       card.addEventListener("mouseleave", resetCard);
-
-      // Asegurarnos de que el evento mousemove esté correctamente configurado
-      card.setAttribute("onmousemove", "moveCard(event)");
+      card.addEventListener("mouseenter", enterCard);
     }
   });
 
   console.log(`Inicializadas ${projectCards.length} tarjetas de proyectos`);
 }
 
-// Función para configurar eventos de tarjetas de proyectos
-function setupProjectCardEvents() {
-  const projectCards = document.querySelectorAll("#projects .project-card");
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-  projectCards.forEach((card) => {
-    if (!isTouchDevice) {
-      // Añadir el evento mousemove directamente
-      card.addEventListener("mousemove", moveCard);
-      card.addEventListener("mouseleave", resetCard);
-    } else {
-      // En dispositivos táctiles
-      card.addEventListener("touchstart", handleTouchStart);
-      card.addEventListener("touchend", handleTouchEnd);
-    }
-  });
-
-  console.log(
-    `Configurados eventos para ${projectCards.length} tarjetas de proyectos`
-  );
+// Función para inicializar el efecto de inclinación 3D
+function initializeCardTilt() {
+  // Esta función ahora está integrada en initializeProjectCards
+  console.log("Efecto de inclinación 3D inicializado correctamente");
 }
 
-// Función para manejar el inicio del toque
-function handleTouchStart(e) {
-  e.preventDefault();
+// Función para cuando el mouse entra en la tarjeta
+function enterCard(e) {
   const card = e.currentTarget;
 
-  // Alternar la clase active-mobile para mostrar/ocultar el overlay
-  card.classList.toggle("active-mobile");
+  // Añadir una transición suave al entrar
+  card.style.transition = "transform 0.2s ease-out";
+  setTimeout(() => {
+    card.style.transition = "none"; // Quitar la transición después para que el movimiento sea fluido
+  }, 200);
 
-  // Si la tarjeta está activa, aplicar efecto de elevación
-  if (card.classList.contains("active-mobile")) {
-    card.style.transform = "translate(-8px, -8px)";
-    card.style.boxShadow = "8px 8px 0 black";
-  } else {
-    resetCard({ currentTarget: card });
+  // Aplicar efecto inicial de agrandamiento
+  card.style.transform = "scale(1.05)";
+
+  // Mostrar overlay
+  const overlay = card.querySelector(".project-overlay");
+  if (overlay) {
+    overlay.style.opacity = "1";
   }
-}
-
-// Función para manejar el fin del toque
-function handleTouchEnd(e) {
-  // No hacemos nada aquí, ya que queremos que el overlay permanezca visible
-  // hasta que el usuario toque nuevamente
 }
 
 // Función para el efecto de inclinación
@@ -179,11 +163,12 @@ function moveCard(e) {
   const centerX = rect.width / 2;
   const centerY = rect.height / 2;
 
-  const rotateX = (y - centerY) / 10;
-  const rotateY = (centerX - x) / 10;
+  // Aumentar el factor de rotación para un efecto más visible
+  const rotateX = ((y - centerY) / 10) * 1.5;
+  const rotateY = ((centerX - x) / 10) * 1.5;
 
-  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(-8px, -8px)`;
-  card.style.boxShadow = "8px 8px 0 black";
+  // Aplicar transformación 3D con perspectiva
+  card.style.transform = `perspective(1000px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
   // Asegurarse de que el overlay sea visible
   const overlay = card.querySelector(".project-overlay");
@@ -195,16 +180,160 @@ function moveCard(e) {
 // Función para resetear la tarjeta
 function resetCard(e) {
   const card = e.currentTarget;
-  card.style.transform = "";
-  card.style.boxShadow = "";
 
-  // Ocultar el overlay al salir (solo en dispositivos no táctiles)
-  if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
-    const overlay = card.querySelector(".project-overlay");
-    if (overlay) {
-      overlay.style.opacity = "";
-    }
+  // Añadir transición suave al salir
+  card.style.transition = "transform 0.5s ease";
+
+  // Resetear transformación
+  card.style.transform = "";
+
+  // Ocultar overlay
+  const overlay = card.querySelector(".project-overlay");
+  if (overlay) {
+    overlay.style.opacity = "";
   }
+}
+
+// Función para manejar el inicio del toque
+function handleTouchStart(e) {
+  e.preventDefault();
+  const card = e.currentTarget;
+
+  // Alternar la clase active-mobile para mostrar/ocultar el overlay
+  card.classList.toggle("active-mobile");
+
+  // Si la tarjeta está activa, aplicar efecto de elevación
+  if (card.classList.contains("active-mobile")) {
+    card.style.transform = "scale(1.05)";
+  } else {
+    card.style.transform = "";
+  }
+}
+
+// Función para manejar el fin del toque
+function handleTouchEnd(e) {
+  // No hacemos nada aquí, ya que queremos que el overlay permanezca visible
+  // hasta que el usuario toque nuevamente
+}
+
+// ===== TARJETAS DE EDUCACIÓN =====
+function initializeEducationCards() {
+  const educationCards = document.querySelectorAll(
+    "#education .education-card"
+  );
+
+  // Detectar si es un dispositivo táctil
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  educationCards.forEach((card, index) => {
+    // Añadir un pequeño retraso inicial para crear un efecto escalonado
+    card.style.transitionDelay = `${index * 0.05}s`;
+
+    // Para dispositivos no táctiles
+    if (!isTouchDevice) {
+      // Animación al pasar el mouse
+      card.addEventListener("mouseenter", () => {
+        // Efecto de elevación
+        card.style.zIndex = "10";
+
+        // Animar elementos internos
+        const title = card.querySelector(".education-title");
+        const year = card.querySelector(".education-year");
+        const school = card.querySelector(".education-school");
+        const description = card.querySelector(".education-description");
+
+        if (title) title.style.transform = "translateX(5px)";
+        if (year) year.style.backgroundColor = "black";
+        if (year) year.style.color = "white";
+        if (school) school.style.transform = "translateX(-5px)";
+        if (description) {
+          description.style.transform = "translateY(-3px)";
+          description.style.opacity = "1";
+        }
+      });
+
+      card.addEventListener("mouseleave", () => {
+        // Restaurar z-index
+        setTimeout(() => {
+          card.style.zIndex = "";
+        }, 300);
+
+        // Restaurar elementos internos
+        const title = card.querySelector(".education-title");
+        const year = card.querySelector(".education-year");
+        const school = card.querySelector(".education-school");
+        const description = card.querySelector(".education-description");
+
+        if (title) title.style.transform = "";
+        if (year) year.style.backgroundColor = "";
+        if (year) year.style.color = "";
+        if (school) school.style.transform = "";
+        if (description) {
+          description.style.transform = "";
+          description.style.opacity = "";
+        }
+      });
+    } else {
+      // Para dispositivos táctiles
+      card.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+
+        // Alternar la clase para el efecto
+        const wasActive = card.classList.contains("active-touch");
+
+        // Primero, eliminar la clase de todas las tarjetas
+        educationCards.forEach((c) => {
+          c.classList.remove("active-touch");
+          c.style.transform = "";
+          c.style.boxShadow = "";
+          c.style.zIndex = "";
+
+          // Resetear elementos internos
+          const title = c.querySelector(".education-title");
+          const year = c.querySelector(".education-year");
+          const school = c.querySelector(".education-school");
+          const description = c.querySelector(".education-description");
+
+          if (title) title.style.transform = "";
+          if (year) year.style.backgroundColor = "";
+          if (year) year.style.color = "";
+          if (school) school.style.transform = "";
+          if (description) {
+            description.style.transform = "";
+            description.style.opacity = "";
+          }
+        });
+
+        // Luego, añadir la clase solo a la tarjeta actual si no estaba activa
+        if (!wasActive) {
+          card.classList.add("active-touch");
+          card.style.transform = "translateY(-15px)";
+          card.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.1)";
+          card.style.zIndex = "10";
+
+          // Animar elementos internos
+          const title = card.querySelector(".education-title");
+          const year = card.querySelector(".education-year");
+          const school = card.querySelector(".education-school");
+          const description = card.querySelector(".education-description");
+
+          if (title) title.style.transform = "translateX(5px)";
+          if (year) year.style.backgroundColor = "black";
+          if (year) year.style.color = "white";
+          if (school) school.style.transform = "translateX(-5px)";
+          if (description) {
+            description.style.transform = "translateY(-3px)";
+            description.style.opacity = "1";
+          }
+        }
+      });
+    }
+  });
+
+  console.log(
+    `Inicializadas ${educationCards.length} tarjetas de educación con animación mejorada`
+  );
 }
 
 // ===== ANIMACIÓN DE HABILIDADES =====
@@ -268,7 +397,7 @@ function initializeContactForm() {
 }
 
 // ===== ANIMACIONES DE SCROLL =====
-function initializeScrollAnimationsFunc() {
+function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
   console.log(`Se encontraron ${fadeInSections.length} secciones con fade-in`);
