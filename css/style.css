@@ -60,6 +60,12 @@ body {
   box-shadow: 4px 4px 0 black;
 }
 
+.active-link {
+  border-color: black;
+  background-color: black;
+  color: white;
+}
+
 /* Menú hamburguesa */
 .menu-toggle {
   display: none;
@@ -130,6 +136,25 @@ body {
 #start {
   background-color: white;
   text-align: center;
+  position: relative;
+}
+
+#start::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
+  opacity: 0.3;
+  z-index: 0;
 }
 
 .name {
@@ -140,11 +165,17 @@ body {
   display: inline-block;
   padding: 1rem 2rem;
   transform: rotate(-2deg);
+  background-color: white;
+  position: relative;
+  z-index: 2;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.8);
 }
 
 .title {
   font-size: 2rem;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 /* Estilos base para los contenedores de enlaces */
@@ -154,6 +185,8 @@ body {
   justify-content: center;
   margin-top: 2rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
 }
 
 .redes-link {
@@ -168,13 +201,30 @@ body {
   letter-spacing: 1px;
   background-color: white;
   margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.redes-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: -1;
 }
 
 .redes-link:hover {
   transform: translate(-4px, -4px);
   box-shadow: 4px 4px 0 black;
-  background-color: white;
   color: black;
+}
+
+.redes-link:hover::before {
+  transform: translateX(100%);
 }
 
 .redes-link:active {
@@ -194,22 +244,41 @@ body {
 .about-text {
   font-size: 1.2rem;
   border: 4px solid black;
-  padding: 2rem;
+  padding: 2.5rem;
   background-color: white;
   transform: rotate(0deg);
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text p::before {
+  content: ">";
+  color: #000;
+  margin-right: 8px;
+  font-weight: bold;
 }
 
 .about-image {
   display: flex;
-  justify-content: flex-end; /* Alinear a la derecha */
+  justify-content: flex-end;
 }
 
 .image-placeholder {
-  width: 75%;
+  width: 85%;
   aspect-ratio: 1;
   background-color: black;
   color: white;
@@ -219,6 +288,20 @@ body {
   font-weight: bold;
   transform: rotate(0deg);
   border: 4px solid black;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.image-placeholder::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  transform: rotate(45deg);
 }
 
 .contenido-imagen {
@@ -226,39 +309,94 @@ body {
   height: 100%;
   object-fit: cover;
   transform: rotate(0deg);
+  transition: all 0.5s ease;
 }
 
-/* Sección Projects mejorada */
+.image-placeholder:hover .contenido-imagen {
+  transform: scale(1.05);
+}
+
+/* Sección Projects con nueva animación espectacular */
+.section-title {
+  font-size: 2.5rem;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  background-color: black;
+}
+
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 3rem;
 }
 
 .project-card {
-  border: 4px solid black;
-  background-color: white;
+  height: 400px;
+  position: relative;
+  border: none;
+  background: none;
+  perspective: 1000px;
   cursor: pointer;
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover .project-card-inner {
+  transform: rotateY(180deg);
+}
+
+.project-card-front,
+.project-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 4px solid black;
   overflow: hidden;
+}
+
+.project-card-front {
+  background-color: white;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  transform-style: preserve-3d !important;
-  perspective: 1000px;
-  transition: transform 0.3s ease;
-  position: relative;
-  min-height: 400px;
-  will-change: transform;
+}
+
+.project-card-back {
+  background-color: black;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
 }
 
 .project-preview {
-  position: relative;
-  width: 100%;
-  height: 250px;
+  height: 65%;
   overflow: hidden;
   border-bottom: 4px solid black;
-  transform-style: preserve-3d !important;
+  position: relative;
 }
 
 .project-image {
@@ -266,102 +404,154 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
-  transform: rotate(0deg);
 }
 
-.project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+.project-card:hover .project-image {
+  transform: scale(1.1);
+}
+
+.project-info {
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  text-align: center;
-  transform-style: preserve-3d !important;
-  backface-visibility: hidden;
+  justify-content: space-between;
+  flex-grow: 1;
+  background-color: white;
 }
 
-.project-card:hover .project-overlay {
-  opacity: 1;
-}
-
-.project-overlay h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.8rem;
+.project-title {
+  font-size: 1.5rem;
   font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.project-overlay p {
-  font-size: 1.4rem;
-  margin-bottom: 1.2rem;
+.project-subtitle {
+  font-size: 1.2rem;
   font-weight: bold;
-  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+.project-card-back h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.project-card-back h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: white;
 }
 
 .project-description {
-  font-size: 1rem;
-  max-width: 90%;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
 .project-links {
   display: flex;
   gap: 1.5rem;
-  padding: 1.8rem;
   justify-content: center;
-  background-color: white;
-  margin-top: auto;
-  transform-style: preserve-3d;
-  position: relative;
 }
 
 .project-link {
-  text-decoration: none;
-  color: black;
-  border: 3px solid black;
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-transform: uppercase;
-  position: relative;
-  letter-spacing: 1px;
-}
-
-.project-link:hover {
-  background-color: black;
-  color: white;
-  transform: translateY(-3px);
-}
-
-/* Sección Education con animación completamente diferente */
-.education-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.education-card {
-  border: 2px solid black;
-  padding: 1.5rem;
   background-color: white;
+  color: black;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 1;
 }
 
-/* Nueva animación para las tarjetas de educación - completamente diferente */
+.project-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+
+.project-link:hover {
+  transform: translateY(-5px);
+}
+
+.project-link:hover::before {
+  height: 100%;
+}
+
+/* Efectos de brillo para tarjetas */
+.shine-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 10;
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.project-card:hover .shine-effect {
+  transform: translateX(100%);
+}
+
+/* Indicador de flip */
+.flip-indicator {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: black;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 3px;
+  opacity: 0.8;
+  z-index: 5;
+}
+
+/* Sección Education con animación mejorada */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.education-card {
+  border: 3px solid black;
+  padding: 2rem;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
 .education-card::before {
   content: "";
   position: absolute;
@@ -382,10 +572,8 @@ body {
 }
 
 .education-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  border-color: black;
-  border-width: 2px;
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 15px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .education-card:hover::before {
@@ -397,16 +585,36 @@ body {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #666;
-  transition: all 0.3s ease;
-  padding: 0.2rem 0.5rem;
-  background-color: transparent;
-  border-radius: 3px;
+  color: white;
+  background-color: black;
+  padding: 0.3rem 0.8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.education-year::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: transform 0.6s ease;
+}
+
+.education-card:hover .education-year::before {
+  transform: translateX(200%);
 }
 
 .education-title {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
   position: relative;
   display: inline-block;
   transition: transform 0.3s ease;
@@ -431,26 +639,24 @@ body {
   width: 100%;
 }
 
-.education-card:hover .education-year {
-  color: white;
-  background-color: black;
-}
-
 .education-school {
   font-weight: bold;
-  margin-bottom: 1rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.education-description {
-  font-size: 0.9rem;
-  transform: translateY(0);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0.8;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  transition: all 0.3s ease;
 }
 
 .education-card:hover .education-school {
   transform: translateX(-5px);
+  color: #333;
+}
+
+.education-description {
+  font-size: 1rem;
+  transform: translateY(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+  line-height: 1.6;
 }
 
 .education-card:hover .education-description {
@@ -458,33 +664,96 @@ body {
   opacity: 1;
 }
 
-/* Sección Skills */
+/* Sección Skills mejorada */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .skill-card {
   border: 4px solid black;
-  padding: 1.5rem;
+  padding: 1.8rem;
   background-color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.skill-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.skill-card h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+
+.skill-card:hover h3::after {
+  width: 100%;
+}
+
+.skill-level-container {
+  position: relative;
+  height: 24px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+  border: 2px solid black;
 }
 
 .skill-level {
-  height: 20px;
+  height: 100%;
   background-color: black;
-  margin-top: 1rem;
+  margin-top: 0;
   position: relative;
+  transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .skill-level::before {
   content: attr(data-level) "%";
   position: absolute;
-  right: 0;
-  top: -1.5rem;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   font-weight: bold;
+  color: white;
+  z-index: 2;
+}
+
+.skill-card:hover .skill-level {
+  background-color: #000;
+}
+
+/* Skill card deco elements */
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover::before {
+  transform: scale(1.5);
 }
 
 /* Formulario de contacto */
@@ -492,24 +761,45 @@ body {
   max-width: 600px;
   margin: 0 auto;
   border: 4px solid black;
-  padding: 2rem;
+  padding: 2.5rem;
   background-color: white;
+  position: relative;
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact-form::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  z-index: -1;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.8rem 1rem;
   border: 3px solid black;
   font-family: "Courier New", monospace;
   font-size: 1rem;
   background-color: white;
   cursor: text;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
 }
 
 .form-group textarea {
@@ -519,55 +809,121 @@ body {
 
 .form-group label {
   position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
+  left: 1rem;
+  top: 0.8rem;
   transition: all 0.3s ease;
   pointer-events: none;
   font-weight: bold;
+  background-color: transparent;
 }
 
 .form-group input:focus ~ label,
 .form-group textarea:focus ~ label,
 .form-group input:valid ~ label,
 .form-group textarea:valid ~ label {
-  transform: translateY(-1.5rem);
-  font-size: 0.8rem;
-  background-color: white;
-  padding: 0 0.5rem;
+  transform: translateY(-2.2rem);
+  font-size: 0.9rem;
+  color: black;
 }
 
 .submit-button {
   background-color: black;
   color: white;
   border: none;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   font-weight: bold;
   font-family: "Courier New", monospace;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: transform 0.6s ease;
+  z-index: -1;
 }
 
 .submit-button:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 4px 4px 0 black;
+  transform: translate(-5px, -5px);
+  box-shadow: 5px 5px 0 black;
+}
+
+.submit-button:hover::before {
+  transform: translateX(200%);
 }
 
 /* Footer */
 .footer {
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-top: 4px solid black;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #f9f9f9 10px,
+    #f9f9f9 20px
+  );
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.footer .container {
+  position: relative;
+  z-index: 1;
 }
 
 .footer-link {
   text-decoration: none;
   color: black;
   transition: all 0.3s ease;
+  font-weight: bold;
+  position: relative;
+}
+
+.footer-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease;
 }
 
 .footer-link:hover {
-  font-weight: bold;
+  color: black;
   cursor: pointer;
+}
+
+.footer-link:hover::after {
+  width: 100%;
 }
 
 /* Animación inicial de carga */
@@ -914,60 +1270,6 @@ body {
   }
 }
 
-@keyframes glitch-anim {
-  0% {
-    clip: rect(41px, 9999px, 44px, 0);
-    transform: skew(0.15deg);
-  }
-  5% {
-    clip: rect(45px, 9999px, 46px, 0);
-    transform: skew(0.45deg);
-  }
-  10% {
-    clip: rect(49px, 9999px, 40px, 0);
-    transform: skew(0.65deg);
-  }
-  15% {
-    clip: rect(42px, 9999px, 41px, 0);
-    transform: skew(0.45deg);
-  }
-  20% {
-    clip: rect(46px, 9999px, 47px, 0);
-    transform: skew(0.25deg);
-  }
-  100% {
-    clip: rect(41px, 9999px, 44px, 0);
-    transform: skew(0.15deg);
-  }
-}
-
-@keyframes glitch-anim2 {
-  0% {
-    clip: rect(40px, 9999px, 45px, 0);
-    transform: skew(0.25deg);
-  }
-  5% {
-    clip: rect(44px, 9999px, 48px, 0);
-    transform: skew(0.55deg);
-  }
-  10% {
-    clip: rect(48px, 9999px, 41px, 0);
-    transform: skew(0.75deg);
-  }
-  15% {
-    clip: rect(41px, 9999px, 40px, 0);
-    transform: skew(0.55deg);
-  }
-  20% {
-    clip: rect(45px, 9999px, 46px, 0);
-    transform: skew(0.35deg);
-  }
-  100% {
-    clip: rect(40px, 9999px, 45px, 0);
-    transform: skew(0.25deg);
-  }
-}
-
 @keyframes reveal {
   0% {
     transform: scaleX(0);
@@ -983,6 +1285,16 @@ body {
   }
   100% {
     clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Animación de destello para tarjetas */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -1015,20 +1327,21 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Media queries para responsive de proyectos */
+/* Media queries para responsive */
 @media (max-width: 1400px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 1100px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .about-content {
     gap: 3rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
   }
 }
 
@@ -1040,19 +1353,23 @@ body {
 
   .about-text {
     font-size: 1.1rem;
-    padding: 1.5rem;
-  }
-
-  .about-image {
-    justify-content: center;
+    padding: 1.8rem;
   }
 
   .image-placeholder {
-    width: 85%;
+    width: 90%;
   }
 
   .section {
     padding: 5rem 1.5rem;
+  }
+
+  .projects-grid {
+    gap: 2rem;
+  }
+
+  .project-card {
+    height: 380px;
   }
 }
 
@@ -1141,7 +1458,6 @@ body {
   .about-text {
     font-size: 1rem;
     padding: 1.5rem;
-    transform: rotate(0deg);
     order: 2;
     margin: 0 auto;
     width: 100%;
@@ -1159,16 +1475,15 @@ body {
   .image-placeholder {
     width: 80%;
     max-width: 300px;
-    transform: rotate(0deg);
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .project-card {
-    min-height: 350px;
+    height: 350px;
   }
 
   .name {
@@ -1228,7 +1543,11 @@ body {
   }
 
   .project-card {
-    min-height: 300px;
+    height: 320px;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
   }
 
   .name {
