@@ -101,12 +101,18 @@ function initializeSmoothScrolling() {
   }
 }
 
-// ===== TARJETAS DE PROYECTOS - NUEVA ANIMACIÓN ESPECTACULAR =====
+// ===== TARJETAS DE PROYECTOS - DISEÑO COMPLETAMENTE NUEVO =====
 function initializeProjectCards() {
-  // Crear la estructura interna de cada tarjeta
   const projectCards = document.querySelectorAll("#projects .project-card");
 
-  projectCards.forEach((card) => {
+  // Detectar si es un dispositivo táctil
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (isTouchDevice) {
+    document.body.classList.add("touch-device");
+  }
+
+  projectCards.forEach((card, index) => {
     // Obtener elementos internos originales
     const previewEl = card.querySelector(".project-preview");
     const imageEl = card.querySelector(".project-image");
@@ -118,96 +124,139 @@ function initializeProjectCards() {
       : null;
     const linksEl = card.querySelector(".project-links");
 
-    // Crear la estructura de tarjeta con flip 3D
-    const cardInner = document.createElement("div");
-    cardInner.className = "project-card-inner";
+    // Crear la nueva estructura de tarjeta con efecto de flip 3D
 
-    // Crear el frente de la tarjeta
-    const cardFront = document.createElement("div");
-    cardFront.className = "project-card-front";
+    // Contenedor principal para el efecto flip
+    const flipContainer = document.createElement("div");
+    flipContainer.className = "project-flip-container";
 
-    // Crear la parte trasera de la tarjeta
-    const cardBack = document.createElement("div");
-    cardBack.className = "project-card-back";
+    // Elemento que rota
+    const flipper = document.createElement("div");
+    flipper.className = "project-flipper";
 
-    // Mover los elementos al frente de la tarjeta
-    if (previewEl) {
-      cardFront.appendChild(previewEl.cloneNode(true));
+    // Cara frontal (imagen)
+    const frontFace = document.createElement("div");
+    frontFace.className = "project-front";
+
+    // Número de proyecto
+    const projectNumber = document.createElement("div");
+    projectNumber.className = "project-number";
+    projectNumber.textContent = `0${index + 1}`;
+    frontFace.appendChild(projectNumber);
+
+    // Imagen
+    if (imageEl) {
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "project-image-container";
+      imageContainer.appendChild(imageEl.cloneNode(true));
+      frontFace.appendChild(imageContainer);
+    } else {
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "project-image-container";
+      const newImage = document.createElement("img");
+      newImage.className = "project-image";
+      newImage.src = "img/placeholder.jpg";
+      newImage.alt = "Vista previa del proyecto";
+      imageContainer.appendChild(newImage);
+      frontFace.appendChild(imageContainer);
     }
 
-    // Crear info contenedor
-    const infoContainer = document.createElement("div");
-    infoContainer.className = "project-info";
-
-    // Añadir título y subtítulo al frente
+    // Título en la cara frontal
     if (titleEl && subtitleEl) {
-      const frontTitle = document.createElement("h3");
-      frontTitle.className = "project-title";
-      frontTitle.textContent = titleEl.textContent;
+      const frontTitle = document.createElement("div");
+      frontTitle.className = "project-front-title";
 
-      const frontSubtitle = document.createElement("p");
-      frontSubtitle.className = "project-subtitle";
-      frontSubtitle.textContent = subtitleEl.textContent;
+      const title = document.createElement("h3");
+      title.textContent = titleEl.textContent;
 
-      infoContainer.appendChild(frontTitle);
-      infoContainer.appendChild(frontSubtitle);
+      const subtitle = document.createElement("p");
+      subtitle.textContent = subtitleEl.textContent;
+
+      frontTitle.appendChild(title);
+      frontTitle.appendChild(subtitle);
+      frontFace.appendChild(frontTitle);
     }
 
-    // Añadir indicador de flip
-    const flipIndicator = document.createElement("div");
-    flipIndicator.className = "flip-indicator";
-    flipIndicator.textContent = "VOLTEAR →";
-    infoContainer.appendChild(flipIndicator);
+    // Cara trasera (detalles)
+    const backFace = document.createElement("div");
+    backFace.className = "project-back";
 
-    cardFront.appendChild(infoContainer);
+    // Contenido de la cara trasera
+    const backContent = document.createElement("div");
+    backContent.className = "project-back-content";
 
-    // Configurar la parte trasera de la tarjeta
-    if (titleEl) {
-      const backTitle = document.createElement("h3");
-      backTitle.textContent = titleEl.textContent;
-      cardBack.appendChild(backTitle);
+    // Título y subtítulo en la cara trasera
+    if (titleEl && subtitleEl) {
+      const title = document.createElement("h3");
+      title.className = "project-title";
+      title.textContent = titleEl.textContent;
+
+      const subtitle = document.createElement("p");
+      subtitle.className = "project-subtitle";
+      subtitle.textContent = subtitleEl.textContent;
+
+      backContent.appendChild(title);
+      backContent.appendChild(subtitle);
     }
 
+    // Descripción
     if (descriptionEl) {
-      const backDescription = document.createElement("p");
-      backDescription.className = "project-description";
-      backDescription.textContent = descriptionEl.textContent;
-      cardBack.appendChild(backDescription);
+      const description = document.createElement("p");
+      description.className = "project-description";
+      description.textContent = descriptionEl.textContent;
+      backContent.appendChild(description);
     }
 
-    // Clonar los enlaces
+    // Enlaces
     if (linksEl) {
-      cardBack.appendChild(linksEl.cloneNode(true));
+      const linksContainer = document.createElement("div");
+      linksContainer.className = "project-links";
+
+      // Clonar los enlaces
+      const originalLinks = linksEl.querySelectorAll("a");
+      originalLinks.forEach((link) => {
+        const newLink = document.createElement("a");
+        newLink.href = link.href;
+        newLink.className = "project-link";
+        newLink.textContent = link.textContent;
+        newLink.target = "_blank";
+        linksContainer.appendChild(newLink);
+      });
+
+      backContent.appendChild(linksContainer);
     }
 
-    // Añadir efecto de brillo
-    const shineEffect = document.createElement("div");
-    shineEffect.className = "shine-effect";
-    cardFront.appendChild(shineEffect);
+    backFace.appendChild(backContent);
 
-    // Ensamblar la tarjeta
-    cardInner.appendChild(cardFront);
-    cardInner.appendChild(cardBack);
+    // Ensamblar la estructura
+    flipper.appendChild(frontFace);
+    flipper.appendChild(backFace);
+    flipContainer.appendChild(flipper);
 
-    // Vaciar la tarjeta original y añadir la nueva estructura
+    // Limpiar y reconstruir la tarjeta
     card.innerHTML = "";
-    card.appendChild(cardInner);
+    card.appendChild(flipContainer);
 
-    // Añadir eventos para animaciones
-    card.addEventListener("mouseenter", () => {
-      shineEffect.style.animation = "shine 1s forwards";
-    });
+    // Añadir eventos para dispositivos táctiles
+    if (isTouchDevice) {
+      card.addEventListener("touchstart", function (e) {
+        e.preventDefault();
 
-    card.addEventListener("mouseleave", () => {
-      shineEffect.style.animation = "none";
-      setTimeout(() => {
-        shineEffect.style.transform = "translateX(-100%)";
-      }, 50);
-    });
+        // Cerrar otras tarjetas abiertas
+        projectCards.forEach((otherCard) => {
+          if (otherCard !== this) {
+            otherCard.classList.remove("active");
+          }
+        });
+
+        // Alternar estado activo
+        this.classList.toggle("active");
+      });
+    }
   });
 
   console.log(
-    `Inicializadas ${projectCards.length} tarjetas de proyectos con animación 3D espectacular`
+    `Inicializadas ${projectCards.length} tarjetas de proyectos con nuevo diseño de flip 3D`
   );
 }
 
@@ -270,56 +319,73 @@ function initializeEducationCards() {
         }
       });
     } else {
-      // Para dispositivos táctiles
-      card.addEventListener("touchstart", (e) => {
+      // Para dispositivos táctiles - Versión mejorada
+      card.addEventListener("touchstart", function (e) {
         e.preventDefault();
 
-        // Alternar la clase para el efecto
-        const wasActive = card.classList.contains("active-touch");
-
-        // Primero, eliminar la clase de todas las tarjetas
+        // Primero, desactivar todas las tarjetas
         educationCards.forEach((c) => {
-          c.classList.remove("active-touch");
-          c.style.transform = "";
-          c.style.boxShadow = "";
-          c.style.zIndex = "";
+          if (c !== this) {
+            c.classList.remove("active-touch");
 
-          // Resetear elementos internos
-          const title = c.querySelector(".education-title");
-          const year = c.querySelector(".education-year");
-          const school = c.querySelector(".education-school");
-          const description = c.querySelector(".education-description");
+            // Resetear estilos
+            const title = c.querySelector(".education-title");
+            const year = c.querySelector(".education-year");
+            const school = c.querySelector(".education-school");
+            const description = c.querySelector(".education-description");
 
-          if (title) title.style.transform = "";
-          if (year) year.style.backgroundColor = "";
-          if (year) year.style.color = "";
-          if (school) school.style.transform = "";
-          if (description) {
-            description.style.transform = "";
-            description.style.opacity = "";
+            if (title) title.style.transform = "";
+            if (year) {
+              year.style.backgroundColor = "";
+              year.style.color = "";
+            }
+            if (school) school.style.transform = "";
+            if (description) {
+              description.style.transform = "";
+              description.style.opacity = "";
+            }
           }
         });
 
-        // Luego, añadir la clase solo a la tarjeta actual si no estaba activa
-        if (!wasActive) {
-          card.classList.add("active-touch");
-          card.style.transform = "translateY(-15px)";
-          card.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.2)";
-          card.style.zIndex = "10";
+        // Alternar estado de la tarjeta actual
+        this.classList.toggle("active-touch");
 
-          // Animar elementos internos
-          const title = card.querySelector(".education-title");
-          const year = card.querySelector(".education-year");
-          const school = card.querySelector(".education-school");
-          const description = card.querySelector(".education-description");
+        // Aplicar o quitar estilos según el estado
+        const isActive = this.classList.contains("active-touch");
+        const title = this.querySelector(".education-title");
+        const year = this.querySelector(".education-year");
+        const school = this.querySelector(".education-school");
+        const description = this.querySelector(".education-description");
+
+        if (isActive) {
+          this.style.transform = "translateY(-15px) scale(1.02)";
+          this.style.boxShadow = "15px 15px 0 rgba(0, 0, 0, 0.2)";
+          this.style.zIndex = "10";
 
           if (title) title.style.transform = "translateX(5px)";
-          if (year) year.style.backgroundColor = "black";
-          if (year) year.style.color = "white";
+          if (year) {
+            year.style.backgroundColor = "black";
+            year.style.color = "white";
+          }
           if (school) school.style.transform = "translateX(-5px)";
           if (description) {
             description.style.transform = "translateY(-3px)";
             description.style.opacity = "1";
+          }
+        } else {
+          this.style.transform = "";
+          this.style.boxShadow = "";
+          this.style.zIndex = "";
+
+          if (title) title.style.transform = "";
+          if (year) {
+            year.style.backgroundColor = "";
+            year.style.color = "";
+          }
+          if (school) school.style.transform = "";
+          if (description) {
+            description.style.transform = "";
+            description.style.opacity = "";
           }
         }
       });
@@ -331,47 +397,155 @@ function initializeEducationCards() {
   );
 }
 
-// ===== ANIMACIÓN DE HABILIDADES =====
+// ===== NUEVA SECCIÓN DE SKILLS CON LOGOS =====
 function initializeSkillsAnimation() {
   const skillsSection = document.querySelector("#skills");
   if (!skillsSection) return;
 
-  const skillLevels = document.querySelectorAll(".skill-level");
+  // Crear nuevas tarjetas de habilidades con logos
+  const skillsGrid = skillsSection.querySelector(".skills-grid");
+  if (!skillsGrid) return;
 
-  // Intersection Observer para animar las barras de habilidades
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateSkillLevels(skillLevels);
-          observer.unobserve(entry.target);
-        }
-      });
+  // Limpiar el grid existente
+  skillsGrid.innerHTML = "";
+
+  // Definir las habilidades con sus logos y niveles
+  const skills = [
+    {
+      name: "HTML",
+      level: 90,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>`,
     },
-    { threshold: 0.5 }
+    {
+      name: "CSS",
+      level: 85,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11v11h-11z"></path><path d="M3 3v18h18V3H3z"></path></svg>`,
+    },
+    {
+      name: "JAVASCRIPT",
+      level: 80,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17V7c0-2-2-3-4-3H8C6 4 4 5 4 7v10c0 2 2 3 4 3h8c2 0 4-1 4-3z"></path><path d="M9 8h1"></path><path d="M14 8h1"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>`,
+    },
+    {
+      name: "REACT",
+      level: 60,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M12 6a9.77 9.77 0 0 1 8.82 5.5A9.77 9.77 0 0 1 12 17a9.77 9.77 0 0 1-8.82-5.5A9.77 9.77 0 0 1 12 6z"></path></svg>`,
+    },
+    {
+      name: "PYTHON",
+      level: 75,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9h.01"></path><path d="M11 12h1v4h1"></path><path d="M8 20V8c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v12H8z"></path><path d="M10 14h4"></path></svg>`,
+    },
+    {
+      name: "FLASK",
+      level: 60,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v2H9zM8 14c0 4 1.5 6 4 6s4-2 4-6-1-8-4-8-4 4-4 8z"></path><path d="M7 9h10"></path></svg>`,
+    },
+    {
+      name: "MYSQL",
+      level: 75,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path><path d="M3 10h18"></path><path d="M10 3v18"></path></svg>`,
+    },
+    {
+      name: "FIGMA",
+      level: 80,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>`,
+    },
+    {
+      name: "TAILWIND",
+      level: 65,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 8h12"></path><path d="M18.3 17.7a2.5 2.5 0 0 1-3.16 3.83 2.53 2.53 0 0 1-1.14-2V12"></path><path d="M6.6 15.6A2 2 0 1 0 10 17v-5"></path></svg>`,
+    },
+    {
+      name: "JAVA",
+      level: 80,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12.5c1.4-1.7 3.8-3.2 9.8-3.2 6 0 10 1.5 10 3.5s-4 3.5-10 3.5c-6.5 0-8.7-1.8-9.8-3.8"></path><path d="M5 10V7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v3"></path></svg>`,
+    },
+  ];
+
+  // Crear las tarjetas de habilidades
+  skills.forEach((skill, index) => {
+    const skillCard = document.createElement("div");
+    skillCard.className = `skill-card scroll-animation ${
+      index % 2 === 0 ? "from-left" : "from-right"
+    } delay-${(index % 5) + 1}`;
+
+    // Crear el logo
+    const skillLogo = document.createElement("div");
+    skillLogo.className = "skill-logo";
+    skillLogo.innerHTML = skill.logo;
+
+    // Crear el nombre de la habilidad
+    const skillName = document.createElement("h3");
+    skillName.className = "skill-name";
+    skillName.textContent = skill.name;
+
+    // Crear el indicador de nivel
+    const skillLevel = document.createElement("div");
+    skillLevel.className = "skill-level";
+    skillLevel.textContent = `${skill.level}%`;
+
+    // Crear los puntos indicadores de nivel
+    const skillLevelIndicator = document.createElement("div");
+    skillLevelIndicator.className = "skill-level-indicator";
+
+    // Crear 5 puntos, llenando según el nivel
+    const dotsCount = 5;
+    const filledDots = Math.round((skill.level / 100) * dotsCount);
+
+    for (let i = 0; i < dotsCount; i++) {
+      const dot = document.createElement("div");
+      dot.className = `skill-dot ${i < filledDots ? "filled" : ""}`;
+      skillLevelIndicator.appendChild(dot);
+    }
+
+    // Ensamblar la tarjeta
+    skillCard.appendChild(skillLogo);
+    skillCard.appendChild(skillName);
+    skillCard.appendChild(skillLevel);
+    skillCard.appendChild(skillLevelIndicator);
+
+    // Añadir la tarjeta al grid
+    skillsGrid.appendChild(skillCard);
+  });
+
+  console.log(
+    `Inicializadas ${skills.length} tarjetas de habilidades con logos`
   );
-
-  skillsSection.querySelectorAll(".skill-card").forEach((card) => {
-    observer.observe(card);
-  });
-}
-
-function animateSkillLevels(skillLevels) {
-  skillLevels.forEach((skill) => {
-    const level = skill.getAttribute("data-level");
-    skill.style.width = "0%";
-    setTimeout(() => {
-      skill.style.transition =
-        "width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-      skill.style.width = `${level}%`;
-    }, 200);
-  });
 }
 
 // ===== FORMULARIO DE CONTACTO =====
 function initializeContactForm() {
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
+
+  // Mejorar la animación de los campos del formulario
+  const formGroups = contactForm.querySelectorAll(".form-group");
+
+  formGroups.forEach((group) => {
+    const input = group.querySelector("input, textarea");
+    const label = group.querySelector("label");
+
+    if (input && label) {
+      // Verificar si el campo ya tiene valor al cargar
+      if (input.value.trim() !== "") {
+        label.classList.add("active");
+      }
+
+      // Eventos para la animación
+      input.addEventListener("focus", () => {
+        label.classList.add("active");
+        input.classList.add("active");
+      });
+
+      input.addEventListener("blur", () => {
+        if (input.value.trim() === "") {
+          label.classList.remove("active");
+        }
+        input.classList.remove("active");
+      });
+    }
+  });
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -388,6 +562,15 @@ function initializeContactForm() {
 
     // Resetear formulario y mostrar confirmación
     this.reset();
+
+    // Resetear también las clases active de las etiquetas
+    formGroups.forEach((group) => {
+      const label = group.querySelector("label");
+      if (label) {
+        label.classList.remove("active");
+      }
+    });
+
     alert("Gracias por tu mensaje! Te responderé pronto.");
   });
 }
