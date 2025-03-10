@@ -101,7 +101,7 @@ function initializeSmoothScrolling() {
   }
 }
 
-// ===== TARJETAS DE PROYECTOS - DISEÑO COMPLETAMENTE NUEVO =====
+// ===== TARJETAS DE PROYECTOS - DISEÑO TILT 3D INTERACTIVO PREMIUM =====
 function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card");
 
@@ -124,69 +124,48 @@ function initializeProjectCards() {
       : null;
     const linksEl = card.querySelector(".project-links");
 
-    // Crear la nueva estructura de tarjeta con efecto de flip 3D
+    // Crear la nueva estructura de tarjeta con efecto tilt 3D
 
-    // Contenedor principal para el efecto flip
-    const flipContainer = document.createElement("div");
-    flipContainer.className = "project-flip-container";
+    // Contenedor principal
+    const cardContainer = document.createElement("div");
+    cardContainer.className = "project-tilt-container";
 
-    // Elemento que rota
-    const flipper = document.createElement("div");
-    flipper.className = "project-flipper";
+    // Imagen de fondo
+    const imageContainer = document.createElement("div");
+    imageContainer.className = "project-image-container";
 
-    // Cara frontal (imagen)
-    const frontFace = document.createElement("div");
-    frontFace.className = "project-front";
-
-    // Número de proyecto
-    const projectNumber = document.createElement("div");
-    projectNumber.className = "project-number";
-    projectNumber.textContent = `0${index + 1}`;
-    frontFace.appendChild(projectNumber);
-
-    // Imagen
     if (imageEl) {
-      const imageContainer = document.createElement("div");
-      imageContainer.className = "project-image-container";
       imageContainer.appendChild(imageEl.cloneNode(true));
-      frontFace.appendChild(imageContainer);
     } else {
-      const imageContainer = document.createElement("div");
-      imageContainer.className = "project-image-container";
       const newImage = document.createElement("img");
       newImage.className = "project-image";
       newImage.src = "img/placeholder.jpg";
       newImage.alt = "Vista previa del proyecto";
       imageContainer.appendChild(newImage);
-      frontFace.appendChild(imageContainer);
     }
 
-    // Título en la cara frontal
+    // Capa de color
+    const colorOverlay = document.createElement("div");
+    colorOverlay.className = "project-color-overlay";
+
+    // Patrón decorativo
+    const pattern = document.createElement("div");
+    pattern.className = "project-pattern";
+
+    // Número de proyecto
+    const projectNumber = document.createElement("div");
+    projectNumber.className = "project-number";
+    projectNumber.textContent = `0${index + 1}`;
+
+    // Contenido
+    const content = document.createElement("div");
+    content.className = "project-content";
+
+    // Título y subtítulo
     if (titleEl && subtitleEl) {
-      const frontTitle = document.createElement("div");
-      frontTitle.className = "project-front-title";
+      const titleContainer = document.createElement("div");
+      titleContainer.className = "project-title-container";
 
-      const title = document.createElement("h3");
-      title.textContent = titleEl.textContent;
-
-      const subtitle = document.createElement("p");
-      subtitle.textContent = subtitleEl.textContent;
-
-      frontTitle.appendChild(title);
-      frontTitle.appendChild(subtitle);
-      frontFace.appendChild(frontTitle);
-    }
-
-    // Cara trasera (detalles)
-    const backFace = document.createElement("div");
-    backFace.className = "project-back";
-
-    // Contenido de la cara trasera
-    const backContent = document.createElement("div");
-    backContent.className = "project-back-content";
-
-    // Título y subtítulo en la cara trasera
-    if (titleEl && subtitleEl) {
       const title = document.createElement("h3");
       title.className = "project-title";
       title.textContent = titleEl.textContent;
@@ -195,16 +174,17 @@ function initializeProjectCards() {
       subtitle.className = "project-subtitle";
       subtitle.textContent = subtitleEl.textContent;
 
-      backContent.appendChild(title);
-      backContent.appendChild(subtitle);
+      titleContainer.appendChild(title);
+      titleContainer.appendChild(subtitle);
+      content.appendChild(titleContainer);
     }
 
     // Descripción
     if (descriptionEl) {
-      const description = document.createElement("p");
+      const description = document.createElement("div");
       description.className = "project-description";
       description.textContent = descriptionEl.textContent;
-      backContent.appendChild(description);
+      content.appendChild(description);
     }
 
     // Enlaces
@@ -223,19 +203,91 @@ function initializeProjectCards() {
         linksContainer.appendChild(newLink);
       });
 
-      backContent.appendChild(linksContainer);
+      content.appendChild(linksContainer);
     }
 
-    backFace.appendChild(backContent);
+    // Brillo
+    const shine = document.createElement("div");
+    shine.className = "project-shine";
 
     // Ensamblar la estructura
-    flipper.appendChild(frontFace);
-    flipper.appendChild(backFace);
-    flipContainer.appendChild(flipper);
+    cardContainer.appendChild(imageContainer);
+    cardContainer.appendChild(colorOverlay);
+    cardContainer.appendChild(pattern);
+    cardContainer.appendChild(projectNumber);
+    cardContainer.appendChild(content);
+    cardContainer.appendChild(shine);
 
     // Limpiar y reconstruir la tarjeta
     card.innerHTML = "";
-    card.appendChild(flipContainer);
+    card.appendChild(cardContainer);
+
+    // Añadir efecto tilt 3D para dispositivos no táctiles
+    if (!isTouchDevice) {
+      card.addEventListener("mousemove", function (e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const percentX = (x - centerX) / centerX;
+        const percentY = (y - centerY) / centerY;
+
+        const container = this.querySelector(".project-tilt-container");
+        const shine = this.querySelector(".project-shine");
+        const title = this.querySelector(".project-title");
+        const subtitle = this.querySelector(".project-subtitle");
+        const description = this.querySelector(".project-description");
+        const projectNumber = this.querySelector(".project-number");
+
+        // Aplicar efecto tilt con diferentes intensidades para cada elemento
+        container.style.transform = `perspective(1200px) rotateX(${
+          percentY * -8
+        }deg) rotateY(${percentX * 8}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        // Mover elementos con diferentes profundidades para efecto parallax
+        if (title)
+          title.style.transform = `translateY(0) translateX(${
+            percentX * 10
+          }px)`;
+        if (subtitle)
+          subtitle.style.transform = `translateY(0) translateX(${
+            percentX * 5
+          }px)`;
+        if (description)
+          description.style.transform = `translateX(${percentX * 7}px)`;
+        if (projectNumber)
+          projectNumber.style.transform = `translateZ(40px) translateX(${
+            percentX * 15
+          }px) translateY(${percentY * 15}px)`;
+
+        // Mover el brillo
+        shine.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%)`;
+        shine.style.opacity = "1";
+      });
+
+      card.addEventListener("mouseleave", function () {
+        const container = this.querySelector(".project-tilt-container");
+        const shine = this.querySelector(".project-shine");
+        const title = this.querySelector(".project-title");
+        const subtitle = this.querySelector(".project-subtitle");
+        const description = this.querySelector(".project-description");
+        const projectNumber = this.querySelector(".project-number");
+
+        // Restaurar posición
+        container.style.transform =
+          "perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+        shine.style.opacity = "0";
+
+        // Restaurar posición de elementos internos
+        if (title) title.style.transform = "";
+        if (subtitle) subtitle.style.transform = "";
+        if (description) description.style.transform = "";
+        if (projectNumber) projectNumber.style.transform = "";
+      });
+    }
 
     // Añadir eventos para dispositivos táctiles
     if (isTouchDevice) {
@@ -256,7 +308,7 @@ function initializeProjectCards() {
   });
 
   console.log(
-    `Inicializadas ${projectCards.length} tarjetas de proyectos con nuevo diseño de flip 3D`
+    `Inicializadas ${projectCards.length} tarjetas de proyectos con efecto tilt 3D interactivo premium`
   );
 }
 
@@ -449,7 +501,7 @@ function initializeSkillsAnimation() {
     {
       name: "FIGMA",
       level: 80,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>`,
+      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>`,
     },
     {
       name: "TAILWIND",
