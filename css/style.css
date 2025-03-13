@@ -905,11 +905,12 @@ body {
   padding: 1.5rem;
   text-align: center;
   aspect-ratio: 1;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
 .skill-card:hover {
   transform: translateY(-10px);
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .skill-logo {
@@ -922,14 +923,21 @@ body {
   justify-content: center;
 }
 
-.skill-card:hover .skill-logo {
+.skill-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.skill-card:hover .skill-logo img {
   transform: scale(1.2);
 }
 
 .skill-name {
   font-weight: bold;
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   position: relative;
   display: inline-block;
 }
@@ -950,15 +958,16 @@ body {
   width: 100%;
 }
 
+/* Ocultar los porcentajes como solicitó el usuario */
 .skill-level {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-top: 0.5rem;
+  display: none;
 }
 
+/* Mejorar el indicador de nivel con puntos */
 .skill-level-indicator {
   display: flex;
   margin-top: 0.5rem;
+  justify-content: center;
 }
 
 .skill-dot {
@@ -966,11 +975,17 @@ body {
   height: 8px;
   border-radius: 50%;
   background-color: #ddd;
-  margin: 0 2px;
+  margin: 0 3px;
+  transition: all 0.3s ease;
 }
 
 .skill-dot.filled {
   background-color: black;
+}
+
+.skill-card:hover .skill-dot.filled {
+  background-color: #333;
+  transform: scale(1.2);
 }
 
 /* Decoración de skill cards */
@@ -988,6 +1003,21 @@ body {
 
 .skill-card:hover::before {
   transform: scale(1.5);
+}
+
+.skill-card-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, black, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover .skill-card-decoration {
+  opacity: 0.2;
 }
 
 /* Formulario de contacto con animación restaurada */
@@ -1758,10 +1788,6 @@ body {
   .skills-grid {
     gap: 1.5rem;
   }
-
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  }
 }
 
 @media (max-width: 480px) {
@@ -1845,5 +1871,44 @@ body {
   .footer {
     padding: 1.5rem;
     font-size: 0.9rem;
+  }
+}
+
+/* Ajustes responsivos para las tarjetas de skills */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .skill-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+  }
+
+  .skill-dot {
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
   }
 }
