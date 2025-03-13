@@ -466,56 +466,55 @@ function initializeSkillsAnimation() {
     {
       name: "HTML",
       level: 90,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>`,
+      logo: "img/skills/html-icon.png",
     },
     {
       name: "CSS",
       level: 85,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11v11h-11z"></path><path d="M3 3v18h18V3H3z"></path></svg>`,
+      logo: "img/skills/css-icon.png",
     },
     {
       name: "JAVASCRIPT",
       level: 80,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17V7c0-2-2-3-4-3H8C6 4 4 5 4 7v10c0 2 2 3 4 3h8c2 0 4-1 4-3z"></path><path d="M9 8h1"></path><path d="M14 8h1"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>`,
+      logo: "img/skills/javascript-icon.png",
     },
     {
       name: "REACT",
       level: 60,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M12 6a9.77 9.77 0 0 1 8.82 5.5A9.77 9.77 0 0 1 12 17a9.77 9.77 0 0 1-8.82-5.5A9.77 9.77 0 0 1 12 6z"></path></svg>`,
+      logo: "img/skills/react-icon.png",
     },
     {
       name: "PYTHON",
       level: 75,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9h.01"></path><path d="M11 12h1v4h1"></path><path d="M8 20V8c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v12H8z"></path><path d="M10 14h4"></path></svg>`,
+      logo: "img/skills/python-icon.png",
     },
     {
       name: "FLASK",
       level: 60,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v2H9zM8 14c0 4 1.5 6 4 6s4-2 4-6-1-8-4-8-4 4-4 8z"></path><path d="M7 9h10"></path></svg>`,
+      logo: "img/skills/flask-icon.png",
     },
     {
       name: "MYSQL",
       level: 75,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path><path d="M3 10h18"></path><path d="M10 3v18"></path></svg>`,
+      logo: "img/skills/mysql-icon.png",
     },
     {
       name: "FIGMA",
       level: 80,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path><path d="M12 2h3.5a3.5 0 1 1 0 7H12V2z"></path><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path></svg>`,
+      logo: "img/skills/figma-icon.png",
     },
     {
       name: "TAILWIND",
       level: 65,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 8h12"></path><path d="M18.3 17.7a2.5 2.5 0 0 1-3.16 3.83 2.53 2.53 0 0 1-1.14-2V12"></path><path d="M6.6 15.6A2 2 0 1 0 10 17v-5"></path></svg>`,
+      logo: "img/skills/tailwind-icon.png",
     },
     {
       name: "JAVA",
       level: 80,
-      logo: `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12.5c1.4-1.7 3.8-3.2 9.8-3.2 6 0 10 1.5 10 3.5s-4 3.5-10 3.5c-6.5 0-8.7-1.8-9.8-3.8"></path><path d="M5 10V7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v3"></path></svg>`,
+      logo: "img/skills/java-icon.png",
     },
   ];
 
-  // Crear las tarjetas de habilidades
   skills.forEach((skill, index) => {
     const skillCard = document.createElement("div");
     skillCard.className = `skill-card scroll-animation ${
@@ -525,19 +524,19 @@ function initializeSkillsAnimation() {
     // Crear el logo
     const skillLogo = document.createElement("div");
     skillLogo.className = "skill-logo";
-    skillLogo.innerHTML = skill.logo;
+    const logoImg = document.createElement("img");
+    logoImg.src = skill.logo;
+    logoImg.alt = `${skill.name} logo`;
+    logoImg.width = 48;
+    logoImg.height = 48;
+    skillLogo.appendChild(logoImg);
 
     // Crear el nombre de la habilidad
     const skillName = document.createElement("h3");
     skillName.className = "skill-name";
     skillName.textContent = skill.name;
 
-    // Crear el indicador de nivel
-    const skillLevel = document.createElement("div");
-    skillLevel.className = "skill-level";
-    skillLevel.textContent = `${skill.level}%`;
-
-    // Crear los puntos indicadores de nivel
+    // Crear los puntos indicadores de nivel (sin mostrar el porcentaje)
     const skillLevelIndicator = document.createElement("div");
     skillLevelIndicator.className = "skill-level-indicator";
 
@@ -551,18 +550,54 @@ function initializeSkillsAnimation() {
       skillLevelIndicator.appendChild(dot);
     }
 
-    // Ensamblar la tarjeta
+    // Ensamblar la tarjeta con un diseño mejorado
     skillCard.appendChild(skillLogo);
     skillCard.appendChild(skillName);
-    skillCard.appendChild(skillLevel);
     skillCard.appendChild(skillLevelIndicator);
+
+    // Añadir efectos visuales adicionales
+    const cardDecoration = document.createElement("div");
+    cardDecoration.className = "skill-card-decoration";
+    skillCard.appendChild(cardDecoration);
 
     // Añadir la tarjeta al grid
     skillsGrid.appendChild(skillCard);
   });
 
+  // Añadir interactividad a las tarjetas
+  const allSkillCards = skillsGrid.querySelectorAll(".skill-card");
+  allSkillCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const logo = card.querySelector(".skill-logo img");
+      if (logo) {
+        logo.style.transform = "scale(1.2) rotate(5deg)";
+      }
+
+      const dots = card.querySelectorAll(".skill-dot.filled");
+      dots.forEach((dot, i) => {
+        setTimeout(() => {
+          dot.style.transform = "scale(1.3)";
+          dot.style.opacity = "1";
+        }, i * 100);
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      const logo = card.querySelector(".skill-logo img");
+      if (logo) {
+        logo.style.transform = "";
+      }
+
+      const dots = card.querySelectorAll(".skill-dot.filled");
+      dots.forEach((dot) => {
+        dot.style.transform = "";
+        dot.style.opacity = "";
+      });
+    });
+  });
+
   console.log(
-    `Inicializadas ${skills.length} tarjetas de habilidades con logos`
+    `Inicializadas ${skills.length} tarjetas de habilidades con diseño mejorado`
   );
 }
 
@@ -719,12 +754,12 @@ function handleScrollAnimations() {
 
 // ===== ANIMACIÓN DE CARGA INICIAL =====
 function initializeLoadingAnimation() {
-  const loadingScreen = document.querySelector(".initial-loading");
-  if (!loadingScreen) return;
+  const loadingOverlay = document.querySelector(".initial-loading");
+  if (!loadingOverlay) return;
 
   // Mostrar animación de carga por 1.5 segundos
   setTimeout(() => {
-    loadingScreen.classList.add("hide");
+    loadingOverlay.classList.add("hide");
     startPageAnimations();
   }, 100);
 }
@@ -787,20 +822,21 @@ function createParticles() {
   });
 }
 
-// ===== BOTÓN DE VOLVER ARRIBA =====
+// ===== BOTÓN DE SCROLL TO TOP =====
 function initializeScrollTopButton() {
   const scrollTopButton = document.querySelector(".scroll-top-button");
   if (!scrollTopButton) return;
 
   window.addEventListener("scroll", () => {
     if (window.pageYOffset > 300) {
-      scrollTopButton.classList.add("active");
+      scrollTopButton.style.display = "block";
     } else {
-      scrollTopButton.classList.remove("active");
+      scrollTopButton.style.display = "none";
     }
   });
 
-  scrollTopButton.addEventListener("click", () => {
+  scrollTopButton.addEventListener("click", (e) => {
+    e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
