@@ -906,6 +906,8 @@ body {
   text-align: center;
   aspect-ratio: 1;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
 }
 
 .skill-card:hover {
@@ -936,10 +938,15 @@ body {
 
 .skill-name {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   margin-bottom: 0.8rem;
   position: relative;
   display: inline-block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .skill-name::after {
@@ -968,6 +975,7 @@ body {
   display: flex;
   margin-top: 0.5rem;
   justify-content: center;
+  width: 100%;
 }
 
 .skill-dot {
@@ -977,6 +985,7 @@ body {
   background-color: #ddd;
   margin: 0 3px;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .skill-dot.filled {
@@ -1875,40 +1884,228 @@ body {
 }
 
 /* Ajustes responsivos para las tarjetas de skills */
+@media (max-width: 1200px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.8rem;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    padding: 1.2rem;
+  }
+
+  .skill-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .skill-name {
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 768px) {
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-card {
+    padding: 1rem;
+    border-width: 2px;
   }
 
   .skill-logo {
     width: 50px;
     height: 50px;
+    margin-bottom: 0.8rem;
   }
 
   .skill-name {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-dot {
+    width: 7px;
+    height: 7px;
+    margin: 0 2px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 0.8rem;
   }
 
   .skill-logo {
     width: 40px;
     height: 40px;
+    margin-bottom: 0.6rem;
   }
 
   .skill-name {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
   }
 
   .skill-dot {
     width: 6px;
     height: 6px;
     margin: 0 2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .skill-card {
+    padding: 0.7rem;
+  }
+
+  .skill-logo {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-name {
+    font-size: 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-dot {
+    width: 5px;
+    height: 5px;
+    margin: 0 1px;
+  }
+}
+
+/* Ajustes responsivos para las tarjetas de skills */
+
+/* Añadir estilos específicos para dispositivos táctiles */
+.touch-device .skill-card {
+  /* Evitar efectos hover en dispositivos táctiles */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.touch-device .skill-card:hover {
+  /* Desactivar transformaciones hover en dispositivos táctiles */
+  transform: none;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Aplicar efectos solo cuando la tarjeta está activa en dispositivos táctiles */
+.touch-device .skill-card.touch-active {
+  transform: translateY(-10px);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustar los estilos de las tarjetas de proyectos para dispositivos táctiles */
+.touch-device .project-card {
+  overflow: hidden; /* Cambiar a hidden para evitar problemas con el scroll */
+}
+
+.touch-device .project-tilt-container {
+  transform: none !important; /* Desactivar efectos 3D en dispositivos táctiles */
+}
+
+.touch-device .project-card .project-title,
+.touch-device .project-card .project-subtitle,
+.touch-device .project-card .project-description,
+.touch-device .project-card .project-links {
+  /* Hacer visible el contenido por defecto en dispositivos táctiles */
+  opacity: 1;
+  transform: none;
+}
+
+.touch-device .project-card .project-title-container::after {
+  width: 80px; /* Mostrar la línea decorativa por defecto */
+}
+
+/* Mejorar la experiencia táctil para las tarjetas de educación */
+.touch-device .education-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.touch-device .education-card:hover {
+  /* Desactivar efectos hover en dispositivos táctiles */
+  transform: none;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Asegurar que el scroll funcione correctamente */
+html,
+body {
+  overscroll-behavior-y: none; /* Prevenir el scroll excesivo en dispositivos móviles */
+}
+
+/* Mejorar la visibilidad de los elementos interactivos en dispositivos táctiles */
+.touch-device .skill-dot.filled {
+  background-color: #000; /* Hacer los puntos más visibles */
+}
+
+.touch-device .skill-card.touch-active .skill-dot.filled {
+  transform: scale(1.3);
+}
+
+/* Añadir un indicador visual para elementos interactivos en dispositivos táctiles */
+.touch-device .skill-card::after,
+.touch-device .project-card::after,
+.touch-device .education-card::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.touch-device .skill-card.touch-active::after,
+.touch-device .project-card.active::after,
+.touch-device .education-card.active-touch::after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Asegurar que los elementos de scroll no interfieran con la interacción */
+.touch-device .section {
+  touch-action: pan-y; /* Permitir solo scroll vertical */
+}
+
+/* Mejorar la experiencia de scroll en dispositivos móviles */
+@media (max-width: 768px) {
+  .section {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Para un scroll suave en iOS */
+  }
+
+  /* Ajustar el tamaño de las tarjetas para mejor manejo táctil */
+  .skill-card,
+  .project-card,
+  .education-card {
+    touch-action: pan-y; /* Permitir scroll vertical */
   }
 }
