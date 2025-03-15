@@ -333,10 +333,6 @@ function initializeProjectCards() {
       });
     }
   });
-
-  console.log(
-    `Inicializadas ${projectCards.length} tarjetas de proyectos con efecto tilt 3D interactivo premium`
-  );
 }
 
 // ===== TARJETAS DE EDUCACIÓN =====
@@ -470,10 +466,6 @@ function initializeEducationCards() {
       });
     }
   });
-
-  console.log(
-    `Inicializadas ${educationCards.length} tarjetas de educación con animación mejorada`
-  );
 }
 
 // ===== NUEVA SECCIÓN DE SKILLS CON LOGOS =====
@@ -711,10 +703,6 @@ function initializeSkillsAnimation() {
       img.height = logoSize;
     });
   });
-
-  console.log(
-    `Inicializadas ${skills.length} tarjetas de habilidades con diseño mejorado`
-  );
 }
 
 // ===== FORMULARIO DE CONTACTO =====
@@ -759,8 +747,6 @@ function initializeContactForm() {
       email: document.getElementById("email").value,
       message: document.getElementById("message").value,
     };
-
-    console.log("Form submitted:", formData);
     // Aquí iría la lógica para enviar los datos al servidor
 
     // Resetear formulario y mostrar confirmación
@@ -782,7 +768,6 @@ function initializeContactForm() {
 function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
-  console.log(`Se encontraron ${fadeInSections.length} secciones con fade-in`);
 
   const fadeObserver = new IntersectionObserver(
     (entries) => {
