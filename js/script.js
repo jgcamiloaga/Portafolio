@@ -105,13 +105,8 @@ function initializeSmoothScrolling() {
 function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card");
 
-  // Modificar la función de detección de dispositivos táctiles para que sea más precisa
-  // Reemplazar la línea existente:
-  // const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-  // Con esta implementación más robusta:
+  // Función mejorada para detectar dispositivos táctiles
   function detectTouchDevice() {
-    // Detectar si es un dispositivo táctil
     const isTouchDevice =
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
@@ -307,57 +302,34 @@ function initializeProjectCards() {
       });
     }
 
-    // Modificar la función initializeProjectCards() para mejorar el manejo táctil
-    // Reemplazar el bloque de código para dispositivos táctiles:
+    // Manejo mejorado para dispositivos táctiles
     if (isTouchDevice) {
-      card.addEventListener("touchstart", function (e) {
-        // No prevenir el evento por defecto aquí para permitir el scroll
-        // e.preventDefault();
-
-        // Verificar si es un toque intencional o parte de un scroll
-        this.touchStartY = e.touches[0].clientY;
-        this.touchStartX = e.touches[0].clientX;
-        this.isTouching = true;
+      // Hacer que los enlaces sean siempre visibles en dispositivos táctiles
+      const projectLinks = card.querySelectorAll(".project-link");
+      projectLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          // Permitir que los enlaces funcionen normalmente
+          e.stopPropagation();
+        });
       });
 
-      card.addEventListener("touchmove", function (e) {
-        if (!this.isTouching) return;
-
-        // Calcular la distancia del movimiento
-        const deltaY = Math.abs(e.touches[0].clientY - this.touchStartY);
-        const deltaX = Math.abs(e.touches[0].clientX - this.touchStartX);
-
-        // Si el movimiento es significativo, considerarlo como scroll y no como tap
-        if (deltaY > 10 || deltaX > 10) {
-          this.isScrolling = true;
-        }
-      });
-
-      card.addEventListener("touchend", function (e) {
-        // Si estábamos scrolling, no activar la tarjeta
-        if (this.isScrolling) {
-          this.isScrolling = false;
-          this.isTouching = false;
+      // Simplificar la interacción táctil para evitar conflictos con el scroll
+      card.addEventListener("click", function (e) {
+        // Alternar la clase active solo si se hace clic directamente en la tarjeta
+        // y no en un enlace
+        if (e.target.closest(".project-link")) {
           return;
         }
 
-        // Si fue un toque intencional, alternar el estado activo
-        if (this.isTouching) {
-          // Cerrar otras tarjetas abiertas
-          projectCards.forEach((otherCard) => {
-            if (otherCard !== this) {
-              otherCard.classList.remove("active");
-            }
-          });
+        // Cerrar otras tarjetas
+        projectCards.forEach((otherCard) => {
+          if (otherCard !== this) {
+            otherCard.classList.remove("active");
+          }
+        });
 
-          // Alternar estado activo
-          this.classList.toggle("active");
-
-          // Prevenir el comportamiento por defecto solo para toques intencionales
-          e.preventDefault();
-        }
-
-        this.isTouching = false;
+        // Alternar estado activo
+        this.classList.toggle("active");
       });
     }
   });
@@ -426,109 +398,76 @@ function initializeEducationCards() {
         }
       });
     } else {
-      // Modificar la función initializeEducationCards() para mejorar el manejo táctil
-      // Reemplazar el bloque de código para dispositivos táctiles:
-      if (isTouchDevice) {
-        // Para dispositivos táctiles - Versión mejorada
-        card.addEventListener("touchstart", function (e) {
-          // No prevenir el evento por defecto para permitir el scroll
-          this.touchStartY = e.touches[0].clientY;
-          this.touchStartX = e.touches[0].clientX;
-          this.isTouching = true;
-        });
+      // Simplificar la interacción táctil para evitar conflictos con el scroll
+      card.addEventListener("click", function () {
+        // Cerrar otras tarjetas
+        educationCards.forEach((otherCard) => {
+          if (otherCard !== this) {
+            otherCard.classList.remove("active-touch");
 
-        card.addEventListener("touchmove", function (e) {
-          if (!this.isTouching) return;
+            // Resetear estilos
+            const title = otherCard.querySelector(".education-title");
+            const year = otherCard.querySelector(".education-year");
+            const school = otherCard.querySelector(".education-school");
+            const description = otherCard.querySelector(
+              ".education-description"
+            );
 
-          const deltaY = Math.abs(e.touches[0].clientY - this.touchStartY);
-          const deltaX = Math.abs(e.touches[0].clientX - this.touchStartX);
-
-          if (deltaY > 10 || deltaX > 10) {
-            this.isScrolling = true;
-          }
-        });
-
-        card.addEventListener("touchend", function (e) {
-          if (this.isScrolling) {
-            this.isScrolling = false;
-            this.isTouching = false;
-            return;
-          }
-
-          if (this.isTouching) {
-            // Primero, desactivar todas las tarjetas
-            educationCards.forEach((c) => {
-              if (c !== this) {
-                c.classList.remove("active-touch");
-
-                // Resetear estilos
-                const title = c.querySelector(".education-title");
-                const year = c.querySelector(".education-year");
-                const school = c.querySelector(".education-school");
-                const description = c.querySelector(".education-description");
-
-                if (title) title.style.transform = "";
-                if (year) {
-                  year.style.backgroundColor = "";
-                  year.style.color = "";
-                }
-                if (school) school.style.transform = "";
-                if (description) {
-                  description.style.transform = "";
-                  description.style.opacity = "";
-                }
-              }
-            });
-
-            // Alternar estado de la tarjeta actual
-            this.classList.toggle("active-touch");
-
-            // Aplicar o quitar estilos según el estado
-            const isActive = this.classList.contains("active-touch");
-            const title = this.querySelector(".education-title");
-            const year = this.querySelector(".education-year");
-            const school = this.querySelector(".education-school");
-            const description = this.querySelector(".education-description");
-
-            if (isActive) {
-              this.style.transform = "translateY(-15px) scale(1.02)";
-              this.style.boxShadow = "15px 15px 0 rgba(0, 0, 0, 0.2)";
-              this.style.zIndex = "10";
-
-              if (title) title.style.transform = "translateX(5px)";
-              if (year) {
-                year.style.backgroundColor = "black";
-                year.style.color = "white";
-              }
-              if (school) school.style.transform = "translateX(-5px)";
-              if (description) {
-                description.style.transform = "translateY(-3px)";
-                description.style.opacity = "1";
-              }
-            } else {
-              this.style.transform = "";
-              this.style.boxShadow = "";
-              this.style.zIndex = "";
-
-              if (title) title.style.transform = "";
-              if (year) {
-                year.style.backgroundColor = "";
-                year.style.color = "";
-              }
-              if (school) school.style.transform = "";
-              if (description) {
-                description.style.transform = "";
-                description.style.opacity = "";
-              }
+            if (title) title.style.transform = "";
+            if (year) {
+              year.style.backgroundColor = "";
+              year.style.color = "";
             }
-
-            // Prevenir el comportamiento por defecto solo para toques intencionales
-            e.preventDefault();
+            if (school) school.style.transform = "";
+            if (description) {
+              description.style.transform = "";
+              description.style.opacity = "";
+            }
           }
-
-          this.isTouching = false;
         });
-      }
+
+        // Alternar estado de la tarjeta actual
+        this.classList.toggle("active-touch");
+
+        // Aplicar o quitar estilos según el estado
+        const isActive = this.classList.contains("active-touch");
+        const title = this.querySelector(".education-title");
+        const year = this.querySelector(".education-year");
+        const school = this.querySelector(".education-school");
+        const description = this.querySelector(".education-description");
+
+        if (isActive) {
+          this.style.transform = "translateY(-15px) scale(1.02)";
+          this.style.boxShadow = "15px 15px 0 rgba(0, 0, 0, 0.2)";
+          this.style.zIndex = "10";
+
+          if (title) title.style.transform = "translateX(5px)";
+          if (year) {
+            year.style.backgroundColor = "black";
+            year.style.color = "white";
+          }
+          if (school) school.style.transform = "translateX(-5px)";
+          if (description) {
+            description.style.transform = "translateY(-3px)";
+            description.style.opacity = "1";
+          }
+        } else {
+          this.style.transform = "";
+          this.style.boxShadow = "";
+          this.style.zIndex = "";
+
+          if (title) title.style.transform = "";
+          if (year) {
+            year.style.backgroundColor = "";
+            year.style.color = "";
+          }
+          if (school) school.style.transform = "";
+          if (description) {
+            description.style.transform = "";
+            description.style.opacity = "";
+          }
+        }
+      });
     }
   });
 
@@ -673,124 +612,94 @@ function initializeSkillsAnimation() {
     skillsGrid.appendChild(skillCard);
   });
 
-  // Modificar la función initializeSkillsAnimation() para almacenar los manejadores de eventos
-  // Reemplazar el bloque de código donde se añaden los eventos mouseenter/mouseleave:
-
   // Añadir interactividad a las tarjetas
   const allSkillCards = skillsGrid.querySelectorAll(".skill-card");
-  allSkillCards.forEach((card) => {
-    // Crear funciones manejadoras y guardarlas como propiedades del elemento
-    card._mouseEnterHandler = () => {
-      const logo = card.querySelector(".skill-logo img");
-      if (logo) {
-        logo.style.transform = "scale(1.2) rotate(5deg)";
-      }
-
-      const dots = card.querySelectorAll(".skill-dot.filled");
-      dots.forEach((dot, i) => {
-        setTimeout(() => {
-          dot.style.transform = "scale(1.3)";
-          dot.style.opacity = "1";
-        }, i * 100);
-      });
-    };
-
-    card._mouseLeaveHandler = () => {
-      const logo = card.querySelector(".skill-logo img");
-      if (logo) {
-        logo.style.transform = "";
-      }
-
-      const dots = card.querySelectorAll(".skill-dot.filled");
-      dots.forEach((dot) => {
-        dot.style.transform = "";
-        dot.style.opacity = "";
-      });
-    };
-
-    // Añadir los eventos solo para dispositivos no táctiles
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (!isTouchDevice) {
-      card.addEventListener("mouseenter", card._mouseEnterHandler);
-      card.addEventListener("mouseleave", card._mouseLeaveHandler);
-    }
-  });
-
-  // Modificar la función initializeSkillsAnimation() para mejorar el manejo táctil
-  // Añadir este código al final de la función:
-
   const isTouchDevice =
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  if (isTouchDevice) {
-    allSkillCards.forEach((card) => {
-      // Eliminar los eventos de mouseenter/mouseleave para dispositivos táctiles
-      card.removeEventListener("mouseenter", card._mouseEnterHandler);
-      card.removeEventListener("mouseleave", card._mouseLeaveHandler);
 
-      // Añadir eventos táctiles específicos
-      card.addEventListener("touchstart", function (e) {
-        // No prevenir el evento por defecto para permitir el scroll
-        this.touchStartY = e.touches[0].clientY;
-        this.touchStartX = e.touches[0].clientX;
-        this.isTouching = true;
-      });
-
-      card.addEventListener("touchmove", function (e) {
-        if (!this.isTouching) return;
-
-        const deltaY = Math.abs(e.touches[0].clientY - this.touchStartY);
-        const deltaX = Math.abs(e.touches[0].clientX - this.touchStartX);
-
-        if (deltaY > 10 || deltaX > 10) {
-          this.isScrolling = true;
-        }
-      });
-
-      card.addEventListener("touchend", function (e) {
-        if (this.isScrolling) {
-          this.isScrolling = false;
-          this.isTouching = false;
-          return;
+  allSkillCards.forEach((card) => {
+    if (!isTouchDevice) {
+      // Para dispositivos no táctiles
+      card.addEventListener("mouseenter", () => {
+        const logo = card.querySelector(".skill-logo img");
+        if (logo) {
+          logo.style.transform = "scale(1.2) rotate(5deg)";
         }
 
-        if (this.isTouching) {
-          // Alternar clase activa para efectos visuales
-          this.classList.toggle("touch-active");
+        const dots = card.querySelectorAll(".skill-dot.filled");
+        dots.forEach((dot, i) => {
+          setTimeout(() => {
+            dot.style.transform = "scale(1.3)";
+            dot.style.opacity = "1";
+          }, i * 100);
+        });
+      });
 
-          // Si ya tiene la clase, aplicar efectos visuales
-          if (this.classList.contains("touch-active")) {
-            const logo = this.querySelector(".skill-logo img");
-            if (logo) {
-              logo.style.transform = "scale(1.2) rotate(5deg)";
+      card.addEventListener("mouseleave", () => {
+        const logo = card.querySelector(".skill-logo img");
+        if (logo) {
+          logo.style.transform = "";
+        }
+
+        const dots = card.querySelectorAll(".skill-dot.filled");
+        dots.forEach((dot) => {
+          dot.style.transform = "";
+          dot.style.opacity = "";
+        });
+      });
+    } else {
+      // Para dispositivos táctiles - simplificado
+      card.addEventListener("click", function () {
+        // Cerrar otras tarjetas
+        allSkillCards.forEach((otherCard) => {
+          if (otherCard !== this) {
+            otherCard.classList.remove("touch-active");
+
+            const otherLogo = otherCard.querySelector(".skill-logo img");
+            if (otherLogo) {
+              otherLogo.style.transform = "";
             }
 
-            const dots = this.querySelectorAll(".skill-dot.filled");
-            dots.forEach((dot, i) => {
-              setTimeout(() => {
-                dot.style.transform = "scale(1.3)";
-                dot.style.opacity = "1";
-              }, i * 100);
-            });
-          } else {
-            // Restaurar estado normal
-            const logo = this.querySelector(".skill-logo img");
-            if (logo) {
-              logo.style.transform = "";
-            }
-
-            const dots = this.querySelectorAll(".skill-dot.filled");
-            dots.forEach((dot) => {
+            const otherDots = otherCard.querySelectorAll(".skill-dot.filled");
+            otherDots.forEach((dot) => {
               dot.style.transform = "";
               dot.style.opacity = "";
             });
           }
-        }
+        });
 
-        this.isTouching = false;
+        // Alternar clase activa
+        this.classList.toggle("touch-active");
+
+        // Aplicar efectos visuales según el estado
+        if (this.classList.contains("touch-active")) {
+          const logo = this.querySelector(".skill-logo img");
+          if (logo) {
+            logo.style.transform = "scale(1.2) rotate(5deg)";
+          }
+
+          const dots = this.querySelectorAll(".skill-dot.filled");
+          dots.forEach((dot, i) => {
+            setTimeout(() => {
+              dot.style.transform = "scale(1.3)";
+              dot.style.opacity = "1";
+            }, i * 100);
+          });
+        } else {
+          const logo = this.querySelector(".skill-logo img");
+          if (logo) {
+            logo.style.transform = "";
+          }
+
+          const dots = this.querySelectorAll(".skill-dot.filled");
+          dots.forEach((dot) => {
+            dot.style.transform = "";
+            dot.style.opacity = "";
+          });
+        }
       });
-    });
-  }
+    }
+  });
 
   // Ajustar el tamaño de las tarjetas cuando cambia el tamaño de la ventana
   window.addEventListener("resize", () => {
