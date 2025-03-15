@@ -333,6 +333,10 @@ function initializeProjectCards() {
       });
     }
   });
+
+  console.log(
+    `Inicializadas ${projectCards.length} tarjetas de proyectos con efecto tilt 3D interactivo premium`
+  );
 }
 
 // ===== TARJETAS DE EDUCACIÓN =====
@@ -395,7 +399,10 @@ function initializeEducationCards() {
       });
     } else {
       // Simplificar la interacción táctil para evitar conflictos con el scroll
-      card.addEventListener("click", function () {
+      card.addEventListener("click", function (e) {
+        // Prevenir comportamiento por defecto solo si es necesario
+        // e.preventDefault();
+
         // Cerrar otras tarjetas
         educationCards.forEach((otherCard) => {
           if (otherCard !== this) {
@@ -433,8 +440,8 @@ function initializeEducationCards() {
         const description = this.querySelector(".education-description");
 
         if (isActive) {
-          this.style.transform = "translateY(-15px) scale(1.02)";
-          this.style.boxShadow = "15px 15px 0 rgba(0, 0, 0, 0.2)";
+          this.style.transform = "translateY(-10px) scale(1.01)";
+          this.style.boxShadow = "10px 10px 0 rgba(0, 0, 0, 0.15)";
           this.style.zIndex = "10";
 
           if (title) title.style.transform = "translateX(5px)";
@@ -464,8 +471,40 @@ function initializeEducationCards() {
           }
         }
       });
+
+      // Añadir efecto de feedback táctil
+      card.addEventListener("touchstart", function () {
+        this.style.transition = "transform 0.2s ease";
+      });
+
+      card.addEventListener("touchend", function () {
+        this.style.transition =
+          "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+      });
     }
   });
+
+  // Ajustar el diseño responsive en función del tamaño de la ventana
+  function adjustEducationCards() {
+    const windowWidth = window.innerWidth;
+
+    educationCards.forEach((card) => {
+      // Ajustar la animación según el tamaño de la pantalla
+      if (windowWidth <= 576) {
+        card.classList.add("small-screen");
+      } else {
+        card.classList.remove("small-screen");
+      }
+    });
+  }
+
+  // Ejecutar al inicio y cuando cambie el tamaño de la ventana
+  adjustEducationCards();
+  window.addEventListener("resize", adjustEducationCards);
+
+  console.log(
+    `Inicializadas ${educationCards.length} tarjetas de educación con animación mejorada y responsive`
+  );
 }
 
 // ===== NUEVA SECCIÓN DE SKILLS CON LOGOS =====
@@ -703,6 +742,10 @@ function initializeSkillsAnimation() {
       img.height = logoSize;
     });
   });
+
+  console.log(
+    `Inicializadas ${skills.length} tarjetas de habilidades con diseño mejorado`
+  );
 }
 
 // ===== FORMULARIO DE CONTACTO =====
@@ -747,6 +790,8 @@ function initializeContactForm() {
       email: document.getElementById("email").value,
       message: document.getElementById("message").value,
     };
+
+    console.log("Form submitted:", formData);
     // Aquí iría la lógica para enviar los datos al servidor
 
     // Resetear formulario y mostrar confirmación
@@ -768,6 +813,7 @@ function initializeContactForm() {
 function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
+  console.log(`Se encontraron ${fadeInSections.length} secciones con fade-in`);
 
   const fadeObserver = new IntersectionObserver(
     (entries) => {
