@@ -884,6 +884,142 @@ body {
   opacity: 1;
 }
 
+/* Mejoras responsive para las tarjetas de educación */
+@media (max-width: 1200px) {
+  .education-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .education-card {
+    padding: 1.8rem;
+  }
+
+  .education-title {
+    font-size: 1.4rem;
+  }
+
+  .education-school {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .education-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.8rem;
+  }
+
+  .education-card {
+    padding: 1.5rem;
+  }
+
+  .education-title {
+    font-size: 1.3rem;
+  }
+
+  .education-year {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .education-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .education-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .education-card:hover,
+  .education-card.active-touch {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (max-width: 576px) {
+  .education-grid {
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .education-card {
+    padding: 1.2rem;
+    border-width: 2px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .education-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .education-year {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.7rem;
+  }
+
+  .education-school {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .education-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .education-card:hover,
+  .education-card.active-touch {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 400px) {
+  .education-card {
+    padding: 1rem;
+  }
+
+  .education-title {
+    font-size: 1.1rem;
+  }
+
+  .education-year {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .education-school {
+    font-size: 0.9rem;
+  }
+
+  .education-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles */
+.touch-device .education-card {
+  cursor: pointer;
+}
+
+.touch-device .education-card:active {
+  transform: scale(0.98);
+  transition: transform 0.2s ease;
+}
+
+.touch-device .education-card.active-touch {
+  border-color: black;
+  background-color: #fafafa;
+}
+
 /* NUEVA Sección Skills con logos */
 .skills-grid {
   display: grid;
