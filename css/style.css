@@ -2158,24 +2158,62 @@ body {
 
 /* Ajustar los estilos de las tarjetas de proyectos para dispositivos táctiles */
 .touch-device .project-card {
-  overflow: hidden; /* Cambiar a hidden para evitar problemas con el scroll */
+  overflow: visible; /* Cambiar a visible para evitar problemas con el scroll */
+  cursor: default;
+  transform: none !important;
 }
 
 .touch-device .project-tilt-container {
   transform: none !important; /* Desactivar efectos 3D en dispositivos táctiles */
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
 }
 
 .touch-device .project-card .project-title,
-.touch-device .project-card .project-subtitle,
-.touch-device .project-card .project-description,
+.touch-device .project-card .project-subtitle {
+  /* Hacer visible el título y subtítulo por defecto en dispositivos táctiles */
+  opacity: 1;
+  transform: none;
+}
+
+.touch-device .project-card .project-description {
+  /* Hacer visible la descripción por defecto en dispositivos táctiles */
+  max-height: 100px;
+  opacity: 1;
+  margin-bottom: 1.8rem;
+}
+
 .touch-device .project-card .project-links {
-  /* Hacer visible el contenido por defecto en dispositivos táctiles */
+  /* Hacer visibles los enlaces por defecto en dispositivos táctiles */
   opacity: 1;
   transform: none;
 }
 
 .touch-device .project-card .project-title-container::after {
   width: 80px; /* Mostrar la línea decorativa por defecto */
+}
+
+/* Eliminar efectos hover en dispositivos táctiles */
+.touch-device .project-card:hover .project-image,
+.touch-device .project-card:hover .project-color-overlay,
+.touch-device .project-card:hover .project-pattern,
+.touch-device .project-card:hover .project-number,
+.touch-device .project-card:hover .project-content,
+.touch-device .project-card:hover .project-shine,
+.touch-device .project-card:hover .project-title-container::after {
+  transform: none;
+  opacity: initial;
+  width: initial;
+  height: initial;
+}
+
+/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
+.touch-device .project-link {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem 0;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
 }
 
 /* Mejorar la experiencia táctil para las tarjetas de educación */
@@ -2239,9 +2277,53 @@ body {
   }
 
   /* Ajustar el tamaño de las tarjetas para mejor manejo táctil */
-  .skill-card,
-  .project-card,
-  .education-card {
+  .project-card {
     touch-action: pan-y; /* Permitir scroll vertical */
+    height: auto;
+    min-height: 350px;
+    margin-bottom: 2rem;
+  }
+
+  .touch-device .project-content {
+    position: relative;
+    padding: 1.5rem;
+    bottom: auto;
+    left: auto;
+  }
+
+  .touch-device .project-image-container {
+    position: relative;
+    height: 200px;
+  }
+
+  .touch-device .project-color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+  }
+
+  .touch-device .project-number {
+    font-size: 4rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .touch-device .project-image-container {
+    height: 180px;
+  }
+
+  .touch-device .project-color-overlay {
+    height: 180px;
+  }
+
+  .touch-device .project-content {
+    padding: 1.2rem;
+  }
+
+  .touch-device .project-number {
+    font-size: 3.5rem;
+    padding: 8px;
   }
 }
