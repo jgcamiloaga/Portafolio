@@ -1027,25 +1027,27 @@ body {
 }
 
 /* NUEVA Sección Skills con diseño coherente con la página */
+/* COMPLETELY REDESIGNED NEOBRUTALIST SKILL CARDS */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 2rem;
-  margin-top: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+  margin-top: 3rem;
 }
 
 .skill-card {
   position: relative;
   aspect-ratio: 1;
-  border: 3px solid black;
   background-color: white;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+  border: 3px solid black;
+  box-shadow: 8px 8px 0 black;
   transition: all 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .skill-card::before {
@@ -1057,6 +1059,7 @@ body {
   height: 20px;
   background-color: black;
   transform: rotate(45deg);
+  z-index: 1;
 }
 
 .skill-logo {
@@ -1066,12 +1069,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .skill-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
 }
 
 .skill-name {
@@ -1079,116 +1086,134 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: black;
   text-align: center;
-  padding: 0.5rem;
+  padding: 8px 5px;
   font-weight: bold;
   font-size: 0.9rem;
   transform: translateY(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  z-index: 3;
+  border-top: 2px solid black;
 }
 
+/* Hover effects */
 .skill-card:hover {
   transform: translate(-5px, -5px);
-  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
-}
-
-.skill-card:hover .skill-name {
-  transform: translateY(0);
+  box-shadow: 12px 12px 0 black;
 }
 
 .skill-card:hover .skill-logo {
   transform: translateY(-10px);
 }
 
-/* Ajustes responsivos para las tarjetas de skills */
-@media (max-width: 1200px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 1.8rem;
-  }
+.skill-card:hover .skill-logo img {
+  filter: grayscale(0%);
 }
 
-@media (max-width: 992px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 1.5rem;
-  }
+.skill-card:hover .skill-name {
+  transform: translateY(0);
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
-  .skill-name {
-    font-size: 0.85rem;
-    padding: 0.4rem;
+/* Active state for touch devices */
+.touch-device .skill-card.touch-active {
+  transform: translate(-5px, -5px);
+  box-shadow: 12px 12px 0 black;
+}
+
+.touch-device .skill-card.touch-active .skill-logo {
+  transform: translateY(-10px);
+}
+
+.touch-device .skill-card.touch-active .skill-logo img {
+  filter: grayscale(0%);
+}
+
+.touch-device .skill-card.touch-active .skill-name {
+  transform: translateY(0);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
   }
 }
 
 @media (max-width: 768px) {
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
   }
 
-  .skill-name {
-    font-size: 0.8rem;
-    padding: 0.3rem;
-  }
-
-  .skill-card:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+  .skill-card {
+    border-width: 2px;
+    box-shadow: 6px 6px 0 black;
   }
 
   .skill-card::before {
     width: 15px;
     height: 15px;
+    top: -7px;
+    right: -7px;
+  }
+
+  .skill-name {
+    padding: 6px 3px;
+    font-size: 0.8rem;
+  }
+
+  .skill-card:hover,
+  .touch-device .skill-card.touch-active {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 black;
   }
 }
 
 @media (max-width: 576px) {
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
   }
 
   .skill-name {
+    padding: 5px 2px;
     font-size: 0.75rem;
-    padding: 0.3rem;
-  }
-
-  .skill-card {
-    border-width: 2px;
-    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .skill-card:hover {
-    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.15);
   }
 }
 
 @media (max-width: 400px) {
   .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  .skill-card {
+    border-width: 2px;
+    box-shadow: 5px 5px 0 black;
+  }
+
+  .skill-card::before {
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    right: -6px;
   }
 
   .skill-name {
+    padding: 4px 2px;
     font-size: 0.7rem;
-    padding: 0.25rem;
   }
-}
 
-/* Estilos para dispositivos táctiles */
-.touch-device .skill-card.touch-active {
-  transform: translate(-5px, -5px);
-  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
-}
-
-.touch-device .skill-card.touch-active .skill-name {
-  transform: translateY(0);
-}
-
-.touch-device .skill-card.touch-active .skill-logo {
-  transform: translateY(-10px);
+  .skill-card:hover,
+  .touch-device .skill-card.touch-active {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 black;
+  }
 }
 
 /* Ocultar los puntos indicadores de nivel */
@@ -1200,112 +1225,7 @@ body {
   display: none;
 }
 
-/* Ajustes para las tarjetas de proyectos en dispositivos táctiles */
-.touch-device .project-card {
-  height: auto;
-  min-height: 450px;
-  margin-bottom: 2.5rem;
-  overflow: visible;
-  cursor: default;
-  transform: none !important;
-}
-
-.touch-device .project-tilt-container {
-  transform: none !important;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-}
-
-/* Hacer que todos los elementos sean visibles por defecto en dispositivos táctiles */
-.touch-device .project-title,
-.touch-device .project-subtitle {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.touch-device .project-description {
-  max-height: 100px;
-  opacity: 1;
-  margin-bottom: 1.8rem;
-}
-
-.touch-device .project-links {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.touch-device .project-title-container::after {
-  width: 80px;
-}
-
-/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
-.touch-device .project-link {
-  padding: 0.8rem 1.5rem;
-  margin: 0.5rem 0.5rem 0.5rem 0;
-  display: inline-block;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 2px solid white;
-}
-
-/* Ajustes específicos para pantallas móviles */
-@media (max-width: 768px) {
-  .touch-device .project-card {
-    min-height: auto;
-  }
-
-  .touch-device .project-tilt-container {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-  }
-
-  .touch-device .project-image-container {
-    position: relative;
-    height: 200px;
-    width: 100%;
-  }
-
-  .touch-device .project-color-overlay {
-    position: absolute;
-    height: 200px;
-  }
-
-  .touch-device .project-content {
-    position: relative;
-    padding: 1.5rem;
-    background-color: black;
-  }
-
-  .touch-device .project-number {
-    font-size: 4rem;
-    padding: 10px;
-  }
-
-  .touch-device .project-pattern {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .touch-device .project-image-container {
-    height: 180px;
-  }
-
-  .touch-device .project-color-overlay {
-    height: 180px;
-  }
-
-  .touch-device .project-content {
-    padding: 1.2rem;
-  }
-
-  .touch-device .project-number {
-    font-size: 3.5rem;
-    padding: 8px;
-  }
-}
-
-/* Formulario de contacto con animación restaurada */
+/* RESTAURACIÓN DEL FORMULARIO DE CONTACTO */
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
@@ -1576,7 +1496,6 @@ body {
 
   .submit-button {
     padding: 0.7rem 1.2rem;
-    font-size: 0.85rem;
   }
 }
 
@@ -2904,7 +2823,6 @@ body {
 
   .submit-button {
     padding: 0.7rem 1.2rem;
-    font-size: 0.85rem;
   }
 }
 
