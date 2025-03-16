@@ -1026,7 +1026,7 @@ body {
   background-color: #fafafa;
 }
 
-/* NUEVA Sección Skills con logos */
+/* NUEVA Sección Skills con diseño coherente con la página */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -1036,17 +1036,16 @@ body {
 
 .skill-card {
   position: relative;
-  overflow: hidden;
   aspect-ratio: 1;
   border: 3px solid black;
   background-color: white;
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .skill-card::before {
@@ -1054,22 +1053,10 @@ body {
   position: absolute;
   top: -10px;
   right: -10px;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: black;
   transform: rotate(45deg);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translate(-8px, -8px);
-  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
-}
-
-.skill-card:hover::before {
-  opacity: 1;
 }
 
 .skill-logo {
@@ -1078,61 +1065,41 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s ease;
 }
 
 .skill-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.skill-card:hover .skill-logo {
-  transform: translateY(-30px);
-}
-
-.skill-name-container {
-  position: absolute;
-  bottom: -50px;
-  left: 0;
-  width: 100%;
-  padding: 0.8rem;
-  background-color: black;
-  color: white;
-  text-align: center;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 3;
-}
-
-.skill-card:hover .skill-name-container {
-  transform: translateY(-50px);
 }
 
 .skill-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
   font-weight: bold;
   font-size: 0.9rem;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
 }
 
-/* Línea decorativa para el nombre */
-.skill-name::after {
-  content: "";
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background-color: white;
-  transition: width 0.3s ease;
+.skill-card:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.skill-card:hover .skill-name::after {
-  width: 30px;
+.skill-card:hover .skill-name {
+  transform: translateY(0);
+}
+
+.skill-card:hover .skill-logo {
+  transform: translateY(-10px);
 }
 
 /* Ajustes responsivos para las tarjetas de skills */
@@ -1151,6 +1118,7 @@ body {
 
   .skill-name {
     font-size: 0.85rem;
+    padding: 0.4rem;
   }
 }
 
@@ -1162,16 +1130,17 @@ body {
 
   .skill-name {
     font-size: 0.8rem;
+    padding: 0.3rem;
   }
 
   .skill-card:hover {
-    transform: translate(-5px, -5px);
+    transform: translate(-3px, -3px);
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
   }
 
   .skill-card::before {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
 }
 
@@ -1183,10 +1152,7 @@ body {
 
   .skill-name {
     font-size: 0.75rem;
-  }
-
-  .skill-name-container {
-    padding: 0.6rem;
+    padding: 0.3rem;
   }
 
   .skill-card {
@@ -1207,37 +1173,22 @@ body {
 
   .skill-name {
     font-size: 0.7rem;
-  }
-
-  .skill-name-container {
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
 }
 
 /* Estilos para dispositivos táctiles */
-.touch-device .skill-card {
-  border-color: black;
-}
-
 .touch-device .skill-card.touch-active {
-  transform: translate(-8px, -8px);
+  transform: translate(-5px, -5px);
   box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.touch-device .skill-card.touch-active::before {
-  opacity: 1;
+.touch-device .skill-card.touch-active .skill-name {
+  transform: translateY(0);
 }
 
 .touch-device .skill-card.touch-active .skill-logo {
-  transform: translateY(-30px);
-}
-
-.touch-device .skill-card.touch-active .skill-name-container {
-  transform: translateY(-50px);
-}
-
-.touch-device .skill-card.touch-active .skill-name::after {
-  width: 30px;
+  transform: translateY(-10px);
 }
 
 /* Ocultar los puntos indicadores de nivel */
@@ -2508,9 +2459,7 @@ body {
   }
 }
 
-/* Ajustes responsivos para las tarjetas de skills */
-
-/* Añadir estilos específicos para dispositivos táctiles */
+/* Estilos para dispositivos táctiles */
 .touch-device .skill-card {
   /* Evitar efectos hover en dispositivos táctiles */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
