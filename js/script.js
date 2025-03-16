@@ -97,7 +97,7 @@ function initializeSmoothScrolling() {
       });
     });
   } catch (error) {
-    console.error("Error en smooth scrolling:", error);
+    // Error en smooth scrolling
   }
 }
 
@@ -301,210 +301,7 @@ function initializeProjectCards() {
         if (projectNumber) projectNumber.style.transform = "";
       });
     }
-
-    // Manejo mejorado para dispositivos táctiles
-    if (isTouchDevice) {
-      // Hacer que los enlaces sean siempre visibles en dispositivos táctiles
-      const projectLinks = card.querySelectorAll(".project-link");
-      projectLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          // Permitir que los enlaces funcionen normalmente
-          e.stopPropagation();
-        });
-      });
-
-      // Simplificar la interacción táctil para evitar conflictos con el scroll
-      card.addEventListener("click", function (e) {
-        // Alternar la clase active solo si se hace clic directamente en la tarjeta
-        // y no en un enlace
-        if (e.target.closest(".project-link")) {
-          return;
-        }
-
-        // Cerrar otras tarjetas
-        projectCards.forEach((otherCard) => {
-          if (otherCard !== this) {
-            otherCard.classList.remove("active");
-          }
-        });
-
-        // Alternar estado activo
-        this.classList.toggle("active");
-      });
-    }
   });
-
-  console.log(
-    `Inicializadas ${projectCards.length} tarjetas de proyectos con efecto tilt 3D interactivo premium`
-  );
-}
-
-// ===== TARJETAS DE EDUCACIÓN =====
-function initializeEducationCards() {
-  const educationCards = document.querySelectorAll(
-    "#education .education-card"
-  );
-
-  // Detectar si es un dispositivo táctil
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-  educationCards.forEach((card, index) => {
-    // Añadir un pequeño retraso inicial para crear un efecto escalonado
-    card.style.transitionDelay = `${index * 0.05}s`;
-
-    // Para dispositivos no táctiles
-    if (!isTouchDevice) {
-      // Animación al pasar el mouse
-      card.addEventListener("mouseenter", () => {
-        // Efecto de elevación
-        card.style.zIndex = "10";
-
-        // Animar elementos internos
-        const title = card.querySelector(".education-title");
-        const year = card.querySelector(".education-year");
-        const school = card.querySelector(".education-school");
-        const description = card.querySelector(".education-description");
-
-        if (title) title.style.transform = "translateX(5px)";
-        if (year) year.style.backgroundColor = "black";
-        if (year) year.style.color = "white";
-        if (school) school.style.transform = "translateX(-5px)";
-        if (description) {
-          description.style.transform = "translateY(-3px)";
-          description.style.opacity = "1";
-        }
-      });
-
-      card.addEventListener("mouseleave", () => {
-        // Restaurar z-index
-        setTimeout(() => {
-          card.style.zIndex = "";
-        }, 300);
-
-        // Restaurar elementos internos
-        const title = card.querySelector(".education-title");
-        const year = card.querySelector(".education-year");
-        const school = card.querySelector(".education-school");
-        const description = card.querySelector(".education-description");
-
-        if (title) title.style.transform = "";
-        if (year) year.style.backgroundColor = "";
-        if (year) year.style.color = "";
-        if (school) school.style.transform = "";
-        if (description) {
-          description.style.transform = "";
-          description.style.opacity = "";
-        }
-      });
-    } else {
-      // Simplificar la interacción táctil para evitar conflictos con el scroll
-      card.addEventListener("click", function (e) {
-        // Prevenir comportamiento por defecto solo si es necesario
-        // e.preventDefault();
-
-        // Cerrar otras tarjetas
-        educationCards.forEach((otherCard) => {
-          if (otherCard !== this) {
-            otherCard.classList.remove("active-touch");
-
-            // Resetear estilos
-            const title = otherCard.querySelector(".education-title");
-            const year = otherCard.querySelector(".education-year");
-            const school = otherCard.querySelector(".education-school");
-            const description = otherCard.querySelector(
-              ".education-description"
-            );
-
-            if (title) title.style.transform = "";
-            if (year) {
-              year.style.backgroundColor = "";
-              year.style.color = "";
-            }
-            if (school) school.style.transform = "";
-            if (description) {
-              description.style.transform = "";
-              description.style.opacity = "";
-            }
-          }
-        });
-
-        // Alternar estado de la tarjeta actual
-        this.classList.toggle("active-touch");
-
-        // Aplicar o quitar estilos según el estado
-        const isActive = this.classList.contains("active-touch");
-        const title = this.querySelector(".education-title");
-        const year = this.querySelector(".education-year");
-        const school = this.querySelector(".education-school");
-        const description = this.querySelector(".education-description");
-
-        if (isActive) {
-          this.style.transform = "translateY(-10px) scale(1.01)";
-          this.style.boxShadow = "10px 10px 0 rgba(0, 0, 0, 0.15)";
-          this.style.zIndex = "10";
-
-          if (title) title.style.transform = "translateX(5px)";
-          if (year) {
-            year.style.backgroundColor = "black";
-            year.style.color = "white";
-          }
-          if (school) school.style.transform = "translateX(-5px)";
-          if (description) {
-            description.style.transform = "translateY(-3px)";
-            description.style.opacity = "1";
-          }
-        } else {
-          this.style.transform = "";
-          this.style.boxShadow = "";
-          this.style.zIndex = "";
-
-          if (title) title.style.transform = "";
-          if (year) {
-            year.style.backgroundColor = "";
-            year.style.color = "";
-          }
-          if (school) school.style.transform = "";
-          if (description) {
-            description.style.transform = "";
-            description.style.opacity = "";
-          }
-        }
-      });
-
-      // Añadir efecto de feedback táctil
-      card.addEventListener("touchstart", function () {
-        this.style.transition = "transform 0.2s ease";
-      });
-
-      card.addEventListener("touchend", function () {
-        this.style.transition =
-          "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-      });
-    }
-  });
-
-  // Ajustar el diseño responsive en función del tamaño de la ventana
-  function adjustEducationCards() {
-    const windowWidth = window.innerWidth;
-
-    educationCards.forEach((card) => {
-      // Ajustar la animación según el tamaño de la pantalla
-      if (windowWidth <= 576) {
-        card.classList.add("small-screen");
-      } else {
-        card.classList.remove("small-screen");
-      }
-    });
-  }
-
-  // Ejecutar al inicio y cuando cambie el tamaño de la ventana
-  adjustEducationCards();
-  window.addEventListener("resize", adjustEducationCards);
-
-  console.log(
-    `Inicializadas ${educationCards.length} tarjetas de educación con animación mejorada y responsive`
-  );
 }
 
 // ===== NUEVA SECCIÓN DE SKILLS CON LOGOS =====
@@ -610,34 +407,19 @@ function initializeSkillsAnimation() {
     logoImg.height = logoSize;
     skillLogo.appendChild(logoImg);
 
+    // Crear el contenedor del nombre
+    const nameContainer = document.createElement("div");
+    nameContainer.className = "skill-name-container";
+
     // Crear el nombre de la habilidad
     const skillName = document.createElement("h3");
     skillName.className = "skill-name";
     skillName.textContent = skill.name;
+    nameContainer.appendChild(skillName);
 
-    // Crear los puntos indicadores de nivel (sin mostrar el porcentaje)
-    const skillLevelIndicator = document.createElement("div");
-    skillLevelIndicator.className = "skill-level-indicator";
-
-    // Crear 5 puntos, llenando según el nivel
-    const dotsCount = 5;
-    const filledDots = Math.round((skill.level / 100) * dotsCount);
-
-    for (let i = 0; i < dotsCount; i++) {
-      const dot = document.createElement("div");
-      dot.className = `skill-dot ${i < filledDots ? "filled" : ""}`;
-      skillLevelIndicator.appendChild(dot);
-    }
-
-    // Ensamblar la tarjeta con un diseño mejorado
+    // Ensamblar la tarjeta con el nuevo diseño
     skillCard.appendChild(skillLogo);
-    skillCard.appendChild(skillName);
-    skillCard.appendChild(skillLevelIndicator);
-
-    // Añadir efectos visuales adicionales
-    const cardDecoration = document.createElement("div");
-    cardDecoration.className = "skill-card-decoration";
-    skillCard.appendChild(cardDecoration);
+    skillCard.appendChild(nameContainer);
 
     // Añadir la tarjeta al grid
     skillsGrid.appendChild(skillCard);
@@ -648,89 +430,22 @@ function initializeSkillsAnimation() {
   const isTouchDevice =
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  allSkillCards.forEach((card) => {
-    if (!isTouchDevice) {
-      // Para dispositivos no táctiles
-      card.addEventListener("mouseenter", () => {
-        const logo = card.querySelector(".skill-logo img");
-        if (logo) {
-          logo.style.transform = "scale(1.2) rotate(5deg)";
-        }
-
-        const dots = card.querySelectorAll(".skill-dot.filled");
-        dots.forEach((dot, i) => {
-          setTimeout(() => {
-            dot.style.transform = "scale(1.3)";
-            dot.style.opacity = "1";
-          }, i * 100);
-        });
-      });
-
-      card.addEventListener("mouseleave", () => {
-        const logo = card.querySelector(".skill-logo img");
-        if (logo) {
-          logo.style.transform = "";
-        }
-
-        const dots = card.querySelectorAll(".skill-dot.filled");
-        dots.forEach((dot) => {
-          dot.style.transform = "";
-          dot.style.opacity = "";
-        });
-      });
-    } else {
-      // Para dispositivos táctiles - simplificado
+  if (isTouchDevice) {
+    // Para dispositivos táctiles
+    allSkillCards.forEach((card) => {
       card.addEventListener("click", function () {
         // Cerrar otras tarjetas
         allSkillCards.forEach((otherCard) => {
           if (otherCard !== this) {
             otherCard.classList.remove("touch-active");
-
-            const otherLogo = otherCard.querySelector(".skill-logo img");
-            if (otherLogo) {
-              otherLogo.style.transform = "";
-            }
-
-            const otherDots = otherCard.querySelectorAll(".skill-dot.filled");
-            otherDots.forEach((dot) => {
-              dot.style.transform = "";
-              dot.style.opacity = "";
-            });
           }
         });
 
         // Alternar clase activa
         this.classList.toggle("touch-active");
-
-        // Aplicar efectos visuales según el estado
-        if (this.classList.contains("touch-active")) {
-          const logo = this.querySelector(".skill-logo img");
-          if (logo) {
-            logo.style.transform = "scale(1.2) rotate(5deg)";
-          }
-
-          const dots = this.querySelectorAll(".skill-dot.filled");
-          dots.forEach((dot, i) => {
-            setTimeout(() => {
-              dot.style.transform = "scale(1.3)";
-              dot.style.opacity = "1";
-            }, i * 100);
-          });
-        } else {
-          const logo = this.querySelector(".skill-logo img");
-          if (logo) {
-            logo.style.transform = "";
-          }
-
-          const dots = this.querySelectorAll(".skill-dot.filled");
-          dots.forEach((dot) => {
-            dot.style.transform = "";
-            dot.style.opacity = "";
-          });
-        }
       });
-    }
-  });
+    });
+  }
 
   // Ajustar el tamaño de las tarjetas cuando cambia el tamaño de la ventana
   window.addEventListener("resize", () => {
@@ -742,10 +457,167 @@ function initializeSkillsAnimation() {
       img.height = logoSize;
     });
   });
+}
 
-  console.log(
-    `Inicializadas ${skills.length} tarjetas de habilidades con diseño mejorado`
+// ===== TARJETAS DE EDUCACIÓN =====
+function initializeEducationCards() {
+  const educationCards = document.querySelectorAll(
+    "#education .education-card"
   );
+
+  // Detectar si es un dispositivo táctil
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  educationCards.forEach((card, index) => {
+    // Añadir un pequeño retraso inicial para crear un efecto escalonado
+    card.style.transitionDelay = `${index * 0.05}s`;
+
+    // Para dispositivos no táctiles
+    if (!isTouchDevice) {
+      // Animación al pasar el mouse
+      card.addEventListener("mouseenter", () => {
+        // Efecto de elevación
+        card.style.zIndex = "10";
+
+        // Animar elementos internos
+        const title = card.querySelector(".education-title");
+        const year = card.querySelector(".education-year");
+        const school = card.querySelector(".education-school");
+        const description = card.querySelector(".education-description");
+
+        if (title) title.style.transform = "translateX(5px)";
+        if (year) year.style.backgroundColor = "black";
+        if (year) year.style.color = "white";
+        if (school) school.style.transform = "translateX(-5px)";
+        if (description) {
+          description.style.transform = "translateY(-3px)";
+          description.style.opacity = "1";
+        }
+      });
+
+      card.addEventListener("mouseleave", () => {
+        // Restaurar z-index
+        setTimeout(() => {
+          card.style.zIndex = "";
+        }, 300);
+
+        // Restaurar elementos internos
+        const title = card.querySelector(".education-title");
+        const year = card.querySelector(".education-year");
+        const school = card.querySelector(".education-school");
+        const description = card.querySelector(".education-description");
+
+        if (title) title.style.transform = "";
+        if (year) year.style.backgroundColor = "";
+        if (year) year.style.color = "";
+        if (school) school.style.transform = "";
+        if (description) {
+          description.style.transform = "";
+          description.style.opacity = "";
+        }
+      });
+    } else {
+      // Simplificar la interacción táctil para evitar conflictos con el scroll
+      card.addEventListener("click", function (e) {
+        // Cerrar otras tarjetas
+        educationCards.forEach((otherCard) => {
+          if (otherCard !== this) {
+            otherCard.classList.remove("active-touch");
+
+            // Resetear estilos
+            const title = otherCard.querySelector(".education-title");
+            const year = otherCard.querySelector(".education-year");
+            const school = otherCard.querySelector(".education-school");
+            const description = otherCard.querySelector(
+              ".education-description"
+            );
+
+            if (title) title.style.transform = "";
+            if (year) {
+              year.style.backgroundColor = "";
+              year.style.color = "";
+            }
+            if (school) school.style.transform = "";
+            if (description) {
+              description.style.transform = "";
+              description.style.opacity = "";
+            }
+          }
+        });
+
+        // Alternar estado de la tarjeta actual
+        this.classList.toggle("active-touch");
+
+        // Aplicar o quitar estilos según el estado
+        const isActive = this.classList.contains("active-touch");
+        const title = this.querySelector(".education-title");
+        const year = this.querySelector(".education-year");
+        const school = this.querySelector(".education-school");
+        const description = this.querySelector(".education-description");
+
+        if (isActive) {
+          this.style.transform = "translateY(-10px) scale(1.01)";
+          this.style.boxShadow = "10px 10px 0 rgba(0, 0, 0, 0.15)";
+          this.style.zIndex = "10";
+
+          if (title) title.style.transform = "translateX(5px)";
+          if (year) {
+            year.style.backgroundColor = "black";
+            year.style.color = "white";
+          }
+          if (school) school.style.transform = "translateX(-5px)";
+          if (description) {
+            description.style.transform = "translateY(-3px)";
+            description.style.opacity = "1";
+          }
+        } else {
+          this.style.transform = "";
+          this.style.boxShadow = "";
+          this.style.zIndex = "";
+
+          if (title) title.style.transform = "";
+          if (year) {
+            year.style.backgroundColor = "";
+            year.style.color = "";
+          }
+          if (school) school.style.transform = "";
+          if (description) {
+            description.style.transform = "";
+            description.style.opacity = "";
+          }
+        }
+      });
+
+      // Añadir efecto de feedback táctil
+      card.addEventListener("touchstart", function () {
+        this.style.transition = "transform 0.2s ease";
+      });
+
+      card.addEventListener("touchend", function () {
+        this.style.transition =
+          "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+      });
+    }
+  });
+
+  // Ajustar el diseño responsive en función del tamaño de la ventana
+  function adjustEducationCards() {
+    const windowWidth = window.innerWidth;
+
+    educationCards.forEach((card) => {
+      // Ajustar la animación según el tamaño de la pantalla
+      if (windowWidth <= 576) {
+        card.classList.add("small-screen");
+      } else {
+        card.classList.remove("small-screen");
+      }
+    });
+  }
+
+  // Ejecutar al inicio y cuando cambie el tamaño de la ventana
+  adjustEducationCards();
+  window.addEventListener("resize", adjustEducationCards);
 }
 
 // ===== FORMULARIO DE CONTACTO =====
@@ -801,7 +673,6 @@ function initializeContactForm() {
       message: document.getElementById("message").value,
     };
 
-    console.log("Form submitted:", formData);
     // Aquí iría la lógica para enviar los datos al servidor
 
     // Resetear formulario y mostrar confirmación
@@ -845,7 +716,6 @@ function initializeContactForm() {
 function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
-  console.log(`Se encontraron ${fadeInSections.length} secciones con fade-in`);
 
   const fadeObserver = new IntersectionObserver(
     (entries) => {
