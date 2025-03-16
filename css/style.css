@@ -1029,146 +1029,329 @@ body {
 /* NUEVA Sección Skills con logos */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 2rem;
   margin-top: 2.5rem;
 }
 
 .skill-card {
-  border: 3px solid black;
-  background-color: white;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
+  aspect-ratio: 1;
+  border: 3px solid black;
+  background-color: white;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-  aspect-ratio: 1;
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: auto;
+  flex-direction: column;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+  background-color: black;
+  transform: rotate(45deg);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .skill-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-8px, -8px);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.skill-card:hover::before {
+  opacity: 1;
 }
 
 .skill-logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
-  transition: transform 0.4s ease;
+  width: 60%;
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .skill-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.skill-card:hover .skill-logo img {
-  transform: scale(1.2);
+.skill-card:hover .skill-logo {
+  transform: translateY(-30px);
+}
+
+.skill-name-container {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: black;
+  color: white;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 3;
+}
+
+.skill-card:hover .skill-name-container {
+  transform: translateY(-50px);
 }
 
 .skill-name {
   font-weight: bold;
-  font-size: 0.95rem;
-  margin-bottom: 0.8rem;
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* Línea decorativa para el nombre */
 .skill-name::after {
   content: "";
   position: absolute;
-  bottom: -5px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background-color: black;
+  background-color: white;
   transition: width 0.3s ease;
 }
 
 .skill-card:hover .skill-name::after {
-  width: 100%;
+  width: 30px;
 }
 
-/* Ocultar los porcentajes como solicitó el usuario */
-.skill-level {
+/* Ajustes responsivos para las tarjetas de skills */
+@media (max-width: 1200px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-name {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-name {
+    font-size: 0.8rem;
+  }
+
+  .skill-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .skill-card::before {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-name {
+    font-size: 0.75rem;
+  }
+
+  .skill-name-container {
+    padding: 0.6rem;
+  }
+
+  .skill-card {
+    border-width: 2px;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .skill-card:hover {
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (max-width: 400px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .skill-name {
+    font-size: 0.7rem;
+  }
+
+  .skill-name-container {
+    padding: 0.5rem;
+  }
+}
+
+/* Estilos para dispositivos táctiles */
+.touch-device .skill-card {
+  border-color: black;
+}
+
+.touch-device .skill-card.touch-active {
+  transform: translate(-8px, -8px);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.touch-device .skill-card.touch-active::before {
+  opacity: 1;
+}
+
+.touch-device .skill-card.touch-active .skill-logo {
+  transform: translateY(-30px);
+}
+
+.touch-device .skill-card.touch-active .skill-name-container {
+  transform: translateY(-50px);
+}
+
+.touch-device .skill-card.touch-active .skill-name::after {
+  width: 30px;
+}
+
+/* Ocultar los puntos indicadores de nivel */
+.skill-level-indicator {
   display: none;
 }
 
-/* Mejorar el indicador de nivel con puntos */
-.skill-level-indicator {
-  display: flex;
-  margin-top: 0.5rem;
-  justify-content: center;
-  width: 100%;
-}
-
 .skill-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #ddd;
-  margin: 0 3px;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
+  display: none;
 }
 
-.skill-dot.filled {
-  background-color: black;
+/* Ajustes para las tarjetas de proyectos en dispositivos táctiles */
+.touch-device .project-card {
+  height: auto;
+  min-height: 450px;
+  margin-bottom: 2.5rem;
+  overflow: visible;
+  cursor: default;
+  transform: none !important;
 }
 
-.skill-card:hover .skill-dot.filled {
-  background-color: #333;
-  transform: scale(1.2);
+.touch-device .project-tilt-container {
+  transform: none !important;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
 }
 
-/* Decoración de skill cards */
-.skill-card::before {
-  content: "";
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  background-color: black;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
+/* Hacer que todos los elementos sean visibles por defecto en dispositivos táctiles */
+.touch-device .project-title,
+.touch-device .project-subtitle {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.skill-card:hover::before {
-  transform: scale(1.5);
+.touch-device .project-description {
+  max-height: 100px;
+  opacity: 1;
+  margin-bottom: 1.8rem;
 }
 
-.skill-card-decoration {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, transparent, black, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.touch-device .project-links {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.skill-card:hover .skill-card-decoration {
-  opacity: 0.2;
+.touch-device .project-title-container::after {
+  width: 80px;
+}
+
+/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
+.touch-device .project-link {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
+/* Ajustes específicos para pantallas móviles */
+@media (max-width: 768px) {
+  .touch-device .project-card {
+    min-height: auto;
+  }
+
+  .touch-device .project-tilt-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .touch-device .project-image-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+  }
+
+  .touch-device .project-color-overlay {
+    position: absolute;
+    height: 200px;
+  }
+
+  .touch-device .project-content {
+    position: relative;
+    padding: 1.5rem;
+    background-color: black;
+  }
+
+  .touch-device .project-number {
+    font-size: 4rem;
+    padding: 10px;
+  }
+
+  .touch-device .project-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .touch-device .project-image-container {
+    height: 180px;
+  }
+
+  .touch-device .project-color-overlay {
+    height: 180px;
+  }
+
+  .touch-device .project-content {
+    padding: 1.2rem;
+  }
+
+  .touch-device .project-number {
+    font-size: 3.5rem;
+    padding: 8px;
+  }
 }
 
 /* Formulario de contacto con animación restaurada */
