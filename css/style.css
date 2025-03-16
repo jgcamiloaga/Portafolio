@@ -1003,6 +1003,12 @@ body {
   .education-description {
     font-size: 0.85rem;
   }
+
+  .education-card:hover,
+  .education-card.active-touch {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* Mejoras para dispositivos táctiles */
@@ -2490,6 +2496,10 @@ body {
     font-size: 4rem;
     padding: 10px;
   }
+
+  .touch-device .project-pattern {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2509,4 +2519,288 @@ body {
     font-size: 3.5rem;
     padding: 8px;
   }
+}
+
+/* Estilos específicos para dispositivos táctiles */
+.touch-device .project-card {
+  height: auto;
+  min-height: 450px;
+  margin-bottom: 2.5rem;
+}
+
+.touch-device .project-tilt-container {
+  transform: none !important;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Hacer que todos los elementos sean visibles por defecto en dispositivos táctiles */
+.touch-device .project-title,
+.touch-device .project-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.touch-device .project-description {
+  max-height: 100px;
+  opacity: 1;
+  margin-bottom: 1.8rem;
+}
+
+.touch-device .project-links {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.touch-device .project-title-container::after {
+  width: 80px;
+}
+
+/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
+.touch-device .project-link {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
+/* Ajustes específicos para pantallas móviles */
+@media (max-width: 768px) {
+  .touch-device .project-card {
+    min-height: auto;
+  }
+
+  .touch-device .project-tilt-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .touch-device .project-image-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+  }
+
+  .touch-device .project-color-overlay {
+    position: absolute;
+    height: 200px;
+  }
+
+  .touch-device .project-content {
+    position: relative;
+    padding: 1.5rem;
+    background-color: black;
+  }
+
+  .touch-device .project-number {
+    font-size: 4rem;
+    padding: 10px;
+  }
+
+  .touch-device .project-pattern {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .touch-device .project-image-container {
+    height: 180px;
+  }
+
+  .touch-device .project-color-overlay {
+    height: 180px;
+  }
+
+  .touch-device .project-content {
+    padding: 1.2rem;
+  }
+
+  .touch-device .project-number {
+    font-size: 3.5rem;
+    padding: 8px;
+  }
+}
+
+/* Mejoras responsivas para el formulario de contacto */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 2rem;
+    border-width: 3px;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.15);
+    max-width: 90%;
+  }
+
+  .contact-form::before {
+    width: 25px;
+    height: 25px;
+    top: -12px;
+    left: -12px;
+  }
+
+  .form-group {
+    margin-bottom: 1.8rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.7rem 0.9rem;
+    border-width: 2px;
+    font-size: 0.95rem;
+  }
+
+  .form-group label {
+    left: 0.9rem;
+    top: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
+  .form-group label.active {
+    transform: translateY(-2rem);
+    font-size: 0.85rem;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+  }
+
+  .submit-button {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-form {
+    padding: 1.5rem;
+    border-width: 3px;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+    max-width: 95%;
+  }
+
+  .contact-form::before {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    left: -10px;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.6rem 0.8rem;
+    border-width: 2px;
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    left: 0.8rem;
+    top: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
+  .form-group label.active {
+    transform: translateY(-1.8rem);
+    font-size: 0.8rem;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+  }
+
+  .submit-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact-form {
+    padding: 1.2rem;
+    border-width: 2px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-form::before {
+    width: 15px;
+    height: 15px;
+    top: -8px;
+    left: -8px;
+  }
+
+  .form-group {
+    margin-bottom: 1.3rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.5rem 0.7rem;
+    border-width: 2px;
+    font-size: 0.85rem;
+  }
+
+  .form-group label {
+    left: 0.7rem;
+    top: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
+  .form-group label.active {
+    transform: translateY(-1.6rem);
+    font-size: 0.75rem;
+  }
+
+  .form-group textarea {
+    min-height: 90px;
+  }
+
+  .submit-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mejoras para dispositivos táctiles */
+.touch-device .form-group input,
+.touch-device .form-group textarea {
+  font-size: 16px; /* Evita el zoom automático en iOS */
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.touch-device .submit-button {
+  padding: 1rem 0;
+  width: 100%;
+  margin-top: 0.5rem;
+  -webkit-appearance: none; /* Elimina estilos por defecto en iOS */
+  border-radius: 0;
+}
+
+.touch-device .form-group input:focus,
+.touch-device .form-group textarea:focus {
+  transform: none; /* Evitar transformaciones que puedan causar problemas en móviles */
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Mejora para el estado activo del botón en dispositivos táctiles */
+.touch-device .submit-button:active {
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 black;
+  background-color: #333;
 }
