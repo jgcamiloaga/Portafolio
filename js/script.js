@@ -304,7 +304,7 @@ function initializeProjectCards() {
   });
 }
 
-// ===== NUEVA SECCIÓN DE SKILLS CON LOGOS =====
+// ===== NUEVA SECCIÓN DE SKILLS CON DISEÑO NEOBRUTALIST REFINADO =====
 function initializeSkillsAnimation() {
   const skillsSection = document.querySelector("#skills");
   if (!skillsSection) return;
