@@ -778,6 +778,16 @@ function initializeContactForm() {
         }
         input.classList.remove("active");
       });
+
+      // Añadir evento para dispositivos móviles para mejorar la experiencia táctil
+      if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+        input.addEventListener("touchstart", () => {
+          // Añadir un pequeño retraso para evitar problemas con el scroll
+          setTimeout(() => {
+            label.classList.add("active");
+          }, 100);
+        });
+      }
     }
   });
 
@@ -807,6 +817,28 @@ function initializeContactForm() {
 
     alert("Gracias por tu mensaje! Te responderé pronto.");
   });
+
+  // Ajustar la altura del formulario en dispositivos móviles cuando se abre el teclado
+  if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+    const originalHeight = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      // Si la altura de la ventana disminuye significativamente, probablemente se abrió el teclado
+      if (window.innerHeight < originalHeight * 0.8) {
+        // Ajustar el scroll para mantener visible el campo activo
+        const activeInput = document.activeElement;
+        if (
+          activeInput &&
+          (activeInput.tagName === "INPUT" ||
+            activeInput.tagName === "TEXTAREA")
+        ) {
+          setTimeout(() => {
+            activeInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 100);
+        }
+      }
+    });
+  }
 }
 
 // ===== ANIMACIONES DE SCROLL =====
