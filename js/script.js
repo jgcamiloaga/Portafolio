@@ -407,19 +407,14 @@ function initializeSkillsAnimation() {
     logoImg.height = logoSize;
     skillLogo.appendChild(logoImg);
 
-    // Crear el contenedor del nombre
-    const nameContainer = document.createElement("div");
-    nameContainer.className = "skill-name-container";
-
     // Crear el nombre de la habilidad
-    const skillName = document.createElement("h3");
+    const skillName = document.createElement("div");
     skillName.className = "skill-name";
     skillName.textContent = skill.name;
-    nameContainer.appendChild(skillName);
 
     // Ensamblar la tarjeta con el nuevo diseño
     skillCard.appendChild(skillLogo);
-    skillCard.appendChild(nameContainer);
+    skillCard.appendChild(skillName);
 
     // Añadir la tarjeta al grid
     skillsGrid.appendChild(skillCard);
