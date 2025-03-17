@@ -300,8 +300,100 @@ function initializeProjectCards() {
         if (description) description.style.transform = "";
         if (projectNumber) projectNumber.style.transform = "";
       });
+    } else {
+      // Comportamiento específico para dispositivos táctiles
+      card.addEventListener(
+        "touchstart",
+        function () {
+          // Agregar clase activa
+          this.classList.add("active-touch");
+
+          // Añadir efecto de feedback táctil
+          const container = this.querySelector(".project-tilt-container");
+          if (container) {
+            container.style.transition = "all 0.2s ease";
+          }
+        },
+        { passive: true }
+      );
+
+      card.addEventListener(
+        "touchend",
+        function () {
+          // Quitar clase activa después de un breve delay para el efecto visual
+          setTimeout(() => {
+            this.classList.remove("active-touch");
+          }, 150);
+
+          // Restaurar la transición original
+          const container = this.querySelector(".project-tilt-container");
+          if (container) {
+            container.style.transition =
+              "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          }
+        },
+        { passive: true }
+      );
+
+      // Evitar que los toques en los enlaces activen el efecto de la tarjeta
+      const projectLinks = card.querySelectorAll(".project-link");
+      projectLinks.forEach((link) => {
+        link.addEventListener(
+          "touchstart",
+          (e) => {
+            e.stopPropagation();
+          },
+          { passive: false }
+        );
+      });
     }
   });
+
+  // Inicializar las animaciones de scroll para las tarjetas de proyectos
+  initializeProjectScroll();
+}
+
+// Nueva función para manejar las animaciones de scroll específicas para proyectos
+function initializeProjectScroll() {
+  const projectCards = document.querySelectorAll("#projects .project-card");
+
+  // Verificar si hay soporte para IntersectionObserver
+  if ("IntersectionObserver" in window) {
+    const projectObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+
+            // Agregar clases de animación a los elementos internos
+            const content = entry.target.querySelector(".project-content");
+            const image = entry.target.querySelector(".project-image");
+
+            if (content) content.classList.add("animated");
+            if (image) image.classList.add("animated");
+
+            // Dejar de observar después de la animación
+            projectObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Empezar animación cuando 20% de la tarjeta sea visible
+        rootMargin: "0px 0px -100px 0px", // Ajuste para anticipar la animación
+      }
+    );
+
+    projectCards.forEach((card) => {
+      // Preparar la tarjeta para animación
+      card.classList.add("scroll-animate");
+      projectObserver.observe(card);
+    });
+  } else {
+    // Fallback para navegadores que no soportan IntersectionObserver
+    projectCards.forEach((card) => {
+      card.classList.add("in-view");
+    });
+  }
 }
 
 // ===== NUEVA SECCIÓN DE SKILLS CON DISEÑO NEOBRUTALIST REFINADO =====
