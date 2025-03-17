@@ -2673,6 +2673,175 @@ body {
   }
 }
 
+/* MEJORAS ESPECÍFICAS PARA TARJETAS DE PROYECTOS EN MÓVIL */
+@media (max-width: 768px) {
+  .project-card {
+    height: auto;
+    min-height: 380px;
+    margin-bottom: 2.5rem;
+    perspective: none;
+    overflow: hidden;
+  }
+
+  .project-tilt-container {
+    border-width: 3px;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: none !important;
+    transform-style: flat;
+    height: 100%;
+  }
+
+  .project-image-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+  }
+
+  .project-image {
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%);
+  }
+
+  .project-color-overlay {
+    height: 100%;
+    opacity: 0.7;
+  }
+
+  .project-content {
+    position: relative;
+    padding: 1.5rem;
+    transform: none !important;
+  }
+
+  .project-title,
+  .project-subtitle,
+  .project-links {
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-description {
+    max-height: unset;
+    opacity: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-title-container::after {
+    width: 60px;
+  }
+
+  .project-number {
+    font-size: 4rem;
+    opacity: 0.1;
+    transform: none !important;
+  }
+
+  .project-pattern {
+    opacity: 0.2;
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Efecto de pulsación para tarjetas en móvil */
+  .touch-device .project-card:active .project-tilt-container {
+    transform: translateY(-5px) !important;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+  }
+
+  .touch-device .project-card:active .project-image {
+    filter: grayscale(0%);
+  }
+
+  .touch-device .project-card:active .project-color-overlay {
+    opacity: 0.6;
+  }
+
+  /* Asegurar que los enlaces se vean bien en móvil */
+  .project-link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    margin-right: 0.8rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .project-link:active {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+    background-color: white;
+    color: black;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    min-height: 350px;
+  }
+
+  .project-image-container {
+    height: 180px;
+  }
+
+  .project-content {
+    padding: 1.2rem;
+  }
+
+  .project-title {
+    font-size: 1.6rem;
+  }
+
+  .project-subtitle {
+    font-size: 1rem;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-number {
+    font-size: 3.5rem;
+  }
+
+  .project-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    margin-right: 0.6rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .project-card {
+    min-height: 320px;
+  }
+
+  .project-image-container {
+    height: 160px;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.4rem;
+  }
+
+  .project-description {
+    padding-left: 10px;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-link {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    margin-right: 0;
+  }
+}
+
 /* Mejoras responsivas para el formulario de contacto */
 @media (max-width: 768px) {
   .contact-form {
@@ -2853,4 +3022,89 @@ body {
   transform: translate(-2px, -2px);
   box-shadow: 2px 2px 0 black;
   background-color: #333;
+}
+
+/* Añadir animaciones de scroll para las tarjetas de proyecto */
+.project-card.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.project-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card .project-image {
+  transition: all 0.6s ease;
+}
+
+.project-card .project-content {
+  transition: all 0.6s ease;
+}
+
+.project-card.scroll-animate .project-image {
+  opacity: 0.6;
+  transform: scale(1.05) translateY(20px);
+}
+
+.project-card.scroll-animate .project-content {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-card.in-view .project-image.animated {
+  opacity: 1;
+  transform: scale(1.05) translateY(0);
+}
+
+.project-card.in-view .project-content.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilo para el efecto de feedback táctil */
+.touch-device .project-card.active-touch .project-tilt-container {
+  transform: translateY(-8px) !important;
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
+}
+
+.touch-device .project-card.active-touch .project-image {
+  filter: grayscale(0%) !important;
+}
+
+.touch-device .project-card.active-touch .project-color-overlay {
+  opacity: 0.6 !important;
+}
+
+/* Evitar que se seleccione texto en móvil durante interacciones táctiles */
+.touch-device .project-card {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.touch-device .project-link {
+  user-select: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Indicador de interactividad para móvil */
+.touch-device .project-card::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 100;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.touch-device .project-card.active-touch::after {
+  background-color: rgba(255, 255, 255, 0.7);
 }
