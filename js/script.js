@@ -102,6 +102,7 @@ function initializeSmoothScrolling() {
 }
 
 // ===== TARJETAS DE PROYECTOS - DISEÑO TILT 3D INTERACTIVO PREMIUM =====
+// Modificar la función initializeProjectCards para mejorar la experiencia móvil
 function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card");
 
@@ -301,50 +302,64 @@ function initializeProjectCards() {
         if (projectNumber) projectNumber.style.transform = "";
       });
     } else {
-      // Comportamiento específico para dispositivos táctiles
+      // NUEVA IMPLEMENTACIÓN PARA DISPOSITIVOS MÓVILES
+      // Añadir clase para identificar que es una tarjeta móvil
+      card.classList.add("mobile-card");
+
+      // Añadir efecto de pulsación para dispositivos táctiles
       card.addEventListener(
         "touchstart",
-        function () {
-          // Agregar clase activa
-          this.classList.add("active-touch");
+        function (e) {
+          // Prevenir comportamiento por defecto solo si no es un enlace
+          if (!e.target.closest(".project-link")) {
+            e.preventDefault();
+          }
 
-          // Añadir efecto de feedback táctil
+          this.classList.add("touch-active");
+
+          // Efecto de pulsación
           const container = this.querySelector(".project-tilt-container");
           if (container) {
-            container.style.transition = "all 0.2s ease";
+            container.style.transform = "translateY(-8px)";
+            container.style.boxShadow = "12px 12px 0 rgba(0, 0, 0, 0.25)";
           }
+
+          // Animar elementos internos
+          const image = this.querySelector(".project-image");
+          const overlay = this.querySelector(".project-color-overlay");
+
+          if (image) image.style.transform = "scale(1.1)";
+          if (overlay) overlay.style.opacity = "0.6";
         },
-        { passive: true }
+        { passive: false }
       );
 
-      card.addEventListener(
-        "touchend",
-        function () {
-          // Quitar clase activa después de un breve delay para el efecto visual
-          setTimeout(() => {
-            this.classList.remove("active-touch");
-          }, 150);
+      card.addEventListener("touchend", function () {
+        // Quitar clase activa después de un breve delay para el efecto visual
+        setTimeout(() => {
+          this.classList.remove("touch-active");
 
-          // Restaurar la transición original
+          // Restaurar estilos
           const container = this.querySelector(".project-tilt-container");
+          const image = this.querySelector(".project-image");
+          const overlay = this.querySelector(".project-color-overlay");
+
           if (container) {
-            container.style.transition =
-              "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            container.style.transform = "";
+            container.style.boxShadow = "";
           }
-        },
-        { passive: true }
-      );
+
+          if (image) image.style.transform = "";
+          if (overlay) overlay.style.opacity = "";
+        }, 300);
+      });
 
       // Evitar que los toques en los enlaces activen el efecto de la tarjeta
       const projectLinks = card.querySelectorAll(".project-link");
       projectLinks.forEach((link) => {
-        link.addEventListener(
-          "touchstart",
-          (e) => {
-            e.stopPropagation();
-          },
-          { passive: false }
-        );
+        link.addEventListener("touchstart", (e) => {
+          e.stopPropagation();
+        });
       });
     }
   });
@@ -353,9 +368,10 @@ function initializeProjectCards() {
   initializeProjectScroll();
 }
 
-// Nueva función para manejar las animaciones de scroll específicas para proyectos
+// Reemplazar la función initializeProjectScroll con una versión mejorada
 function initializeProjectScroll() {
   const projectCards = document.querySelectorAll("#projects .project-card");
+  const isTouchDevice = document.body.classList.contains("touch-device");
 
   // Verificar si hay soporte para IntersectionObserver
   if ("IntersectionObserver" in window) {
@@ -363,22 +379,73 @@ function initializeProjectScroll() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Añadir clase para la animación de entrada
             entry.target.classList.add("in-view");
 
-            // Agregar clases de animación a los elementos internos
+            // Animar elementos internos
+            const container = entry.target.querySelector(
+              ".project-tilt-container"
+            );
             const content = entry.target.querySelector(".project-content");
             const image = entry.target.querySelector(".project-image");
+            const number = entry.target.querySelector(".project-number");
+            const pattern = entry.target.querySelector(".project-pattern");
 
+            if (container) container.classList.add("animated");
             if (content) content.classList.add("animated");
             if (image) image.classList.add("animated");
+            if (number) number.classList.add("animated");
+            if (pattern) pattern.classList.add("animated");
 
-            // Dejar de observar después de la animación
-            projectObserver.unobserve(entry.target);
+            // Animación secuencial para dispositivos móviles
+            if (isTouchDevice) {
+              const title = entry.target.querySelector(".project-title");
+              const subtitle = entry.target.querySelector(".project-subtitle");
+              const description = entry.target.querySelector(
+                ".project-description"
+              );
+              const links = entry.target.querySelector(".project-links");
+
+              if (title) {
+                setTimeout(() => {
+                  title.classList.add("animated");
+                }, 200);
+              }
+              if (subtitle) {
+                setTimeout(() => {
+                  subtitle.classList.add("animated");
+                }, 300);
+              }
+              if (description) {
+                setTimeout(() => {
+                  description.classList.add("animated");
+                }, 400);
+              }
+              if (links) {
+                setTimeout(() => {
+                  links.classList.add("animated");
+                }, 500);
+              }
+            }
+
+            // Configurar animación de salida cuando se hace scroll hacia arriba
+            setupExitAnimation(entry.target);
+
+            // Dejar de observar después de la animación de entrada
+            // projectObserver.unobserve(entry.target);
+          } else if (entry.boundingClientRect.top > 0) {
+            // Si la tarjeta sale por la parte superior, activar animación de salida
+            entry.target.classList.remove("in-view");
+
+            const elements = entry.target.querySelectorAll(".animated");
+            elements.forEach((el) => {
+              el.classList.remove("animated");
+            });
           }
         });
       },
       {
-        threshold: 0.2, // Empezar animación cuando 20% de la tarjeta sea visible
+        threshold: 0.15, // Empezar animación cuando 15% de la tarjeta sea visible
         rootMargin: "0px 0px -100px 0px", // Ajuste para anticipar la animación
       }
     );
@@ -394,6 +461,35 @@ function initializeProjectScroll() {
       card.classList.add("in-view");
     });
   }
+}
+
+// Nueva función para configurar animaciones de salida
+function setupExitAnimation(card) {
+  // Crear un nuevo observer para detectar cuando la tarjeta sale del viewport
+  const exitObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          // La tarjeta ha salido por la parte inferior
+          card.classList.add("exit-animation");
+
+          // Quitar la clase después de que termine la animación
+          setTimeout(() => {
+            card.classList.remove("exit-animation");
+          }, 500);
+
+          // Dejar de observar
+          exitObserver.unobserve(card);
+        }
+      });
+    },
+    {
+      threshold: 0,
+      rootMargin: "-20% 0px 0px 0px", // Activar cuando el 20% superior de la tarjeta sale del viewport
+    }
+  );
+
+  exitObserver.observe(card);
 }
 
 // ===== NUEVA SECCIÓN DE SKILLS CON DISEÑO NEOBRUTALIST REFINADO =====
