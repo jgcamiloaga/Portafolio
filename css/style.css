@@ -1528,6 +1528,427 @@ body {
   background-color: #333;
 }
 
+/* Añadir animaciones de scroll para las tarjetas de proyecto */
+.project-card.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.project-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card .project-image {
+  transition: all 0.6s ease;
+}
+
+.project-card .project-content {
+  transition: all 0.6s ease;
+}
+
+.project-card.scroll-animate .project-image {
+  opacity: 0.6;
+  transform: scale(1.05) translateY(20px);
+}
+
+.project-card.scroll-animate .project-content {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-card.in-view .project-image.animated {
+  opacity: 1;
+  transform: scale(1.05) translateY(0);
+}
+
+.project-card.in-view .project-content.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilo para el efecto de feedback táctil */
+.touch-device .project-card.active-touch .project-tilt-container {
+  transform: translateY(-8px) !important;
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
+}
+
+.touch-device .project-card.active-touch .project-image {
+  filter: grayscale(0%) !important;
+}
+
+.touch-device .project-card.active-touch .project-color-overlay {
+  opacity: 0.6 !important;
+}
+
+/* Evitar que se seleccione texto en móvil durante interacciones táctiles */
+.touch-device .project-card {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.touch-device .project-link {
+  user-select: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Indicador de interactividad para móvil */
+.touch-device .project-card::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 100;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.touch-device .project-card.active-touch::after {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Asegurar que los elementos de scroll no interfieran con la interacción */
+.touch-device .section {
+  touch-action: pan-y; /* Permitir solo scroll vertical */
+}
+
+/* Mejorar la experiencia de scroll en dispositivos móviles */
+@media (max-width: 768px) {
+  .section {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Para un scroll suave en iOS */
+  }
+
+  /* Ajustar el tamaño de las tarjetas para mejor manejo táctil */
+  .project-card {
+    touch-action: pan-y; /* Permitir scroll vertical */
+    height: auto;
+    min-height: 350px;
+    margin-bottom: 2rem;
+  }
+
+  .touch-device .project-content {
+    position: relative;
+    padding: 1.5rem;
+    bottom: auto;
+    left: auto;
+  }
+
+  .touch-device .project-image-container {
+    position: relative;
+    height: 200px;
+  }
+
+  .touch-device .project-color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .touch-device .project-image-container {
+    height: 180px;
+  }
+
+  .touch-device .project-color-overlay {
+    height: 180px;
+  }
+
+  .touch-device .project-content {
+    padding: 1.2rem;
+  }
+
+  .touch-device .project-number {
+    font-size: 3.5rem;
+    padding: 8px;
+  }
+}
+
+/* NUEVO DISEÑO EXCLUSIVO PARA TARJETAS DE PROYECTO EN MÓVIL */
+@media (max-width: 768px) {
+  /* Contenedor principal de la tarjeta */
+  .touch-device .project-card {
+    height: auto;
+    min-height: 400px;
+    margin-bottom: 3rem;
+    perspective: none;
+    overflow: visible;
+    border-radius: 0;
+    position: relative;
+  }
+
+  /* Contenedor de la tarjeta con efecto de elevación */
+  .touch-device .project-tilt-container {
+    border: 4px solid black;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: none !important;
+    transform-style: flat;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Contenedor de imagen con altura fija */
+  .touch-device .project-image-container {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* Imagen con efecto de zoom suave */
+  .touch-device .project-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transform: scale(1.05);
+    transition: all 0.5s ease;
+  }
+
+  /* Overlay con gradiente más atractivo */
+  .touch-device .project-color-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    opacity: 0.8;
+    transition: all 0.4s ease;
+  }
+
+  /* Número de proyecto más estilizado */
+  .touch-device .project-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.1);
+    z-index: 3;
+    text-shadow: none;
+    transition: all 0.4s ease;
+  }
+
+  /* Contenido con mejor espaciado */
+  .touch-device .project-content {
+    position: relative;
+    padding: 1.8rem;
+    background-color: white;
+    color: black;
+    z-index: 3;
+    transition: all 0.4s ease;
+    border-top: 4px solid black;
+  }
+
+  /* Título con mejor contraste */
+  .touch-device .project-title {
+    font-size: 1.8rem;
+    color: black;
+    opacity: 1;
+    transform: none;
+    margin-bottom: 0.5rem;
+    text-shadow: none;
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Subtítulo con mejor legibilidad */
+  .touch-device .project-subtitle {
+    font-size: 1.2rem;
+    color: #333;
+    opacity: 1;
+    transform: none;
+    margin-bottom: 1rem;
+    text-shadow: none;
+  }
+
+  /* Descripción más legible */
+  .touch-device .project-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    opacity: 1;
+    max-height: none;
+    margin-bottom: 1.5rem;
+    padding-left: 12px;
+    border-left: 3px solid #000;
+  }
+
+  /* Enlaces más atractivos */
+  .touch-device .project-links {
+    display: flex;
+    gap: 1rem;
+    opacity: 1;
+    transform: none;
+    flex-wrap: wrap;
+  }
+
+  .touch-device .project-link {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 0.7rem 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+    margin: 0.3rem 0.5rem 0.3rem 0;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Línea decorativa para el título */
+  .touch-device .project-title-container::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: black;
+    transition: width 0.4s ease;
+  }
+
+  /* ESTADOS ACTIVOS PARA INTERACCIÓN TÁCTIL */
+  .touch-device .project-card.touch-active .project-tilt-container {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .touch-device .project-card.touch-active .project-image {
+    transform: scale(1.15);
+    filter: grayscale(0%);
+  }
+
+  .touch-device .project-card.touch-active .project-color-overlay {
+    opacity: 0.6;
+  }
+
+  .touch-device .project-card.touch-active .project-number {
+    color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  .touch-device .project-card.touch-active .project-title-container::after {
+    width: 100px;
+  }
+
+  /* Indicador de interactividad más visible */
+  .touch-device .project-card::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    z-index: 100;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    animation: pulseIndicator 2s infinite;
+  }
+
+  @keyframes pulseIndicator {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  /* Efecto de pulsación para enlaces */
+  .touch-device .project-link:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    background-color: #333;
+  }
+
+  /* Ajustes para pantallas más pequeñas */
+  @media (max-width: 480px) {
+    .touch-device .project-card {
+      min-height: 380px;
+    }
+
+    .touch-device .project-image-container {
+      height: 180px;
+    }
+
+    .touch-device .project-content {
+      padding: 1.5rem;
+    }
+
+    .touch-device .project-title {
+      font-size: 1.6rem;
+    }
+
+    .touch-device .project-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .touch-device .project-description {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .touch-device .project-card {
+      min-height: 350px;
+    }
+
+    .touch-device .project-image-container {
+      height: 160px;
+    }
+
+    .touch-device .project-content {
+      padding: 1.2rem;
+    }
+
+    .touch-device .project-title {
+      font-size: 1.4rem;
+    }
+
+    .touch-device .project-subtitle {
+      font-size: 1rem;
+    }
+
+    .touch-device .project-description {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .touch-device .project-link {
+      width: 100%;
+      text-align: center;
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
 /* Footer */
 .footer {
   text-align: center;
@@ -1967,6 +2388,7 @@ body {
   transform: scale(0.5);
   transition: all 0.3s ease;
   z-index: 1000;
+  display: none;
 }
 
 .scroll-top-button.active {
@@ -2261,850 +2683,35 @@ body {
   }
 }
 
-/* Ajustes responsivos para las tarjetas de skills */
-@media (max-width: 1200px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1.8rem;
+/* Media queries para dispositivos móviles pequeños */
+@media (max-width: 375px) {
+  .section {
+    padding: 3.5rem 0.8rem;
   }
 
-  .skill-name {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 1.5rem;
+  .name {
+    font-size: 2.2rem;
+    padding: 0.6rem 1.2rem;
   }
 
-  .skill-card {
-    padding: 1.2rem;
+  .title {
+    font-size: 1.1rem;
   }
 
-  .skill-logo {
-    width: 55px;
-    height: 55px;
+  .glitch {
+    font-size: 1.8rem;
   }
 
-  .skill-name {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .skill-card {
-    padding: 1rem;
-    border-width: 2px;
-  }
-
-  .skill-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 0.8rem;
-  }
-
-  .skill-name {
+  .redes-link {
+    padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
-    margin-bottom: 0.6rem;
   }
 
-  .skill-dot {
-    width: 7px;
-    height: 7px;
-    margin: 0 2px;
-  }
-}
-
-@media (max-width: 576px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 1rem;
-  }
-
-  .skill-card {
-    padding: 0.8rem;
-  }
-
-  .skill-logo {
+  .scroll-top-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
     width: 40px;
     height: 40px;
-    margin-bottom: 0.6rem;
+    font-size: 20px;
   }
-
-  .skill-name {
-    font-size: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .skill-dot {
-    width: 6px;
-    height: 6px;
-    margin: 0 2px;
-  }
-}
-
-@media (max-width: 400px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.8rem;
-  }
-
-  .skill-card {
-    padding: 0.7rem;
-  }
-
-  .skill-logo {
-    width: 35px;
-    height: 35px;
-    margin-bottom: 0.5rem;
-  }
-
-  .skill-name {
-    font-size: 0.7rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .skill-dot {
-    width: 5px;
-    height: 5px;
-    margin: 0 1px;
-  }
-}
-
-/* Estilos para dispositivos táctiles */
-.touch-device .skill-card {
-  /* Evitar efectos hover en dispositivos táctiles */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.touch-device .skill-card:hover {
-  /* Desactivar transformaciones hover en dispositivos táctiles */
-  transform: none;
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Aplicar efectos solo cuando la tarjeta está activa en dispositivos táctiles */
-.touch-device .skill-card.touch-active {
-  transform: translateY(-10px);
-  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Ajustar los estilos de las tarjetas de proyectos para dispositivos táctiles */
-.touch-device .project-card {
-  overflow: visible; /* Cambiar a visible para evitar problemas con el scroll */
-  cursor: default;
-  transform: none !important;
-}
-
-.touch-device .project-tilt-container {
-  transform: none !important; /* Desactivar efectos 3D en dispositivos táctiles */
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-}
-
-.touch-device .project-card .project-title,
-.touch-device .project-card .project-subtitle {
-  /* Hacer visible el título y subtítulo por defecto en dispositivos táctiles */
-  opacity: 1;
-  transform: none;
-}
-
-.touch-device .project-card .project-description {
-  /* Hacer visible la descripción por defecto en dispositivos táctiles */
-  max-height: 100px;
-  opacity: 1;
-  margin-bottom: 1.8rem;
-}
-
-.touch-device .project-card .project-links {
-  /* Hacer visibles los enlaces por defecto en dispositivos táctiles */
-  opacity: 1;
-  transform: none;
-}
-
-.touch-device .project-card .project-title-container::after {
-  width: 80px; /* Mostrar la línea decorativa por defecto */
-}
-
-/* Eliminar efectos hover en dispositivos táctiles */
-.touch-device .project-card:hover .project-image,
-.touch-device .project-card:hover .project-color-overlay,
-.touch-device .project-card:hover .project-pattern,
-.touch-device .project-card:hover .project-number,
-.touch-device .project-card:hover .project-content,
-.touch-device .project-card:hover .project-shine,
-.touch-device .project-card:hover .project-title-container::after {
-  transform: none;
-  opacity: initial;
-  width: initial;
-  height: initial;
-}
-
-/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
-.touch-device .project-link {
-  padding: 0.8rem 1.5rem;
-  margin: 0.5rem 0;
-  display: inline-block;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 2px solid white;
-}
-
-/* Mejorar la experiencia táctil para las tarjetas de educación */
-.touch-device .education-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.touch-device .education-card:hover {
-  /* Desactivar efectos hover en dispositivos táctiles */
-  transform: none;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
-}
-
-/* Asegurar que el scroll funcione correctamente */
-html,
-body {
-  overscroll-behavior-y: none; /* Prevenir el scroll excesivo en dispositivos móviles */
-}
-
-/* Mejorar la visibilidad de los elementos interactivos en dispositivos táctiles */
-.touch-device .skill-dot.filled {
-  background-color: #000; /* Hacer los puntos más visibles */
-}
-
-.touch-device .skill-card.touch-active .skill-dot.filled {
-  transform: scale(1.3);
-}
-
-/* Añadir un indicador visual para elementos interactivos en dispositivos táctiles */
-.touch-device .skill-card::after,
-.touch-device .project-card::after,
-.touch-device .education-card::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.touch-device .skill-card.touch-active::after,
-.touch-device .project-card.active::after,
-.touch-device .education-card.active-touch::after {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Asegurar que los elementos de scroll no interfieran con la interacción */
-.touch-device .section {
-  touch-action: pan-y; /* Permitir solo scroll vertical */
-}
-
-/* Mejorar la experiencia de scroll en dispositivos móviles */
-@media (max-width: 768px) {
-  .section {
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Para un scroll suave en iOS */
-  }
-
-  /* Ajustar el tamaño de las tarjetas para mejor manejo táctil */
-  .project-card {
-    touch-action: pan-y; /* Permitir scroll vertical */
-    height: auto;
-    min-height: 350px;
-    margin-bottom: 2rem;
-  }
-
-  .touch-device .project-content {
-    position: relative;
-    padding: 1.5rem;
-    bottom: auto;
-    left: auto;
-  }
-
-  .touch-device .project-image-container {
-    position: relative;
-    height: 200px;
-  }
-
-  .touch-device .project-color-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 200px;
-  }
-
-  .touch-device .project-number {
-    font-size: 4rem;
-    padding: 10px;
-  }
-
-  .touch-device .project-pattern {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .touch-device .project-image-container {
-    height: 180px;
-  }
-
-  .touch-device .project-color-overlay {
-    height: 180px;
-  }
-
-  .touch-device .project-content {
-    padding: 1.2rem;
-  }
-
-  .touch-device .project-number {
-    font-size: 3.5rem;
-    padding: 8px;
-  }
-}
-
-/* Estilos específicos para dispositivos táctiles */
-.touch-device .project-card {
-  height: auto;
-  min-height: 450px;
-  margin-bottom: 2.5rem;
-}
-
-.touch-device .project-tilt-container {
-  transform: none !important;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Hacer que todos los elementos sean visibles por defecto en dispositivos táctiles */
-.touch-device .project-title,
-.touch-device .project-subtitle {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.touch-device .project-description {
-  max-height: 100px;
-  opacity: 1;
-  margin-bottom: 1.8rem;
-}
-
-.touch-device .project-links {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.touch-device .project-title-container::after {
-  width: 80px;
-}
-
-/* Mejorar la visibilidad de los enlaces en dispositivos táctiles */
-.touch-device .project-link {
-  padding: 0.8rem 1.5rem;
-  margin: 0.5rem 0.5rem 0.5rem 0;
-  display: inline-block;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 2px solid white;
-}
-
-/* Ajustes específicos para pantallas móviles */
-@media (max-width: 768px) {
-  .touch-device .project-card {
-    min-height: auto;
-  }
-
-  .touch-device .project-tilt-container {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-  }
-
-  .touch-device .project-image-container {
-    position: relative;
-    height: 200px;
-    width: 100%;
-  }
-
-  .touch-device .project-color-overlay {
-    position: absolute;
-    height: 200px;
-  }
-
-  .touch-device .project-content {
-    position: relative;
-    padding: 1.5rem;
-    background-color: black;
-  }
-
-  .touch-device .project-number {
-    font-size: 4rem;
-    padding: 10px;
-  }
-
-  .touch-device .project-pattern {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .touch-device .project-image-container {
-    height: 180px;
-  }
-
-  .touch-device .project-color-overlay {
-    height: 180px;
-  }
-
-  .touch-device .project-content {
-    padding: 1.2rem;
-  }
-
-  .touch-device .project-number {
-    font-size: 3.5rem;
-    padding: 8px;
-  }
-}
-
-/* MEJORAS ESPECÍFICAS PARA TARJETAS DE PROYECTOS EN MÓVIL */
-@media (max-width: 768px) {
-  .project-card {
-    height: auto;
-    min-height: 380px;
-    margin-bottom: 2.5rem;
-    perspective: none;
-    overflow: hidden;
-  }
-
-  .project-tilt-container {
-    border-width: 3px;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-    transform: none !important;
-    transform-style: flat;
-    height: 100%;
-  }
-
-  .project-image-container {
-    position: relative;
-    height: 200px;
-    width: 100%;
-  }
-
-  .project-image {
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(30%);
-  }
-
-  .project-color-overlay {
-    height: 100%;
-    opacity: 0.7;
-  }
-
-  .project-content {
-    position: relative;
-    padding: 1.5rem;
-    transform: none !important;
-  }
-
-  .project-title,
-  .project-subtitle,
-  .project-links {
-    opacity: 1;
-    transform: none;
-  }
-
-  .project-description {
-    max-height: unset;
-    opacity: 1;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-title-container::after {
-    width: 60px;
-  }
-
-  .project-number {
-    font-size: 4rem;
-    opacity: 0.1;
-    transform: none !important;
-  }
-
-  .project-pattern {
-    opacity: 0.2;
-    width: 60px;
-    height: 60px;
-  }
-
-  /* Efecto de pulsación para tarjetas en móvil */
-  .touch-device .project-card:active .project-tilt-container {
-    transform: translateY(-5px) !important;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
-    transition: all 0.2s ease;
-  }
-
-  .touch-device .project-card:active .project-image {
-    filter: grayscale(0%);
-  }
-
-  .touch-device .project-card:active .project-color-overlay {
-    opacity: 0.6;
-  }
-
-  /* Asegurar que los enlaces se vean bien en móvil */
-  .project-link {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    margin-right: 0.8rem;
-    margin-bottom: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .project-link:active {
-    transform: translateY(-2px);
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
-    background-color: white;
-    color: black;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-card {
-    min-height: 350px;
-  }
-
-  .project-image-container {
-    height: 180px;
-  }
-
-  .project-content {
-    padding: 1.2rem;
-  }
-
-  .project-title {
-    font-size: 1.6rem;
-  }
-
-  .project-subtitle {
-    font-size: 1rem;
-  }
-
-  .project-description {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .project-number {
-    font-size: 3.5rem;
-  }
-
-  .project-link {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    margin-right: 0.6rem;
-  }
-}
-
-@media (max-width: 375px) {
-  .project-card {
-    min-height: 320px;
-  }
-
-  .project-image-container {
-    height: 160px;
-  }
-
-  .project-content {
-    padding: 1rem;
-  }
-
-  .project-title {
-    font-size: 1.4rem;
-  }
-
-  .project-description {
-    padding-left: 10px;
-    margin-bottom: 1.2rem;
-  }
-
-  .project-link {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0.8rem;
-    margin-right: 0;
-  }
-}
-
-/* Mejoras responsivas para el formulario de contacto */
-@media (max-width: 768px) {
-  .contact-form {
-    padding: 2rem;
-    border-width: 3px;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.15);
-    max-width: 90%;
-  }
-
-  .contact-form::before {
-    width: 25px;
-    height: 25px;
-    top: -12px;
-    left: -12px;
-  }
-
-  .form-group {
-    margin-bottom: 1.8rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 0.7rem 0.9rem;
-    border-width: 2px;
-    font-size: 0.95rem;
-  }
-
-  .form-group label {
-    left: 0.9rem;
-    top: 0.7rem;
-    font-size: 0.95rem;
-  }
-
-  .form-group input:focus ~ label,
-  .form-group textarea:focus ~ label,
-  .form-group input:valid ~ label,
-  .form-group textarea:valid ~ label,
-  .form-group label.active {
-    transform: translateY(-2rem);
-    font-size: 0.85rem;
-  }
-
-  .form-group textarea {
-    min-height: 120px;
-  }
-
-  .submit-button {
-    padding: 0.9rem 2rem;
-    font-size: 0.95rem;
-    width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  .contact-form {
-    padding: 1.5rem;
-    border-width: 3px;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
-    max-width: 95%;
-  }
-
-  .contact-form::before {
-    width: 20px;
-    height: 20px;
-    top: -10px;
-    left: -10px;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 0.6rem 0.8rem;
-    border-width: 2px;
-    font-size: 0.9rem;
-  }
-
-  .form-group label {
-    left: 0.8rem;
-    top: 0.6rem;
-    font-size: 0.9rem;
-  }
-
-  .form-group input:focus ~ label,
-  .form-group textarea:focus ~ label,
-  .form-group input:valid ~ label,
-  .form-group textarea:valid ~ label,
-  .form-group label.active {
-    transform: translateY(-1.8rem);
-    font-size: 0.8rem;
-  }
-
-  .form-group textarea {
-    min-height: 100px;
-  }
-
-  .submit-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .contact-form {
-    padding: 1.2rem;
-    border-width: 2px;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .contact-form::before {
-    width: 15px;
-    height: 15px;
-    top: -8px;
-    left: -8px;
-  }
-
-  .form-group {
-    margin-bottom: 1.3rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 0.5rem 0.7rem;
-    border-width: 2px;
-    font-size: 0.85rem;
-  }
-
-  .form-group label {
-    left: 0.7rem;
-    top: 0.5rem;
-    font-size: 0.85rem;
-  }
-
-  .form-group input:focus ~ label,
-  .form-group textarea:focus ~ label,
-  .form-group input:valid ~ label,
-  .form-group textarea:valid ~ label,
-  .form-group label.active {
-    transform: translateY(-1.6rem);
-    font-size: 0.75rem;
-  }
-
-  .form-group textarea {
-    min-height: 90px;
-  }
-
-  .submit-button {
-    padding: 0.7rem 1.2rem;
-  }
-}
-
-/* Mejoras para dispositivos táctiles */
-.touch-device .form-group input,
-.touch-device .form-group textarea {
-  font-size: 16px; /* Evita el zoom automático en iOS */
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-}
-
-.touch-device .submit-button {
-  padding: 1rem 0;
-  width: 100%;
-  margin-top: 0.5rem;
-  -webkit-appearance: none; /* Elimina estilos por defecto en iOS */
-  border-radius: 0;
-}
-
-.touch-device .form-group input:focus,
-.touch-device .form-group textarea:focus {
-  transform: none; /* Evitar transformaciones que puedan causar problemas en móviles */
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Mejora para el estado activo del botón en dispositivos táctiles */
-.touch-device .submit-button:active {
-  transform: translate(-2px, -2px);
-  box-shadow: 2px 2px 0 black;
-  background-color: #333;
-}
-
-/* Añadir animaciones de scroll para las tarjetas de proyecto */
-.project-card.scroll-animate {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.project-card.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.project-card .project-image {
-  transition: all 0.6s ease;
-}
-
-.project-card .project-content {
-  transition: all 0.6s ease;
-}
-
-.project-card.scroll-animate .project-image {
-  opacity: 0.6;
-  transform: scale(1.05) translateY(20px);
-}
-
-.project-card.scroll-animate .project-content {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.project-card.in-view .project-image.animated {
-  opacity: 1;
-  transform: scale(1.05) translateY(0);
-}
-
-.project-card.in-view .project-content.animated {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Estilo para el efecto de feedback táctil */
-.touch-device .project-card.active-touch .project-tilt-container {
-  transform: translateY(-8px) !important;
-  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
-}
-
-.touch-device .project-card.active-touch .project-image {
-  filter: grayscale(0%) !important;
-}
-
-.touch-device .project-card.active-touch .project-color-overlay {
-  opacity: 0.6 !important;
-}
-
-/* Evitar que se seleccione texto en móvil durante interacciones táctiles */
-.touch-device .project-card {
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-.touch-device .project-link {
-  user-select: auto;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
-}
-
-/* Indicador de interactividad para móvil */
-.touch-device .project-card::after {
-  content: "";
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.4);
-  z-index: 100;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.touch-device .project-card.active-touch::after {
-  background-color: rgba(255, 255, 255, 0.7);
 }
