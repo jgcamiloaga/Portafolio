@@ -302,57 +302,42 @@ function initializeProjectCards() {
         if (projectNumber) projectNumber.style.transform = "";
       });
     } else {
-      // NUEVA IMPLEMENTACIÓN PARA DISPOSITIVOS MÓVILES
+      // NUEVA IMPLEMENTACIÓN MEJORADA PARA DISPOSITIVOS MÓVILES
       // Añadir clase para identificar que es una tarjeta móvil
       card.classList.add("mobile-card");
 
-      // Añadir efecto de pulsación para dispositivos táctiles
-      card.addEventListener(
+      // Crear área de toque específica para activar la tarjeta
+      const touchArea = document.createElement("div");
+      touchArea.className = "project-touch-area";
+      cardContainer.appendChild(touchArea);
+
+      // Añadir evento de toque al área específica
+      touchArea.addEventListener(
         "touchstart",
-        function (e) {
-          // Prevenir comportamiento por defecto solo si no es un enlace
-          if (!e.target.closest(".project-link")) {
-            e.preventDefault();
+        (e) => {
+          e.stopPropagation(); // Evitar que el evento se propague
+
+          // Alternar clase activa
+          const isActive = card.classList.contains("touch-active");
+
+          // Cerrar otras tarjetas activas
+          document
+            .querySelectorAll("#projects .project-card.touch-active")
+            .forEach((activeCard) => {
+              if (activeCard !== card) {
+                activeCard.classList.remove("touch-active");
+              }
+            });
+
+          // Alternar estado de la tarjeta actual
+          if (isActive) {
+            card.classList.remove("touch-active");
+          } else {
+            card.classList.add("touch-active");
           }
-
-          this.classList.add("touch-active");
-
-          // Efecto de pulsación
-          const container = this.querySelector(".project-tilt-container");
-          if (container) {
-            container.style.transform = "translateY(-8px)";
-            container.style.boxShadow = "12px 12px 0 rgba(0, 0, 0, 0.25)";
-          }
-
-          // Animar elementos internos
-          const image = this.querySelector(".project-image");
-          const overlay = this.querySelector(".project-color-overlay");
-
-          if (image) image.style.transform = "scale(1.1)";
-          if (overlay) overlay.style.opacity = "0.6";
         },
-        { passive: false }
+        { passive: true }
       );
-
-      card.addEventListener("touchend", function () {
-        // Quitar clase activa después de un breve delay para el efecto visual
-        setTimeout(() => {
-          this.classList.remove("touch-active");
-
-          // Restaurar estilos
-          const container = this.querySelector(".project-tilt-container");
-          const image = this.querySelector(".project-image");
-          const overlay = this.querySelector(".project-color-overlay");
-
-          if (container) {
-            container.style.transform = "";
-            container.style.boxShadow = "";
-          }
-
-          if (image) image.style.transform = "";
-          if (overlay) overlay.style.opacity = "";
-        }, 300);
-      });
 
       // Evitar que los toques en los enlaces activen el efecto de la tarjeta
       const projectLinks = card.querySelectorAll(".project-link");
