@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeSkillsAnimation();
   initializeContactForm();
   initializeScrollAnimations();
-  initializeLoadingAnimation();
   createParticles();
   initializeScrollTopButton();
 
@@ -102,7 +101,6 @@ function initializeSmoothScrolling() {
 }
 
 // ===== TARJETAS DE PROYECTOS - DISEÑO TILT 3D INTERACTIVO PREMIUM =====
-// Modificar la función initializeProjectCards para mejorar la experiencia móvil
 function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card");
 
@@ -138,106 +136,257 @@ function initializeProjectCards() {
       : null;
     const linksEl = card.querySelector(".project-links");
 
-    // Crear la nueva estructura de tarjeta con efecto tilt 3D
+    if (isTouchDevice) {
+      // NUEVO DISEÑO PREMIUM PARA MÓVIL
+      // Limpiar la tarjeta
+      card.innerHTML = "";
 
-    // Contenedor principal
-    const cardContainer = document.createElement("div");
-    cardContainer.className = "project-tilt-container";
+      // Crear la estructura principal
+      const cardMobile = document.createElement("div");
+      cardMobile.className = "project-card-mobile";
 
-    // Imagen de fondo
-    const imageContainer = document.createElement("div");
-    imageContainer.className = "project-image-container";
+      // Sección de imagen
+      const imageSection = document.createElement("div");
+      imageSection.className = "project-image-section";
 
-    if (imageEl) {
-      imageContainer.appendChild(imageEl.cloneNode(true));
-    } else {
-      const newImage = document.createElement("img");
-      newImage.className = "project-image";
-      newImage.src = "img/placeholder.jpg";
-      newImage.alt = "Vista previa del proyecto";
-      imageContainer.appendChild(newImage);
-    }
+      // Imagen
+      if (imageEl) {
+        imageSection.appendChild(imageEl.cloneNode(true));
+      } else {
+        const newImage = document.createElement("img");
+        newImage.className = "project-image";
+        newImage.src = "img/placeholder.jpg";
+        newImage.alt = "Vista previa del proyecto";
+        imageSection.appendChild(newImage);
+      }
 
-    // Capa de color
-    const colorOverlay = document.createElement("div");
-    colorOverlay.className = "project-color-overlay";
+      // Overlay
+      const overlay = document.createElement("div");
+      overlay.className = "project-overlay";
+      imageSection.appendChild(overlay);
 
-    // Patrón decorativo
-    const pattern = document.createElement("div");
-    pattern.className = "project-pattern";
+      // Número de proyecto
+      const projectNumber = document.createElement("div");
+      projectNumber.className = "project-number";
+      projectNumber.textContent = `0${index + 1}`;
+      imageSection.appendChild(projectNumber);
 
-    // Número de proyecto
-    const projectNumber = document.createElement("div");
-    projectNumber.className = "project-number";
-    projectNumber.textContent = `0${index + 1}`;
+      // Sección de contenido
+      const contentSection = document.createElement("div");
+      contentSection.className = "project-content-section";
 
-    // Contenido
-    const content = document.createElement("div");
-    content.className = "project-content";
+      // Título
+      if (titleEl) {
+        const title = document.createElement("h3");
+        title.className = "project-title";
+        title.textContent = titleEl.textContent;
+        contentSection.appendChild(title);
+      }
 
-    // Título y subtítulo
-    if (titleEl && subtitleEl) {
-      const titleContainer = document.createElement("div");
-      titleContainer.className = "project-title-container";
+      // Subtítulo
+      if (subtitleEl) {
+        const subtitle = document.createElement("p");
+        subtitle.className = "project-subtitle";
+        subtitle.textContent = subtitleEl.textContent;
+        contentSection.appendChild(subtitle);
+      }
 
-      const title = document.createElement("h3");
-      title.className = "project-title";
-      title.textContent = titleEl.textContent;
+      // Descripción
+      if (descriptionEl) {
+        const description = document.createElement("div");
+        description.className = "project-description";
+        description.textContent = descriptionEl.textContent;
+        contentSection.appendChild(description);
+      }
 
-      const subtitle = document.createElement("p");
-      subtitle.className = "project-subtitle";
-      subtitle.textContent = subtitleEl.textContent;
+      // Enlaces
+      if (linksEl) {
+        const linksContainer = document.createElement("div");
+        linksContainer.className = "project-links";
 
-      titleContainer.appendChild(title);
-      titleContainer.appendChild(subtitle);
-      content.appendChild(titleContainer);
-    }
+        // Clonar los enlaces
+        const originalLinks = linksEl.querySelectorAll("a");
+        originalLinks.forEach((link) => {
+          const newLink = document.createElement("a");
+          newLink.href = link.href;
+          newLink.className = "project-link";
+          newLink.textContent = link.textContent;
+          newLink.target = "_blank";
+          linksContainer.appendChild(newLink);
+        });
 
-    // Descripción
-    if (descriptionEl) {
-      const description = document.createElement("div");
-      description.className = "project-description";
-      description.textContent = descriptionEl.textContent;
-      content.appendChild(description);
-    }
+        contentSection.appendChild(linksContainer);
+      }
 
-    // Enlaces
-    if (linksEl) {
-      const linksContainer = document.createElement("div");
-      linksContainer.className = "project-links";
+      // Botón de expandir
+      const expandBtn = document.createElement("div");
+      expandBtn.className = "project-expand-btn";
+      contentSection.appendChild(expandBtn);
 
-      // Clonar los enlaces
-      const originalLinks = linksEl.querySelectorAll("a");
-      originalLinks.forEach((link) => {
-        const newLink = document.createElement("a");
-        newLink.href = link.href;
-        newLink.className = "project-link";
-        newLink.textContent = link.textContent;
-        newLink.target = "_blank";
-        linksContainer.appendChild(newLink);
+      // Elementos decorativos
+      const decoration1 = document.createElement("div");
+      decoration1.className = "project-decoration project-decoration-1";
+      cardMobile.appendChild(decoration1);
+
+      const decoration2 = document.createElement("div");
+      decoration2.className = "project-decoration project-decoration-2";
+      contentSection.appendChild(decoration2);
+
+      const decoration3 = document.createElement("div");
+      decoration3.className = "project-decoration project-decoration-3";
+      contentSection.appendChild(decoration3);
+
+      // Ensamblar la estructura
+      cardMobile.appendChild(imageSection);
+      cardMobile.appendChild(contentSection);
+      card.appendChild(cardMobile);
+
+      // Añadir evento de toque al botón de expandir
+      expandBtn.addEventListener(
+        "touchstart",
+        (e) => {
+          e.stopPropagation(); // Evitar que el evento se propague
+
+          // Alternar clase activa
+          const isActive = card.classList.contains("touch-active");
+
+          // Cerrar otras tarjetas activas
+          document
+            .querySelectorAll("#projects .project-card.touch-active")
+            .forEach((activeCard) => {
+              if (activeCard !== card) {
+                activeCard.classList.remove("touch-active");
+              }
+            });
+
+          // Alternar estado de la tarjeta actual
+          if (isActive) {
+            card.classList.remove("touch-active");
+          } else {
+            card.classList.add("touch-active");
+          }
+        },
+        { passive: true }
+      );
+
+      // Evitar que los toques en los enlaces activen el efecto de la tarjeta
+      const projectLinks = card.querySelectorAll(".project-link");
+      projectLinks.forEach((link) => {
+        link.addEventListener("touchstart", (e) => {
+          e.stopPropagation();
+        });
       });
 
-      content.appendChild(linksContainer);
-    }
+      // Añadir efecto de feedback táctil
+      expandBtn.addEventListener("touchstart", function () {
+        this.style.transition = "transform 0.2s ease";
+      });
 
-    // Brillo
-    const shine = document.createElement("div");
-    shine.className = "project-shine";
+      expandBtn.addEventListener("touchend", function () {
+        this.style.transition =
+          "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+      });
+    } else {
+      // DISEÑO DESKTOP ORIGINAL CON EFECTO TILT 3D
+      // Crear la nueva estructura de tarjeta con efecto tilt 3D
 
-    // Ensamblar la estructura
-    cardContainer.appendChild(imageContainer);
-    cardContainer.appendChild(colorOverlay);
-    cardContainer.appendChild(pattern);
-    cardContainer.appendChild(projectNumber);
-    cardContainer.appendChild(content);
-    cardContainer.appendChild(shine);
+      // Contenedor principal
+      const cardContainer = document.createElement("div");
+      cardContainer.className = "project-tilt-container";
 
-    // Limpiar y reconstruir la tarjeta
-    card.innerHTML = "";
-    card.appendChild(cardContainer);
+      // Imagen de fondo
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "project-image-container";
 
-    // Añadir efecto tilt 3D para dispositivos no táctiles
-    if (!isTouchDevice) {
+      if (imageEl) {
+        imageContainer.appendChild(imageEl.cloneNode(true));
+      } else {
+        const newImage = document.createElement("img");
+        newImage.className = "project-image";
+        newImage.src = "img/placeholder.jpg";
+        newImage.alt = "Vista previa del proyecto";
+        imageContainer.appendChild(newImage);
+      }
+
+      // Capa de color
+      const colorOverlay = document.createElement("div");
+      colorOverlay.className = "project-color-overlay";
+
+      // Patrón decorativo
+      const pattern = document.createElement("div");
+      pattern.className = "project-pattern";
+
+      // Número de proyecto
+      const projectNumber = document.createElement("div");
+      projectNumber.className = "project-number";
+      projectNumber.textContent = `0${index + 1}`;
+
+      // Contenido
+      const content = document.createElement("div");
+      content.className = "project-content";
+
+      // Título y subtítulo
+      if (titleEl && subtitleEl) {
+        const titleContainer = document.createElement("div");
+        titleContainer.className = "project-title-container";
+
+        const title = document.createElement("h3");
+        title.className = "project-title";
+        title.textContent = titleEl.textContent;
+
+        const subtitle = document.createElement("p");
+        subtitle.className = "project-subtitle";
+        subtitle.textContent = subtitleEl.textContent;
+
+        titleContainer.appendChild(title);
+        titleContainer.appendChild(subtitle);
+        content.appendChild(titleContainer);
+      }
+
+      // Descripción
+      if (descriptionEl) {
+        const description = document.createElement("div");
+        description.className = "project-description";
+        description.textContent = descriptionEl.textContent;
+        content.appendChild(description);
+      }
+
+      // Enlaces
+      if (linksEl) {
+        const linksContainer = document.createElement("div");
+        linksContainer.className = "project-links";
+
+        // Clonar los enlaces
+        const originalLinks = linksEl.querySelectorAll("a");
+        originalLinks.forEach((link) => {
+          const newLink = document.createElement("a");
+          newLink.href = link.href;
+          newLink.className = "project-link";
+          newLink.textContent = link.textContent;
+          newLink.target = "_blank";
+          linksContainer.appendChild(newLink);
+        });
+
+        content.appendChild(linksContainer);
+      }
+
+      // Brillo
+      const shine = document.createElement("div");
+      shine.className = "project-shine";
+
+      // Ensamblar la estructura
+      cardContainer.appendChild(imageContainer);
+      cardContainer.appendChild(colorOverlay);
+      cardContainer.appendChild(pattern);
+      cardContainer.appendChild(projectNumber);
+      cardContainer.appendChild(content);
+      cardContainer.appendChild(shine);
+
+      // Limpiar y reconstruir la tarjeta
+      card.innerHTML = "";
+      card.appendChild(cardContainer);
+
+      // Añadir efecto tilt 3D para dispositivos no táctiles
       card.addEventListener("mousemove", function (e) {
         const rect = this.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -301,51 +450,6 @@ function initializeProjectCards() {
         if (description) description.style.transform = "";
         if (projectNumber) projectNumber.style.transform = "";
       });
-    } else {
-      // NUEVA IMPLEMENTACIÓN MEJORADA PARA DISPOSITIVOS MÓVILES
-      // Añadir clase para identificar que es una tarjeta móvil
-      card.classList.add("mobile-card");
-
-      // Crear área de toque específica para activar la tarjeta
-      const touchArea = document.createElement("div");
-      touchArea.className = "project-touch-area";
-      cardContainer.appendChild(touchArea);
-
-      // Añadir evento de toque al área específica
-      touchArea.addEventListener(
-        "touchstart",
-        (e) => {
-          e.stopPropagation(); // Evitar que el evento se propague
-
-          // Alternar clase activa
-          const isActive = card.classList.contains("touch-active");
-
-          // Cerrar otras tarjetas activas
-          document
-            .querySelectorAll("#projects .project-card.touch-active")
-            .forEach((activeCard) => {
-              if (activeCard !== card) {
-                activeCard.classList.remove("touch-active");
-              }
-            });
-
-          // Alternar estado de la tarjeta actual
-          if (isActive) {
-            card.classList.remove("touch-active");
-          } else {
-            card.classList.add("touch-active");
-          }
-        },
-        { passive: true }
-      );
-
-      // Evitar que los toques en los enlaces activen el efecto de la tarjeta
-      const projectLinks = card.querySelectorAll(".project-link");
-      projectLinks.forEach((link) => {
-        link.addEventListener("touchstart", (e) => {
-          e.stopPropagation();
-        });
-      });
     }
   });
 
@@ -353,7 +457,7 @@ function initializeProjectCards() {
   initializeProjectScroll();
 }
 
-// Reemplazar la función initializeProjectScroll con una versión mejorada
+// Función mejorada para las animaciones de scroll de proyectos
 function initializeProjectScroll() {
   const projectCards = document.querySelectorAll("#projects .project-card");
   const isTouchDevice = document.body.classList.contains("touch-device");
@@ -367,57 +471,44 @@ function initializeProjectScroll() {
             // Añadir clase para la animación de entrada
             entry.target.classList.add("in-view");
 
-            // Animar elementos internos
-            const container = entry.target.querySelector(
-              ".project-tilt-container"
-            );
-            const content = entry.target.querySelector(".project-content");
-            const image = entry.target.querySelector(".project-image");
-            const number = entry.target.querySelector(".project-number");
-            const pattern = entry.target.querySelector(".project-pattern");
-
-            if (container) container.classList.add("animated");
-            if (content) content.classList.add("animated");
-            if (image) image.classList.add("animated");
-            if (number) number.classList.add("animated");
-            if (pattern) pattern.classList.add("animated");
-
-            // Animación secuencial para dispositivos móviles
             if (isTouchDevice) {
+              // Para dispositivos móviles, animar elementos específicos del nuevo diseño
+              const imageSection = entry.target.querySelector(
+                ".project-image-section"
+              );
+              const contentSection = entry.target.querySelector(
+                ".project-content-section"
+              );
               const title = entry.target.querySelector(".project-title");
               const subtitle = entry.target.querySelector(".project-subtitle");
-              const description = entry.target.querySelector(
-                ".project-description"
+              const expandBtn = entry.target.querySelector(
+                ".project-expand-btn"
               );
-              const links = entry.target.querySelector(".project-links");
 
-              if (title) {
-                setTimeout(() => {
-                  title.classList.add("animated");
-                }, 200);
-              }
-              if (subtitle) {
-                setTimeout(() => {
-                  subtitle.classList.add("animated");
-                }, 300);
-              }
-              if (description) {
-                setTimeout(() => {
-                  description.classList.add("animated");
-                }, 400);
-              }
-              if (links) {
-                setTimeout(() => {
-                  links.classList.add("animated");
-                }, 500);
-              }
+              if (imageSection) imageSection.classList.add("animated");
+              if (contentSection) contentSection.classList.add("animated");
+              if (title) title.classList.add("animated");
+              if (subtitle) subtitle.classList.add("animated");
+              if (expandBtn) expandBtn.classList.add("animated");
+            } else {
+              // Para desktop, animar elementos del diseño tilt 3D
+              const container = entry.target.querySelector(
+                ".project-tilt-container"
+              );
+              const content = entry.target.querySelector(".project-content");
+              const image = entry.target.querySelector(".project-image");
+              const number = entry.target.querySelector(".project-number");
+              const pattern = entry.target.querySelector(".project-pattern");
+
+              if (container) container.classList.add("animated");
+              if (content) content.classList.add("animated");
+              if (image) image.classList.add("animated");
+              if (number) number.classList.add("animated");
+              if (pattern) pattern.classList.add("animated");
             }
 
             // Configurar animación de salida cuando se hace scroll hacia arriba
             setupExitAnimation(entry.target);
-
-            // Dejar de observar después de la animación de entrada
-            // projectObserver.unobserve(entry.target);
           } else if (entry.boundingClientRect.top > 0) {
             // Si la tarjeta sale por la parte superior, activar animación de salida
             entry.target.classList.remove("in-view");
@@ -615,6 +706,9 @@ function initializeSkillsAnimation() {
     });
   }
 
+  // Inicializar animaciones de scroll para las tarjetas de habilidades
+  initializeSkillsScroll();
+
   // Ajustar el tamaño de las tarjetas cuando cambia el tamaño de la ventana
   window.addEventListener("resize", () => {
     const logoSize = adjustLogoSize();
@@ -625,6 +719,40 @@ function initializeSkillsAnimation() {
       img.height = logoSize;
     });
   });
+}
+
+// Nueva función para las animaciones de scroll de las tarjetas de habilidades
+function initializeSkillsScroll() {
+  const skillCards = document.querySelectorAll("#skills .skill-card");
+
+  if ("IntersectionObserver" in window) {
+    const skillsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+
+            // Dejar de observar después de la animación
+            // skillsObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
+
+    skillCards.forEach((card) => {
+      card.classList.add("scroll-animate");
+      skillsObserver.observe(card);
+    });
+  } else {
+    // Fallback
+    skillCards.forEach((card) => {
+      card.classList.add("in-view");
+    });
+  }
 }
 
 // ===== TARJETAS DE EDUCACIÓN =====
@@ -725,8 +853,8 @@ function initializeEducationCards() {
         const description = this.querySelector(".education-description");
 
         if (isActive) {
-          this.style.transform = "translateY(-10px) scale(1.01)";
-          this.style.boxShadow = "10px 10px 0 rgba(0, 0, 0, 0.15)";
+          this.style.transform = "translateY(-8px)";
+          this.style.boxShadow = "12px 12px 0 rgba(0, 0, 0, 0.2)";
           this.style.zIndex = "10";
 
           if (title) title.style.transform = "translateX(5px)";
@@ -764,28 +892,49 @@ function initializeEducationCards() {
 
       card.addEventListener("touchend", function () {
         this.style.transition =
-          "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
       });
     }
   });
 
-  // Ajustar el diseño responsive en función del tamaño de la ventana
-  function adjustEducationCards() {
-    const windowWidth = window.innerWidth;
+  // Inicializar animaciones de scroll para las tarjetas de educación
+  initializeEducationScroll();
+}
+
+// Nueva función para las animaciones de scroll de las tarjetas de educación
+function initializeEducationScroll() {
+  const educationCards = document.querySelectorAll(
+    "#education .education-card"
+  );
+
+  if ("IntersectionObserver" in window) {
+    const educationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+
+            // Dejar de observar después de la animación
+            // educationObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
 
     educationCards.forEach((card) => {
-      // Ajustar la animación según el tamaño de la pantalla
-      if (windowWidth <= 576) {
-        card.classList.add("small-screen");
-      } else {
-        card.classList.remove("small-screen");
-      }
+      card.classList.add("scroll-animate");
+      educationObserver.observe(card);
+    });
+  } else {
+    // Fallback
+    educationCards.forEach((card) => {
+      card.classList.add("in-view");
     });
   }
-
-  // Ejecutar al inicio y cuando cambie el tamaño de la ventana
-  adjustEducationCards();
-  window.addEventListener("resize", adjustEducationCards);
 }
 
 // ===== FORMULARIO DE CONTACTO =====
@@ -793,10 +942,16 @@ function initializeContactForm() {
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
 
+  // Añadir clases de animación al formulario
+  contactForm.classList.add("scroll-animation", "from-bottom");
+
   // Mejorar la animación de los campos del formulario
   const formGroups = contactForm.querySelectorAll(".form-group");
 
-  formGroups.forEach((group) => {
+  formGroups.forEach((group, index) => {
+    // Añadir clases de animación a cada grupo
+    group.classList.add("scroll-animation", "from-left", `delay-${index + 1}`);
+
     const input = group.querySelector("input, textarea");
     const label = group.querySelector("label");
 
@@ -831,6 +986,12 @@ function initializeContactForm() {
     }
   });
 
+  // Añadir clase de animación al botón de envío
+  const submitButton = contactForm.querySelector(".submit-button");
+  if (submitButton) {
+    submitButton.classList.add("scroll-animation", "from-bottom", "delay-4");
+  }
+
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -857,30 +1018,43 @@ function initializeContactForm() {
     alert("Gracias por tu mensaje! Te responderé pronto.");
   });
 
-  // Ajustar la altura del formulario en dispositivos móviles cuando se abre el teclado
-  if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
-    const originalHeight = window.innerHeight;
+  // Inicializar animaciones de scroll para el formulario
+  initializeContactScroll();
+}
 
-    window.addEventListener("resize", () => {
-      // Si la altura de la ventana disminuye significativamente, probablemente se abrió el teclado
-      if (window.innerHeight < originalHeight * 0.8) {
-        // Ajustar el scroll para mantener visible el campo activo
-        const activeInput = document.activeElement;
-        if (
-          activeInput &&
-          (activeInput.tagName === "INPUT" ||
-            activeInput.tagName === "TEXTAREA")
-        ) {
-          setTimeout(() => {
-            activeInput.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, 100);
-        }
+// Nueva función para las animaciones de scroll del formulario
+function initializeContactScroll() {
+  const contactForm = document.querySelector("#contact .contact-form");
+  const formGroups = document.querySelectorAll("#contact .form-group");
+  const submitButton = document.querySelector("#contact .submit-button");
+
+  if ("IntersectionObserver" in window) {
+    const contactObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
       }
-    });
+    );
+
+    if (contactForm) contactObserver.observe(contactForm);
+    formGroups.forEach((group) => contactObserver.observe(group));
+    if (submitButton) contactObserver.observe(submitButton);
+  } else {
+    // Fallback
+    if (contactForm) contactForm.classList.add("active");
+    formGroups.forEach((group) => group.classList.add("active"));
+    if (submitButton) submitButton.classList.add("active");
   }
 }
 
-// ===== ANIMACIONES DE SCROLL =====
+// Función mejorada para inicializar las animaciones de scroll
 function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section");
@@ -914,7 +1088,7 @@ function initializeScrollAnimations() {
   });
 }
 
-// Función para manejar las animaciones de scroll avanzadas
+// Función mejorada para manejar las animaciones de scroll
 function handleScrollAnimations() {
   const scrollAnimations = document.querySelectorAll(".scroll-animation");
   const sections = document.querySelectorAll(".section");
@@ -969,17 +1143,47 @@ function handleScrollAnimations() {
   });
 }
 
-// ===== ANIMACIÓN DE CARGA INICIAL =====
-function initializeLoadingAnimation() {
-  const loadingOverlay = document.querySelector(".initial-loading");
-  if (!loadingOverlay) return;
+// Función mejorada para inicializar el botón de scroll to top
+function initializeScrollTopButton() {
+  const scrollTopButton = document.querySelector(".scroll-top-button");
+  if (!scrollTopButton) return;
 
-  // Mostrar animación de carga por 1.5 segundos
-  setTimeout(() => {
-    loadingOverlay.classList.add("hide");
-    startPageAnimations();
-  }, 100);
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      scrollTopButton.style.display = "block";
+      setTimeout(() => {
+        scrollTopButton.classList.add("active");
+      }, 10);
+    } else {
+      scrollTopButton.classList.remove("active");
+      setTimeout(() => {
+        if (!scrollTopButton.classList.contains("active")) {
+          scrollTopButton.style.display = "none";
+        }
+      }, 300);
+    }
+  });
+
+  scrollTopButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // Añadir feedback táctil
+  if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+    scrollTopButton.addEventListener("touchstart", function () {
+      this.style.transform = "scale(0.9)";
+    });
+
+    scrollTopButton.addEventListener("touchend", function () {
+      this.style.transform = "";
+    });
+  }
 }
+
 
 // Iniciar animaciones de la página después de la carga
 function startPageAnimations() {
@@ -998,7 +1202,7 @@ function startPageAnimations() {
   }
 }
 
-// ===== PARTÍCULAS DE FONDO =====
+// Función para crear partículas en el fondo
 function createParticles() {
   const sections = document.querySelectorAll(".section");
 
@@ -1039,30 +1243,7 @@ function createParticles() {
   });
 }
 
-// ===== BOTÓN DE SCROLL TO TOP =====
-function initializeScrollTopButton() {
-  const scrollTopButton = document.querySelector(".scroll-top-button");
-  if (!scrollTopButton) return;
-
-  window.addEventListener("scroll", () => {
-    if (window.pageYOffset > 300) {
-      scrollTopButton.style.display = "block";
-    } else {
-      scrollTopButton.style.display = "none";
-    }
-  });
-
-  scrollTopButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-}
-
-// ===== FUNCIONES UTILITARIAS =====
-// Función para animar elementos secuencialmente
+// Función para animar secuencialmente los elementos
 function animateSequentially(elements, delayBetween = 200) {
   elements.forEach((element, index) => {
     setTimeout(() => {
