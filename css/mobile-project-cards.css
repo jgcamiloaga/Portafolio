@@ -13,7 +13,7 @@
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem; /* Aumentado para dar más espacio entre tarjetas */
     margin-top: 2rem;
   }
 
@@ -28,7 +28,7 @@
   .project-card {
     position: relative;
     height: auto;
-    min-height: 450px;
+    min-height: 420px; /* Reducido para un diseño más compacto */
     width: 100%;
     perspective: none;
     margin-bottom: 2rem;
@@ -51,11 +51,11 @@
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  /* Sección de imagen */
+  /* Sección de imagen - MEJORADA */
   .project-image-section {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 260px; /* Aumentado para mostrar más de la imagen */
     overflow: hidden;
     border: 4px solid black;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
@@ -63,17 +63,17 @@
     z-index: 2;
   }
 
-  /* Imagen del proyecto */
+  /* Imagen del proyecto - MEJORADA */
   .project-image-section .project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
-    filter: grayscale(30%);
+    filter: grayscale(20%); /* Reducido para mostrar más color */
     transform: scale(1.05);
   }
 
-  /* Overlay para la imagen */
+  /* Overlay para la imagen - MEJORADO */
   .project-image-section .project-overlay {
     position: absolute;
     top: 0;
@@ -82,28 +82,28 @@
     height: 100%;
     background: linear-gradient(
       135deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.4) 100%
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 100%
     );
     z-index: 1;
-    opacity: 0.7;
+    opacity: 0.6; /* Reducido para mostrar más de la imagen */
     transition: opacity 0.4s ease;
   }
 
-  /* Número de proyecto */
+  /* Número de proyecto - MEJORADO */
   .project-number {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 3.5rem;
+    font-size: 4rem; /* Aumentado para mayor impacto visual */
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.2);
     z-index: 2;
     line-height: 1;
     transition: all 0.3s ease;
   }
 
-  /* Botón de expandir */
+  /* Botón de expandir - MEJORADO */
   .project-expand-btn {
     position: absolute;
     bottom: 15px;
@@ -118,6 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3); /* Añadido para mejor visibilidad */
   }
 
   .project-expand-btn::before,
@@ -144,11 +145,11 @@
     transform: translate(-50%, -50%);
   }
 
-  /* Sección de contenido */
+  /* Sección de contenido - MEJORADA */
   .project-content-section {
     position: relative;
     width: 100%;
-    padding: 1.8rem;
+    padding: 1.5rem; /* Reducido para menos espacio en blanco */
     background-color: white;
     border: 4px solid black;
     border-top: none;
@@ -159,11 +160,11 @@
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  /* Título del proyecto */
+  /* Título del proyecto - MEJORADO */
   .project-title {
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem; /* Reducido para menos espacio en blanco */
     position: relative;
     color: black;
   }
@@ -171,7 +172,7 @@
   .project-title::after {
     content: "";
     position: absolute;
-    bottom: -8px;
+    bottom: -6px; /* Ajustado para estar más cerca del título */
     left: 0;
     width: 60px;
     height: 3px;
@@ -179,27 +180,28 @@
     transition: width 0.3s ease;
   }
 
-  /* Descripción del proyecto */
+  /* Descripción del proyecto - MEJORADA */
   .project-description {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.5; /* Reducido para un diseño más compacto */
     color: #333;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem; /* Reducido para menos espacio en blanco */
     max-height: none;
     opacity: 1;
     overflow: visible;
     transition: all 0.3s ease;
   }
 
-  /* Enlaces del proyecto */
+  /* Enlaces del proyecto - CORREGIDOS */
   .project-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.8rem; /* Reducido para un diseño más compacto */
     opacity: 1;
     transform: none;
   }
 
+  /* CORREGIDO: Botones con mejor contraste en todos los estados */
   .project-link {
     text-decoration: none;
     color: white;
@@ -212,9 +214,43 @@
     border: 2px solid black;
     transition: all 0.3s ease;
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
 
-  /* Elementos decorativos */
+  /* CORREGIDO: Nuevo estilo hover/active para los botones */
+  .project-link:hover,
+  .project-link:active {
+    background-color: white;
+    color: black; /* Texto negro sobre fondo blanco para contraste */
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 black;
+  }
+
+  /* Efecto de brillo para los botones */
+  .project-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transition: transform 0.6s ease;
+    z-index: -1;
+  }
+
+  .project-link:hover::before {
+    transform: translateX(200%);
+  }
+
+  /* Elementos decorativos - MEJORADOS */
   .project-decoration {
     position: absolute;
     background-color: black;
@@ -233,11 +269,11 @@
   .project-decoration-2 {
     width: 40px;
     height: 3px;
-    bottom: 20px;
+    bottom: 15px; /* Ajustado para estar más cerca del borde */
     right: 20px;
   }
 
-  /* Estado activo para tarjetas en dispositivos táctiles */
+  /* Estado activo para tarjetas en dispositivos táctiles - MEJORADO */
   .project-card.touch-active .project-image-section {
     transform: translateY(-8px);
     box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
@@ -254,12 +290,12 @@
   }
 
   .project-card.touch-active .project-overlay {
-    opacity: 0.5;
+    opacity: 0.4; /* Reducido para mostrar más de la imagen */
   }
 
   .project-card.touch-active .project-number {
-    color: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1);
+    color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1) translateX(5px); /* Añadido movimiento horizontal */
   }
 
   .project-card.touch-active .project-expand-btn::after {
@@ -278,7 +314,25 @@
     width: 60px;
   }
 
-  /* Animaciones para scroll */
+  /* NUEVO: Indicador visual para expandir */
+  .project-card:not(.touch-active)::after {
+    content: "Toca para expandir";
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .project-card.touch-active::after {
+    opacity: 0;
+  }
+
+  /* Animaciones para scroll - MEJORADAS */
   .project-card.scroll-animate {
     opacity: 0;
     transform: translateY(40px);
@@ -331,34 +385,51 @@
     background-color: #f0f0f0;
   }
 
+  /* CORREGIDO: Estilo active para botones en dispositivos táctiles */
   .touch-device .project-link:active {
+    background-color: white;
+    color: black;
     transform: translate(-3px, -3px);
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   }
 
-  /* Ajustes para pantallas muy pequeñas */
+  /* NUEVO: Efecto de presión para botones */
+  .touch-device .project-link:active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+  }
+
+  /* Ajustes para pantallas muy pequeñas - MEJORADOS */
   @media (max-width: 480px) {
     .project-image-section {
-      height: 180px;
+      height: 220px; /* Aumentado para mostrar más de la imagen */
       border-width: 3px;
     }
 
     .project-content-section {
-      padding: 1.5rem;
+      padding: 1.3rem; /* Ajustado para menos espacio en blanco */
       border-width: 3px;
     }
 
     .project-title {
       font-size: 1.5rem;
+      margin-bottom: 0.7rem; /* Reducido para menos espacio en blanco */
     }
 
     .project-description {
       font-size: 0.9rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem; /* Reducido para menos espacio en blanco */
+      line-height: 1.4; /* Ajustado para un diseño más compacto */
     }
 
     .project-number {
-      font-size: 3rem;
+      font-size: 3.5rem; /* Aumentado para mayor impacto visual */
     }
 
     .project-expand-btn {
@@ -371,28 +442,36 @@
       padding: 0.5rem 1rem;
       font-size: 0.75rem;
     }
+
+    /* Ajuste para el indicador de expandir */
+    .project-card:not(.touch-active)::after {
+      font-size: 0.75rem;
+      bottom: 8px;
+    }
   }
 
   @media (max-width: 375px) {
     .project-image-section {
-      height: 160px;
+      height: 200px; /* Ajustado pero manteniendo buena visibilidad */
     }
 
     .project-content-section {
-      padding: 1.2rem;
+      padding: 1.1rem; /* Reducido para menos espacio en blanco */
     }
 
     .project-title {
       font-size: 1.3rem;
+      margin-bottom: 0.6rem; /* Reducido para menos espacio en blanco */
     }
 
     .project-description {
       font-size: 0.85rem;
-      line-height: 1.5;
+      line-height: 1.4;
+      margin-bottom: 0.9rem; /* Reducido para menos espacio en blanco */
     }
 
     .project-number {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
 
     .project-expand-btn {
@@ -407,5 +486,46 @@
     .project-expand-btn::after {
       height: 15px;
     }
+
+    /* Ajuste para el indicador de expandir */
+    .project-card:not(.touch-active)::after {
+      font-size: 0.7rem;
+      bottom: 6px;
+    }
+  }
+
+  /* NUEVO: Mejoras adicionales para la experiencia táctil */
+  .touch-device .project-card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* NUEVO: Efecto de presión para toda la tarjeta */
+  .touch-device .project-card:active:not(.touch-active) {
+    transform: scale(0.98);
+    transition: transform 0.2s ease;
+  }
+
+  /* NUEVO: Mejora visual para indicar que la tarjeta es interactiva */
+  .project-image-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:not(.touch-active):hover .project-image-section::after,
+  .project-card:not(.touch-active):active .project-image-section::after {
+    opacity: 1;
   }
 }
