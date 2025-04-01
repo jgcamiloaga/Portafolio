@@ -1,0 +1,344 @@
+/* NUEVO DISEÑO MEJORADO PARA TARJETAS DE PROYECTOS EN MÓVIL */
+@media (max-width: 768px) {
+  /* Contenedor principal de la tarjeta con mejor espaciado y estructura */
+  .touch-device .project-card {
+    height: auto;
+    min-height: 380px;
+    margin-bottom: 3rem;
+    perspective: none;
+    overflow: visible;
+    border-radius: 0;
+    position: relative;
+    touch-action: pan-y; /* Permitir scroll vertical sin interferir */
+    transform: translateZ(0); /* Optimización para rendimiento */
+    will-change: transform; /* Optimización para animaciones */
+  }
+
+  /* Contenedor de la tarjeta con diseño neobrutalist mejorado */
+  .touch-device .project-card-mobile {
+    border: 3px solid black;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Contenedor de imagen con altura adaptativa */
+  .touch-device .project-image-section {
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    border-bottom: 3px solid black;
+    transform: translateZ(0); /* Optimización para rendimiento */
+  }
+
+  /* Imagen con efecto de zoom suave y transición mejorada */
+  .touch-device .project-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transform: scale(1.05);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Overlay con gradiente más sutil y mejor visibilidad */
+  .touch-device .project-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* Número de proyecto más estilizado */
+  .touch-device .project-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 3;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  /* Contenido con mejor espaciado y diseño neobrutalist */
+  .touch-device .project-content-section {
+    position: relative;
+    padding: 1.2rem;
+    background-color: white;
+    color: black;
+    z-index: 3;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Título con estilo neobrutalist mejorado */
+  .touch-device .project-title {
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  /* Línea decorativa para el título */
+  .touch-device .project-title::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Descripción más legible con mejor espaciado */
+  .touch-device .project-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    margin: 1rem 0;
+    padding-left: 10px;
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  /* Enlaces con estilo neobrutalist mejorado */
+  .touch-device .project-links {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+  }
+
+  .touch-device .project-link {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border: 2px solid black;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Botón de expandir con mejor visibilidad */
+  .touch-device .project-expand-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Crear el símbolo + en el botón de expandir */
+  .touch-device .project-expand-btn::before,
+  .touch-device .project-expand-btn::after {
+    content: "";
+    position: absolute;
+    background-color: black;
+    transition: all 0.3s ease;
+  }
+
+  .touch-device .project-expand-btn::before {
+    width: 16px;
+    height: 2px;
+  }
+
+  .touch-device .project-expand-btn::after {
+    width: 2px;
+    height: 16px;
+  }
+
+  /* Elementos decorativos para mejorar el diseño */
+  .touch-device .project-decoration {
+    position: absolute;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+
+  .touch-device .project-decoration-1 {
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    transform: rotate(45deg);
+  }
+
+  .touch-device .project-decoration-2 {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-right: 3px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  }
+
+  /* ESTADOS ACTIVOS PARA INTERACCIÓN TÁCTIL */
+  .touch-device .project-card.touch-active .project-card-mobile {
+    transform: translateY(-8px);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .touch-device .project-card.touch-active .project-image {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+  }
+
+  .touch-device .project-card.touch-active .project-overlay {
+    opacity: 0.5;
+  }
+
+  .touch-device .project-card.touch-active .project-title::after {
+    width: 60px;
+  }
+
+  .touch-device .project-card.touch-active .project-expand-btn {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: rotate(45deg);
+  }
+
+  .touch-device .project-card.touch-active .project-expand-btn::before,
+  .touch-device .project-card.touch-active .project-expand-btn::after {
+    background-color: white;
+  }
+
+  /* Animaciones para entrada y salida de las tarjetas */
+  .touch-device .project-card.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .touch-device .project-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Animaciones para elementos internos */
+  .touch-device .project-card .project-image-section {
+    opacity: 0.8;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .touch-device .project-card .project-content-section {
+    opacity: 0.8;
+    transform: translateY(20px);
+    transition: all 0.6s ease 0.1s;
+  }
+
+  .touch-device .project-card.in-view .project-image-section.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .touch-device .project-card.in-view .project-content-section.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Efecto de pulsación para enlaces */
+  .touch-device .project-link:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ajustes para pantallas más pequeñas */
+  @media (max-width: 480px) {
+    .touch-device .project-card {
+      min-height: 360px;
+    }
+
+    .touch-device .project-image-section {
+      height: 160px;
+    }
+
+    .touch-device .project-content-section {
+      padding: 1rem;
+    }
+
+    .touch-device .project-title {
+      font-size: 1.3rem;
+    }
+
+    .touch-device .project-description {
+      font-size: 0.9rem;
+      margin: 0.8rem 0;
+    }
+
+    .touch-device .project-link {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .touch-device .project-card {
+      min-height: 340px;
+    }
+
+    .touch-device .project-image-section {
+      height: 140px;
+    }
+
+    .touch-device .project-content-section {
+      padding: 0.8rem;
+    }
+
+    .touch-device .project-title {
+      font-size: 1.2rem;
+    }
+
+    .touch-device .project-description {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin: 0.7rem 0;
+    }
+
+    .touch-device .project-link {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+}
