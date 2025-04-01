@@ -1,138 +1,206 @@
-/* NUEVO DISEÑO MEJORADO PARA TARJETAS DE PROYECTOS EN MÓVIL */
+/* ESTILOS ESPECÍFICOS PARA TARJETAS DE PROYECTOS EN DISPOSITIVOS MÓVILES */
+/* Este archivo complementa al archivo style.css principal */
+
+/* Detector de dispositivos táctiles */
+.touch-device {
+  /* Estilos específicos para dispositivos táctiles */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Contenedor principal de proyectos para móvil */
 @media (max-width: 768px) {
-  /* Contenedor principal de la tarjeta con mejor espaciado y estructura */
-  .touch-device .project-card {
-    height: auto;
-    min-height: 380px;
-    margin-bottom: 3rem;
-    perspective: none;
-    overflow: visible;
-    border-radius: 0;
-    position: relative;
-    touch-action: pan-y; /* Permitir scroll vertical sin interferir */
-    transform: translateZ(0); /* Optimización para rendimiento */
-    will-change: transform; /* Optimización para animaciones */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 2rem;
   }
 
-  /* Contenedor de la tarjeta con diseño neobrutalist mejorado */
-  .touch-device .project-card-mobile {
-    border: 3px solid black;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
-    height: 100%;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Ocultar elementos del diseño desktop en móvil */
+  .project-card .project-tilt-container,
+  .project-card .project-shine,
+  .project-card .project-pattern {
+    display: none;
+  }
+
+  /* Nuevo diseño de tarjeta para móvil */
+  .project-card {
     position: relative;
-    overflow: hidden;
-    background-color: white;
+    height: auto;
+    min-height: 450px;
+    width: 100%;
+    perspective: none;
+    margin-bottom: 2rem;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+    transition: transform 0.3s ease;
+  }
+
+  /* Contenedor principal de la tarjeta móvil */
+  .project-card-mobile {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    border-radius: 0;
+    overflow: visible;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  /* Contenedor de imagen con altura adaptativa */
-  .touch-device .project-image-section {
+  /* Sección de imagen */
+  .project-image-section {
     position: relative;
-    height: 180px;
     width: 100%;
+    height: 220px;
     overflow: hidden;
-    z-index: 1;
-    border-bottom: 3px solid black;
-    transform: translateZ(0); /* Optimización para rendimiento */
+    border: 4px solid black;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
   }
 
-  /* Imagen con efecto de zoom suave y transición mejorada */
-  .touch-device .project-image {
-    height: 100%;
+  /* Imagen del proyecto */
+  .project-image-section .project-image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    filter: grayscale(20%);
+    transition: transform 0.5s ease;
+    filter: grayscale(30%);
     transform: scale(1.05);
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  /* Overlay con gradiente más sutil y mejor visibilidad */
-  .touch-device .project-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.4) 100%
-    );
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    height: 100%;
+  /* Overlay para la imagen */
+  .project-image-section .project-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    z-index: 1;
+    opacity: 0.7;
+    transition: opacity 0.4s ease;
   }
 
-  /* Número de proyecto más estilizado */
-  .touch-device .project-number {
+  /* Número de proyecto */
+  .project-number {
     position: absolute;
     top: 10px;
     left: 10px;
     font-size: 3.5rem;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.2);
-    z-index: 3;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.15);
+    z-index: 2;
+    line-height: 1;
     transition: all 0.3s ease;
   }
 
-  /* Contenido con mejor espaciado y diseño neobrutalist */
-  .touch-device .project-content-section {
-    position: relative;
-    padding: 1.2rem;
+  /* Botón de expandir */
+  .project-expand-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
     background-color: white;
-    color: black;
+    border: 3px solid black;
     z-index: 3;
+    cursor: pointer;
     transition: all 0.3s ease;
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Título con estilo neobrutalist mejorado */
-  .touch-device .project-title {
-    font-size: 1.5rem;
-    color: black;
-    margin-bottom: 0.5rem;
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-  }
-
-  /* Línea decorativa para el título */
-  .touch-device .project-title::after {
+  .project-expand-btn::before,
+  .project-expand-btn::after {
     content: "";
     position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 3px;
     background-color: black;
-    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Descripción más legible con mejor espaciado */
-  .touch-device .project-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #444;
-    margin: 1rem 0;
-    padding-left: 10px;
-    border-left: 3px solid rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
   }
 
-  /* Enlaces con estilo neobrutalist mejorado */
-  .touch-device .project-links {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: auto;
-    flex-wrap: wrap;
+  .project-expand-btn::before {
+    width: 20px;
+    height: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  .touch-device .project-link {
+  .project-expand-btn::after {
+    width: 3px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Sección de contenido */
+  .project-content-section {
+    position: relative;
+    width: 100%;
+    padding: 1.8rem;
+    background-color: white;
+    border: 4px solid black;
+    border-top: none;
+    margin-top: -4px;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(0);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Título del proyecto */
+  .project-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    position: relative;
+    color: black;
+  }
+
+  .project-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: black;
+    transition: width 0.3s ease;
+  }
+
+  /* Descripción del proyecto */
+  .project-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1.5rem;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    transition: all 0.3s ease;
+  }
+
+  /* Enlaces del proyecto */
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-link {
     text-decoration: none;
     color: white;
     background-color: black;
@@ -142,203 +210,202 @@
     font-size: 0.8rem;
     letter-spacing: 1px;
     border: 2px solid black;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    display: inline-block;
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
-  }
-
-  /* Botón de expandir con mejor visibilidad */
-  .touch-device .project-expand-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(0, 0, 0, 0.8);
-    border-radius: 50%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.3s ease;
-    cursor: pointer;
+    display: inline-block;
   }
 
-  /* Crear el símbolo + en el botón de expandir */
-  .touch-device .project-expand-btn::before,
-  .touch-device .project-expand-btn::after {
-    content: "";
+  /* Elementos decorativos */
+  .project-decoration {
     position: absolute;
     background-color: black;
+    z-index: 0;
     transition: all 0.3s ease;
   }
 
-  .touch-device .project-expand-btn::before {
-    width: 16px;
-    height: 2px;
-  }
-
-  .touch-device .project-expand-btn::after {
-    width: 2px;
-    height: 16px;
-  }
-
-  /* Elementos decorativos para mejorar el diseño */
-  .touch-device .project-decoration {
-    position: absolute;
-    z-index: 1;
-    transition: all 0.3s ease;
-  }
-
-  .touch-device .project-decoration-1 {
-    top: -10px;
-    right: -10px;
+  .project-decoration-1 {
     width: 20px;
     height: 20px;
-    background-color: black;
+    top: -10px;
+    right: 30px;
     transform: rotate(45deg);
   }
 
-  .touch-device .project-decoration-2 {
+  .project-decoration-2 {
+    width: 40px;
+    height: 3px;
     bottom: 20px;
     right: 20px;
-    width: 40px;
-    height: 40px;
-    border-right: 3px solid rgba(0, 0, 0, 0.2);
-    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
   }
 
-  /* ESTADOS ACTIVOS PARA INTERACCIÓN TÁCTIL */
-  .touch-device .project-card.touch-active .project-card-mobile {
+  /* Estado activo para tarjetas en dispositivos táctiles */
+  .project-card.touch-active .project-image-section {
     transform: translateY(-8px);
     box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
   }
 
-  .touch-device .project-card.touch-active .project-image {
+  .project-card.touch-active .project-content-section {
+    transform: translateY(8px);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .project-card.touch-active .project-image {
     transform: scale(1.1);
     filter: grayscale(0%);
   }
 
-  .touch-device .project-card.touch-active .project-overlay {
+  .project-card.touch-active .project-overlay {
     opacity: 0.5;
   }
 
-  .touch-device .project-card.touch-active .project-title::after {
+  .project-card.touch-active .project-number {
+    color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+  }
+
+  .project-card.touch-active .project-expand-btn::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .project-card.touch-active .project-title::after {
+    width: 100px;
+  }
+
+  .project-card.touch-active .project-decoration-1 {
+    transform: rotate(225deg);
+  }
+
+  .project-card.touch-active .project-decoration-2 {
     width: 60px;
   }
 
-  .touch-device .project-card.touch-active .project-expand-btn {
-    background-color: rgba(0, 0, 0, 0.8);
-    transform: rotate(45deg);
-  }
-
-  .touch-device .project-card.touch-active .project-expand-btn::before,
-  .touch-device .project-card.touch-active .project-expand-btn::after {
-    background-color: white;
-  }
-
-  /* Animaciones para entrada y salida de las tarjetas */
-  .touch-device .project-card.scroll-animate {
+  /* Animaciones para scroll */
+  .project-card.scroll-animate {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .touch-device .project-card.in-view {
+  .project-card.in-view {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Animaciones para elementos internos */
-  .touch-device .project-card .project-image-section {
-    opacity: 0.8;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
+  .project-image-section.animated {
+    animation: slideInFromLeft 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
 
-  .touch-device .project-card .project-content-section {
-    opacity: 0.8;
-    transform: translateY(20px);
-    transition: all 0.6s ease 0.1s;
+  .project-content-section.animated {
+    animation: slideInFromRight 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.1s
+      forwards;
   }
 
-  .touch-device .project-card.in-view .project-image-section.animated {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  .touch-device .project-card.in-view .project-content-section.animated {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  /* Efecto de pulsación para enlaces */
+  /* Mejoras para dispositivos táctiles */
+  .touch-device .project-expand-btn {
+    cursor: pointer;
+  }
+
+  .touch-device .project-expand-btn:active {
+    transform: scale(0.9);
+    background-color: #f0f0f0;
+  }
+
   .touch-device .project-link:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   }
 
-  /* Ajustes para pantallas más pequeñas */
+  /* Ajustes para pantallas muy pequeñas */
   @media (max-width: 480px) {
-    .touch-device .project-card {
-      min-height: 360px;
+    .project-image-section {
+      height: 180px;
+      border-width: 3px;
     }
 
-    .touch-device .project-image-section {
-      height: 160px;
+    .project-content-section {
+      padding: 1.5rem;
+      border-width: 3px;
     }
 
-    .touch-device .project-content-section {
-      padding: 1rem;
+    .project-title {
+      font-size: 1.5rem;
     }
 
-    .touch-device .project-title {
-      font-size: 1.3rem;
-    }
-
-    .touch-device .project-description {
+    .project-description {
       font-size: 0.9rem;
-      margin: 0.8rem 0;
+      margin-bottom: 1.2rem;
     }
 
-    .touch-device .project-link {
+    .project-number {
+      font-size: 3rem;
+    }
+
+    .project-expand-btn {
+      width: 35px;
+      height: 35px;
+      border-width: 2px;
+    }
+
+    .project-link {
       padding: 0.5rem 1rem;
       font-size: 0.75rem;
     }
   }
 
   @media (max-width: 375px) {
-    .touch-device .project-card {
-      min-height: 340px;
+    .project-image-section {
+      height: 160px;
     }
 
-    .touch-device .project-image-section {
-      height: 140px;
+    .project-content-section {
+      padding: 1.2rem;
     }
 
-    .touch-device .project-content-section {
-      padding: 0.8rem;
+    .project-title {
+      font-size: 1.3rem;
     }
 
-    .touch-device .project-title {
-      font-size: 1.2rem;
-    }
-
-    .touch-device .project-description {
+    .project-description {
       font-size: 0.85rem;
-      line-height: 1.4;
-      margin: 0.7rem 0;
+      line-height: 1.5;
     }
 
-    .touch-device .project-link {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    .project-number {
+      font-size: 2.5rem;
+    }
+
+    .project-expand-btn {
+      width: 30px;
+      height: 30px;
+    }
+
+    .project-expand-btn::before {
+      width: 15px;
+    }
+
+    .project-expand-btn::after {
+      height: 15px;
     }
   }
 }
