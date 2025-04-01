@@ -316,7 +316,6 @@
 
   /* NUEVO: Indicador visual para expandir */
   .project-card:not(.touch-active)::after {
-    content: "Toca para expandir";
     position: absolute;
     bottom: 10px;
     left: 50%;
