@@ -19,26 +19,68 @@ function initializeNavigation() {
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
   const navLinksItems = document.querySelectorAll(".nav-link");
+  const body = document.body;
 
   if (!menuToggle || !navLinks) return;
 
-  // Toggle del menú hamburguesa
-  menuToggle.addEventListener("click", () => {
+  // Crear overlay para el fondo cuando el menú está activo
+  const navOverlay = document.createElement("div");
+  navOverlay.className = "nav-overlay";
+  navOverlay.style.position = "fixed";
+  navOverlay.style.top = "0";
+  navOverlay.style.left = "0";
+  navOverlay.style.width = "100%";
+  navOverlay.style.height = "100%";
+  navOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  navOverlay.style.zIndex = "999";
+  navOverlay.style.opacity = "0";
+  navOverlay.style.visibility = "hidden";
+  navOverlay.style.transition = "all 0.3s ease";
+  navOverlay.style.backdropFilter = "blur(3px)";
+  body.appendChild(navOverlay);
+
+  // Función para alternar el menú
+  function toggleMenu() {
     menuToggle.classList.toggle("active");
     navLinks.classList.toggle("active");
-  });
+    navOverlay.style.opacity = menuToggle.classList.contains("active")
+      ? "1"
+      : "0";
+    navOverlay.style.visibility = menuToggle.classList.contains("active")
+      ? "visible"
+      : "hidden";
+
+    // Bloquear/desbloquear scroll del body
+    if (menuToggle.classList.contains("active")) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "";
+    }
+  }
+
+  // Toggle del menú hamburguesa
+  menuToggle.addEventListener("click", toggleMenu);
 
   // Cerrar el menú al hacer clic en un enlace
   navLinksItems.forEach((link) => {
     link.addEventListener("click", () => {
-      menuToggle.classList.remove("active");
-      navLinks.classList.remove("active");
+      toggleMenu();
     });
 
     // Preparar para animación secuencial
     link.style.opacity = "0";
     link.style.transform = "translateY(-20px)";
     link.style.transition = "all 0.5s ease";
+  });
+
+  // Cerrar menú al hacer clic en el overlay
+  navOverlay.addEventListener("click", toggleMenu);
+
+  // Cerrar menú al presionar la tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuToggle.classList.contains("active")) {
+      toggleMenu();
+    }
   });
 
   // Animación secuencial de los enlaces de navegación
@@ -85,18 +127,73 @@ function initializeSmoothScrolling() {
 
         const target = document.querySelector(targetId);
         if (target) {
-          // Usar window.scrollTo en lugar de scrollIntoView para mayor compatibilidad
+          // Aplicar opacidad al contenido durante el desplazamiento
+          document.body.classList.add("scrolling");
+
+          // Calcular la posición de destino
           const targetPosition =
             target.getBoundingClientRect().top + window.pageYOffset;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth",
-          });
+
+          // Obtener la posición actual
+          const startPosition = window.pageYOffset;
+
+          // Calcular la distancia a recorrer
+          const distance = targetPosition - startPosition;
+
+          // Duración de la animación en milisegundos
+          const duration = 800;
+
+          // Tiempo de inicio
+          let startTime = null;
+
+          // Función de animación
+          function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+
+            // Función de easing para suavizar el movimiento
+            const ease = easeInOutCubic(progress);
+
+            window.scrollTo(0, startPosition + distance * ease);
+
+            // Continuar la animación si no ha terminado
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            } else {
+              // Restaurar la opacidad cuando se completa el desplazamiento
+              document.body.classList.remove("scrolling");
+
+              // Asegurarse de que estamos exactamente en la posición correcta
+              window.scrollTo(0, targetPosition);
+            }
+          }
+
+          // Función de easing
+          function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          }
+
+          // Iniciar la animación
+          requestAnimationFrame(animation);
         }
       });
     });
+
+    // Agregar estilos para la transición de opacidad
+    const style = document.createElement("style");
+    style.textContent = `
+      body.scrolling section {
+        transition: opacity 0.3s ease;
+        opacity: 0.7;
+      }
+      section {
+        transition: opacity 0.5s ease;
+      }
+    `;
+    document.head.appendChild(style);
   } catch (error) {
-    // Error en smooth scrolling
+    console.error("Error en smooth scrolling:", error);
   }
 }
 
@@ -1183,7 +1280,6 @@ function initializeScrollTopButton() {
     });
   }
 }
-
 
 // Iniciar animaciones de la página después de la carga
 function startPageAnimations() {
