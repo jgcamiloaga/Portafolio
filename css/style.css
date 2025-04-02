@@ -2202,6 +2202,197 @@ body {
   .skills-grid {
     gap: 1.5rem;
   }
+
+  /* Mejoras para el menú de navegación móvil */
+  .nav {
+    height: auto;
+    transition: all 0.3s ease;
+  }
+
+  /* Cabecera de navegación mejorada */
+  .nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0;
+    position: relative;
+    z-index: 1001;
+  }
+
+  /* Logo mejorado */
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    position: relative;
+    z-index: 1001;
+    transition: all 0.3s ease;
+  }
+
+  /* Menú hamburguesa - Volviendo al diseño original */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: black;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: black;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger::before {
+    transform: translateY(-8px);
+  }
+
+  .hamburger::after {
+    transform: translateY(8px);
+  }
+
+  .menu-toggle.active .hamburger {
+    background: transparent;
+  }
+
+  .menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+  }
+
+  /* Contenedor de enlaces mejorado - Centrado sin efectos 3D */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 4px solid black;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+  }
+
+  /* Estado activo del contenedor de enlaces */
+  .nav-links.active {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 1rem 0;
+  }
+
+  /* Fondo decorativo para el menú */
+  .nav-links::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.02) 0px,
+      rgba(0, 0, 0, 0.02) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .nav-links.active::before {
+    opacity: 1;
+  }
+
+  /* Enlaces individuales mejorados - Centrados sin efectos 3D */
+  .nav-link {
+    display: block;
+    width: 80%;
+    margin: 0.6rem auto;
+    padding: 0.8rem 1rem;
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  /* Animación de entrada para los enlaces */
+  .nav-links.active .nav-link {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Efecto de hover para los enlaces */
+  .nav-link:hover {
+    background-color: #333;
+    color: white;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Efecto de focus para los enlaces */
+  .nav-link:focus {
+    background-color: #222;
+    color: white;
+    outline: 2px solid white;
+    outline-offset: -4px;
+  }
+
+  /* Efecto de active para los enlaces */
+  .nav-link:active {
+    background-color: #111;
+    color: white;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Estilo para el enlace activo */
+  .nav-link.active-link {
+    background-color: black;
+    color: white;
+    border-color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Efecto de hover para el enlace activo */
+  .nav-link.active-link:hover {
+    background-color: #333;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2351,7 +2542,7 @@ body {
     /* Eliminar el borde */
     border: none;
     background-color: transparent;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease;
   }
 
   .menu-toggle:active {
@@ -2366,7 +2557,7 @@ body {
   .hamburger,
   .hamburger::before,
   .hamburger::after {
-    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transition: all 0.4s ease-in-out;
   }
 
   .menu-toggle.active .hamburger::before,
@@ -2388,12 +2579,15 @@ body {
   .nav-link {
     position: relative;
     padding: 0.8rem 1rem;
-    margin: 0.5rem;
+    margin: 0.5rem auto;
     border-width: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    width: 80%;
+    background-color: black;
+    color: white;
   }
 
   .nav-link::before {
@@ -2403,7 +2597,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.1);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -2412,8 +2606,8 @@ body {
 
   .nav-link:active {
     transform: scale(0.98);
-    background-color: transparent;
-    color: black;
+    background-color: #222;
+    color: white;
   }
 
   .nav-link:active::before {
@@ -2423,9 +2617,9 @@ body {
 
   /* Asegurar que los enlaces activos no tengan fondo negro en móvil */
   .nav-link.active-link {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: black;
-    border-color: transparent;
+    background-color: black;
+    color: white;
+    border-color: white;
     text-decoration: none;
     font-weight: bold;
   }
@@ -2807,6 +3001,6 @@ body {
 }
 
 /* 
-   * NOTA: Las reglas para tarjetas de proyectos en dispositivos móviles 
-   * han sido movidas a mobile-project-cards.css 
-   */
+     * NOTA: Las reglas para tarjetas de proyectos en dispositivos móviles 
+     * han sido movidas a mobile-project-cards.css 
+     */
