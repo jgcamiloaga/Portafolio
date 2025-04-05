@@ -5,7 +5,7 @@
 [![CSS](https://img.shields.io/badge/CSS-54.7%25-blue)](https://developer.mozilla.org/es/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-34.8%25-yellow)](https://developer.mozilla.org/es/docs/Web/JavaScript)
 
-## 📋 Descripción General
+## 📋 Descripción
 
 Este repositorio contiene el código fuente de mi sitio web de portafolio personal. El sitio muestra mis habilidades profesionales, proyectos y experiencia en desarrollo web.
 
