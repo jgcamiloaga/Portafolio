@@ -2651,7 +2651,7 @@ body {
     padding: 0.8rem 1.5rem;
   }
 
-  /* En la sección de ENHANCED MOBILE NAVIGATION, modificar el estilo del menu-toggle */
+  /* Mejora del menú hamburguesa con animaciones más fluidas */
   .menu-toggle {
     width: 40px;
     height: 40px;
@@ -2660,14 +2660,13 @@ body {
     justify-content: center;
     position: relative;
     z-index: 1001;
-    /* Eliminar el borde */
     border: none;
     background-color: transparent;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .menu-toggle:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
   }
 
   .menu-toggle.active {
@@ -2675,18 +2674,35 @@ body {
     border-color: transparent;
   }
 
+  /* Animación mejorada para las líneas del hamburguesa */
   .hamburger,
   .hamburger::before,
   .hamburger::after {
-    transition: all 0.4s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   }
 
-  .menu-toggle.active .hamburger::before,
-  .menu-toggle.active .hamburger::after {
+  .menu-toggle.active .hamburger {
+    background-color: transparent;
+  }
+
+  .menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    width: 24px;
     background-color: black;
   }
 
+  .menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    width: 24px;
+    background-color: black;
+  }
+
+  /* Contenedor de navegación con animación de despliegue */
   .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
     background-color: white;
     border-bottom: 3px solid black;
     padding: 0;
@@ -2694,13 +2710,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity, max-height;
+    z-index: 1000;
   }
 
   .nav-links.active {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 1rem 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
 
-  /* Enlaces mejorados dentro del menú hamburguesa */
+  /* Overlay para el fondo cuando el menú está activo */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+  }
+
+  /* Enlaces mejorados dentro del menú hamburguesa con animación secuencial */
   .nav-link {
     position: relative;
     padding: 0.8rem 1rem;
@@ -2717,7 +2761,35 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  /* Animación secuencial para los enlaces */
+  .nav-links.active .nav-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Delays escalonados para los enlaces */
+  .nav-links.active .nav-link:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  .nav-links.active .nav-link:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  .nav-links.active .nav-link:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  .nav-links.active .nav-link:nth-child(4) {
+    transition-delay: 0.4s;
+  }
+  .nav-links.active .nav-link:nth-child(5) {
+    transition-delay: 0.5s;
+  }
+  .nav-links.active .nav-link:nth-child(6) {
+    transition-delay: 0.6s;
   }
 
   /* Efecto hover para los enlaces */
@@ -2755,7 +2827,7 @@ body {
     position: relative;
   }
 
-  /* Indicador para el enlace activo */
+  /* Indicador para el enlace activo con animación */
   .nav-link.active-link::after {
     content: "";
     position: absolute;
@@ -2765,12 +2837,39 @@ body {
     width: 30%;
     height: 2px;
     background-color: white;
+    transition: width 0.3s ease;
   }
 
   /* Efecto hover para el enlace activo */
   .nav-link.active-link:hover {
     background-color: #333;
     transform: translateY(-2px);
+  }
+
+  .nav-link.active-link:hover::after {
+    width: 50%;
+  }
+
+  /* Efecto de ondulación al hacer clic */
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+  }
+
+  .nav-link:active::before {
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+    transition: width 0.5s ease, height 0.5s ease, opacity 0s;
   }
 
   /* ===== ENHANCED MOBILE HERO SECTION ===== */
@@ -2787,6 +2886,11 @@ body {
     transform: rotate(-1deg);
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.7);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .name:hover {
+    transform: rotate(1deg) scale(1.02);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.8);
   }
 
   .title {
@@ -2818,6 +2922,14 @@ body {
     right: -5px;
   }
 
+  .title:hover::before {
+    transform: translate(-2px, -2px);
+  }
+
+  .title:hover::after {
+    transform: translate(2px, 2px);
+  }
+
   .redes-links {
     margin-top: 2.5rem;
   }
@@ -2835,6 +2947,28 @@ body {
     box-shadow: 2px 2px 0 black;
     color: white;
     background-color: black;
+  }
+
+  /* Efecto de brillo para los enlaces */
+  .redes-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transition: transform 0.6s ease;
+    z-index: -1;
+  }
+
+  .redes-link:hover::before {
+    transform: translateX(200%);
   }
 
   /* ===== ENHANCED MOBILE SKILL CARDS ===== */
@@ -2883,6 +3017,23 @@ body {
     transform: translateY(0);
   }
 
+  /* Animación de pulsación para tarjetas de habilidades */
+  @keyframes skillPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .skill-card:hover {
+    animation: skillPulse 1s infinite;
+  }
+
   /* ===== ENHANCED MOBILE EDUCATION CARDS ===== */
   .education-grid {
     gap: 2rem;
@@ -2924,6 +3075,33 @@ body {
     box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
   }
 
+  /* Efecto de entrada para tarjetas de educación */
+  .education-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .education-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .education-card:hover::after,
+  .touch-device .education-card.active-touch::after {
+    opacity: 1;
+  }
+
   /* ===== ENHANCED MOBILE CONTACT FORM ===== */
   .contact-form {
     padding: 1.8rem;
@@ -2956,6 +3134,19 @@ body {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
+  /* Animación mejorada para etiquetas de formulario */
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
+  .form-group label.active {
+    transform: translateY(-2.2rem) scale(0.9);
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    padding: 0 0.3rem;
+  }
+
   .submit-button {
     width: 100%;
     padding: 0.9rem;
@@ -2982,13 +3173,13 @@ body {
     z-index: 1;
   }
 
+  .submit-button:hover::before {
+    transform: translateX(200%);
+  }
+
   .submit-button:active {
     transform: translate(-3px, -3px);
     box-shadow: 3px 3px 0 black;
-  }
-
-  .submit-button:active::before {
-    transform: translateX(200%);
   }
 
   /* ===== ENHANCED MOBILE FOOTER ===== */
@@ -3001,6 +3192,23 @@ body {
     display: inline-block;
     padding: 0.2rem 0.4rem;
     transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .footer-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease;
+  }
+
+  .footer-link:hover::after,
+  .footer-link:active::after {
+    width: 100%;
   }
 
   .footer-link:active {
@@ -3025,6 +3233,11 @@ body {
 
   .scroll-top-button.active {
     animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .scroll-top-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
   }
 
   .scroll-top-button:active {
@@ -3146,6 +3359,58 @@ body {
         -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
         -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
     }
+  }
+
+  /* Nuevas animaciones para elementos interactivos */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Efecto de ondulación para botones y enlaces */
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+  }
+
+  .ripple:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+    transition: width 0.6s ease, height 0.6s ease, opacity 0s;
   }
 }
 
