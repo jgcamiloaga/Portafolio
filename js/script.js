@@ -39,22 +39,69 @@ function initializeNavigation() {
   navOverlay.style.backdropFilter = "blur(3px)";
   body.appendChild(navOverlay);
 
-  // Función para alternar el menú
+  // Función para alternar el menú con animación mejorada
   function toggleMenu() {
     menuToggle.classList.toggle("active");
-    navLinks.classList.toggle("active");
-    navOverlay.style.opacity = menuToggle.classList.contains("active")
-      ? "1"
-      : "0";
-    navOverlay.style.visibility = menuToggle.classList.contains("active")
-      ? "visible"
-      : "hidden";
 
-    // Bloquear/desbloquear scroll del body
+    // Si el menú se está abriendo
     if (menuToggle.classList.contains("active")) {
+      // Mostrar el overlay con animación
+      navOverlay.style.visibility = "visible";
+      setTimeout(() => {
+        navOverlay.style.opacity = "1";
+      }, 10);
+
+      // Activar el menú
+      navLinks.classList.add("active");
+
+      // Bloquear scroll del body
       body.style.overflow = "hidden";
+
+      // Animar cada enlace secuencialmente
+      navLinksItems.forEach((link, index) => {
+        // Resetear primero para asegurar la animación
+        link.style.opacity = "0";
+        link.style.transform = "translateY(-20px)";
+
+        // Forzar un reflow para que la transición funcione
+        void link.offsetWidth;
+
+        // Aplicar la animación con delay
+        setTimeout(() => {
+          link.style.opacity = "1";
+          link.style.transform = "translateY(0)";
+        }, 100 + index * 50);
+      });
     } else {
+      // Ocultar el overlay
+      navOverlay.style.opacity = "0";
+      setTimeout(() => {
+        navOverlay.style.visibility = "hidden";
+      }, 300);
+
+      // Desactivar el menú
+      navLinks.classList.remove("active");
+
+      // Desbloquear scroll
       body.style.overflow = "";
+
+      // Animar la salida de los enlaces
+      navLinksItems.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = "0";
+          link.style.transform = "translateY(-10px)";
+        }, (navLinksItems.length - index - 1) * 30);
+      });
+
+      // Resetear los estilos después de la animación
+      setTimeout(() => {
+        if (!menuToggle.classList.contains("active")) {
+          navLinksItems.forEach((link) => {
+            link.style.opacity = "";
+            link.style.transform = "";
+          });
+        }
+      }, 300);
     }
   }
 
