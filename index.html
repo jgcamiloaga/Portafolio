@@ -1,321 +1,457 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link id="favicon" rel="icon" href="img/Favicon.ico" type="icon" />
+    <link id="favicon" rel="icon" href="img/Favicon.ico" type="image/x-icon" />
     <meta
       name="description"
-      content="Portafolio de Johann Camiloaga, desarrollador frontend donde muestro mis proyectos, educación, skills y contacto."
+      content="Portafolio profesional de Johann Camiloaga, desarrollador frontend especializado en React, JavaScript y CSS. Explora mis proyectos, habilidades técnicas y formación académica."
     />
     <meta
       name="keywords"
-      content="portafolio, portfolio, proyectos, educación, skills, contacto"
+      content="Johann Camiloaga, desarrollador frontend, React, JavaScript, CSS, desarrollo web, portafolio, proyectos web, UTP, Perú"
     />
+
     <title>Mi Portafolio - Johann</title>
+
+    <!-- Metadatos Open Graph para compartir en redes sociales -->
+    <meta
+      property="og:title"
+      content="Johann Camiloaga | Desarrollador Frontend"
+    />
+    <meta
+      property="og:description"
+      content="Portafolio profesional de Johann Camiloaga, desarrollador frontend especializado en React, JavaScript y CSS."
+    />
+    <meta
+      property="og:image"
+      content="https://jgcamiloaga.me/img/social-share.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://jgcamiloaga.me" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Portafolio de Johann Camiloaga" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Johann Camiloaga | Desarrollador Frontend"
+    />
+    <meta
+      name="twitter:description"
+      content="Portafolio profesional de Johann Camiloaga, desarrollador frontend."
+    />
+    <meta
+      name="twitter:image"
+      content="https://jgcamiloaga.me/img/social-share.jpg"
+    />
+    <meta name="twitter:creator" content="@tuusuariotwitter" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jgcamiloaga.me" />
+
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/mobile-project-cards.css" />
   </head>
   <body>
-    <nav class="nav">
-      <div class="nav-content">
-        <div class="nav-header">
-          <span class="logo">PORTA<br />FOLIO</span>
-          <button class="menu-toggle" aria-label="Menú">
-            <span class="hamburger"></span>
-          </button>
+    <header>
+      <nav class="nav" aria-label="Navegación principal">
+        <div class="nav-content">
+          <div class="nav-header">
+            <span class="logo">PORTA<br />FOLIO</span>
+            <button class="menu-toggle" aria-label="Abrir menú de navegación">
+              <span class="hamburger"></span>
+            </button>
+          </div>
+          <div class="nav-links">
+            <a href="#start" class="nav-link">INICIO</a>
+            <a href="#about" class="nav-link">SOBRE MI</a>
+            <a href="#projects" class="nav-link">PROYECTOS</a>
+            <a href="#education" class="nav-link">EDUCACION</a>
+            <a href="#skills" class="nav-link">SKILLS</a>
+            <a href="#contact" class="nav-link">CONTACTO</a>
+          </div>
         </div>
-        <div class="nav-links">
-          <a href="#start" class="nav-link">INICIO</a>
-          <a href="#about" class="nav-link">SOBRE MI</a>
-          <a href="#projects" class="nav-link">PROYECTOS</a>
-          <a href="#education" class="nav-link">EDUCACION</a>
-          <a href="#skills" class="nav-link">SKILLS</a>
-          <a href="#contact" class="nav-link">CONTACTO</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="start" class="section fade-in-section">
+        <div class="container">
+          <h1 class="glitch scroll-animation from-top" data-text="HELLO, I'M">
+            HOLA, YO SOY
+          </h1>
+          <h2 class="name scroll-animation zoom-in delay-1">
+            Johann Camiloaga
+          </h2>
+          <p class="title scroll-animation from-bottom delay-2">
+            DESARROLLADOR FRONTEND
+          </p>
+          <div class="redes-links scroll-animation fade delay-3">
+            <a
+              href="https://www.linkedin.com/in/jgcamiloaga/"
+              class="redes-link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Perfil de LinkedIn de Johann Camiloaga"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/jgcamiloaga"
+              class="redes-link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Perfil de GitHub de Johann Camiloaga"
+              >Github</a
+            >
+          </div>
         </div>
-      </div>
-    </nav>
-    <section id="start" class="section fade-in-section">
-      <div class="container">
-        <h1 class="glitch scroll-animation from-top" data-text="HELLO, I'M">
-          HOLA, YO SOY
-        </h1>
-        <h2 class="name scroll-animation zoom-in delay-1">Johann Camiloaga</h2>
-        <p class="title scroll-animation from-bottom delay-2">
-          DESARROLLADOR FRONTEND
-        </p>
-        <div class="redes-links scroll-animation fade delay-3">
-          <a
-            href="https://www.linkedin.com/in/jgcamiloaga/"
-            class="redes-link"
-            target="_blank"
-            >LinkedIn</a
+      </section>
+
+      <section id="about" class="section fade-in-section">
+        <div class="container">
+          <h2 class="section-title scroll-animation from-left">SOBRE MI</h2>
+          <div class="about-content">
+            <div class="about-text scroll-animation from-right delay-1">
+              <p>
+                Soy apasionado por la programación y el desarrollo web, siempre
+                buscando aprender y aplicar nuevas tecnologías en mis proyectos.
+                Me caracterizo por ser autodidacta, responsable y comprometido
+                con mi trabajo.
+              </p>
+              <p>
+                Disfruto los retos y el trabajo en equipo, aportando ideas y
+                soluciones creativas para resolver problemas de manera
+                eficiente.
+              </p>
+            </div>
+            <div class="about-image scroll-animation zoom-in delay-2">
+              <div class="image-placeholder">
+                <img
+                  class="contenido-imagen"
+                  src="img/foto.png"
+                  alt="Johann Camiloaga - Desarrollador Frontend"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section fade-in-section">
+        <div class="container">
+          <h2 class="section-title scroll-animation from-bottom">PROYECTOS</h2>
+          <div class="projects-grid">
+            <!-- Proyecto 1 -->
+            <article class="project-card scroll-animation from-left delay-1">
+              <div class="project-preview">
+                <img
+                  src="img/projects/project_1.png"
+                  alt="PRONUNCHECK - Aplicación web para practicar pronunciación en inglés"
+                  class="project-image"
+                  width="400"
+                  height="225"
+                  loading="lazy"
+                />
+                <div class="project-overlay">
+                  <h3>PRONUNCHECK</h3>
+                  <p></p>
+                  <div class="project-description">
+                    Aplicación web para practicar y mejorar la pronunciación en
+                    inglés mediante ejercicios interactivos.
+                  </div>
+                </div>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://pronuncheck.netlify.app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Visitar el proyecto PRONUNCHECK"
+                  >VISITAR</a
+                >
+                <a
+                  href="https://github.com/jgcamiloaga/PronunCheck"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Ver código fuente de PRONUNCHECK en GitHub"
+                  >CODIGO</a
+                >
+              </div>
+            </article>
+
+            <!-- Proyecto 2 -->
+            <article class="project-card scroll-animation from-bottom delay-2">
+              <div class="project-preview">
+                <img
+                  src="img/projects/project_2.png"
+                  alt="VERBO LOGIC - Plataforma educativa para aprender conjugación de verbos"
+                  class="project-image"
+                  width="400"
+                  height="225"
+                  loading="lazy"
+                />
+                <div class="project-overlay">
+                  <h3>VERBO LOGIC</h3>
+                  <p></p>
+                  <div class="project-description">
+                    Plataforma educativa para aprender conjugación de verbos en
+                    diferentes idiomas.
+                  </div>
+                </div>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://verbologic.netlify.app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Visitar el proyecto VERBO LOGIC"
+                  >VISITAR</a
+                >
+                <a
+                  href="https://github.com/jgcamiloaga/VerboLogic"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Ver código fuente de VERBO LOGIC en GitHub"
+                  >CODIGO</a
+                >
+              </div>
+            </article>
+
+            <!-- Proyecto 3 -->
+            <article class="project-card scroll-animation from-right delay-3">
+              <div class="project-preview">
+                <img
+                  src="img/proyecto3.jpg"
+                  alt="POKE DETAILS - Aplicación que muestra información detallada sobre Pokémon"
+                  class="project-image"
+                  width="400"
+                  height="225"
+                  loading="lazy"
+                />
+                <div class="project-overlay">
+                  <h3>POKE DETAILS</h3>
+                  <p></p>
+                  <div class="project-description">
+                    Aplicación que muestra información detallada sobre Pokémon
+                    utilizando la PokeAPI.
+                  </div>
+                </div>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://pokedetails.netlify.app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Visitar el proyecto POKE DETAILS"
+                  >VISITAR</a
+                >
+                <a
+                  href="https://github.com/jgcamiloaga/PokeDetails"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Ver código fuente de POKE DETAILS en GitHub"
+                  >CODIGO</a
+                >
+              </div>
+            </article>
+
+            <!-- Proyecto 4 -->
+            <article class="project-card scroll-animation from-left delay-4">
+              <div class="project-preview">
+                <img
+                  src="img/proyecto4.jpg"
+                  alt="PORTFOLIO - Portafolio personal con diseño minimalista"
+                  class="project-image"
+                  width="400"
+                  height="225"
+                  loading="lazy"
+                />
+                <div class="project-overlay">
+                  <h3>PORTFOLIO</h3>
+                  <p></p>
+                  <div class="project-description">
+                    Portafolio personal con diseño minimalista y animaciones
+                    interactivas.
+                  </div>
+                </div>
+              </div>
+              <div class="project-links">
+                <a
+                  href="#"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Visitar el proyecto PORTFOLIO"
+                  >VISITAR</a
+                >
+                <a
+                  href="#"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Ver código fuente de PORTFOLIO en GitHub"
+                  >CODIGO</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section fade-in-section">
+        <div class="container">
+          <h2 class="section-title scroll-animation from-top">EDUCACIÓN</h2>
+          <div class="education-grid">
+            <article class="education-card scroll-animation from-left delay-1">
+              <div class="education-year">2022 - 2027</div>
+              <h3 class="education-title">Ingeniería de Sistemas</h3>
+              <p class="education-school">Universidad Tecnológica del Perú</p>
+              <p class="education-description">
+                Especialización en desarrollo web y aplicaciones móviles.
+                Participación en proyectos de innovación tecnológica.
+              </p>
+            </article>
+            <article class="education-card scroll-animation from-right delay-2">
+              <div class="education-year">2024</div>
+              <h3 class="education-title">Desarrollo Back-End</h3>
+              <p class="education-school">Alura Latam</p>
+              <p class="education-description">
+                Certificación en tecnologías Back-End modernas incluyendo java,
+                spring boot y bases de datos.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section fade-in-section">
+        <div class="container">
+          <h2 class="section-title scroll-animation from-bottom">SKILLS</h2>
+          <div class="skills-grid">
+            <div class="skill-card scroll-animation from-left delay-1">
+              <h3>HTML</h3>
+              <div
+                class="skill-level"
+                data-level="90"
+                aria-label="Nivel de habilidad en HTML: 90%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-left delay-2">
+              <h3>CSS</h3>
+              <div
+                class="skill-level"
+                data-level="85"
+                aria-label="Nivel de habilidad en CSS: 85%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-left delay-3">
+              <h3>JAVASCRIPT</h3>
+              <div
+                class="skill-level"
+                data-level="80"
+                aria-label="Nivel de habilidad en JavaScript: 80%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-left delay-4">
+              <h3>REACT</h3>
+              <div
+                class="skill-level"
+                data-level="60"
+                aria-label="Nivel de habilidad en React: 60%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-right delay-1">
+              <h3>PYTHON</h3>
+              <div
+                class="skill-level"
+                data-level="75"
+                aria-label="Nivel de habilidad en Python: 75%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-right delay-2">
+              <h3>FLASK</h3>
+              <div
+                class="skill-level"
+                data-level="60"
+                aria-label="Nivel de habilidad en Flask: 60%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-right delay-3">
+              <h3>MYSQL</h3>
+              <div
+                class="skill-level"
+                data-level="75"
+                aria-label="Nivel de habilidad en MySQL: 75%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation from-right delay-4">
+              <h3>FIGMA</h3>
+              <div
+                class="skill-level"
+                data-level="80"
+                aria-label="Nivel de habilidad en Figma: 80%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation zoom-in delay-5">
+              <h3>TAILWIND</h3>
+              <div
+                class="skill-level"
+                data-level="65"
+                aria-label="Nivel de habilidad en Tailwind: 65%"
+              ></div>
+            </div>
+            <div class="skill-card scroll-animation zoom-in delay-6">
+              <h3>JAVA</h3>
+              <div
+                class="skill-level"
+                data-level="80"
+                aria-label="Nivel de habilidad en Java: 80%"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section fade-in-section">
+        <div class="container">
+          <h2 class="section-title scroll-animation from-top">CONTACTO</h2>
+          <form
+            id="contact-form"
+            class="contact-form scroll-animation from-bottom delay-1"
+            action="#"
+            method="POST"
+            aria-label="Formulario de contacto"
           >
-          <a
-            href="https://github.com/jgcamiloaga"
-            class="redes-link"
-            target="_blank"
-            >Github</a
-          >
+            <div class="form-group">
+              <input type="text" id="name" name="name" required />
+              <label for="name">NOMBRE</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" required />
+              <label for="email">EMAIL</label>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" required></textarea>
+              <label for="message">MENSAJE</label>
+            </div>
+            <button type="submit" class="submit-button">ENVIAR</button>
+          </form>
         </div>
-      </div>
-    </section>
-
-    <section id="about" class="section fade-in-section">
-      <div class="container">
-        <h2 class="section-title scroll-animation from-left">SOBRE MI</h2>
-        <div class="about-content">
-          <div class="about-text scroll-animation from-right delay-1">
-            <p>
-              Soy apasionado por la programación y el desarrollo web, siempre
-              buscando aprender y aplicar nuevas tecnologías en mis proyectos.
-              Me caracterizo por ser autodidacta, responsable y comprometido con
-              mi trabajo.
-            </p>
-            <p>
-              Disfruto los retos y el trabajo en equipo, aportando ideas y
-              soluciones creativas para resolver problemas de manera eficiente.
-            </p>
-          </div>
-          <div class="about-image scroll-animation zoom-in delay-2">
-            <div class="image-placeholder">
-              <img
-                class="contenido-imagen"
-                src="img/foto.png"
-                alt="Johann Camiloaga"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section fade-in-section">
-      <div class="container">
-        <h2 class="section-title scroll-animation from-bottom">PROYECTOS</h2>
-        <div class="projects-grid">
-          <!-- Proyecto 1 -->
-          <div class="project-card scroll-animation from-left delay-1">
-            <div class="project-preview">
-              <img
-                src="img/projects/project_1.png"
-                alt="Vista previa de PRONUNCHECK"
-                class="project-image"
-              />
-              <div class="project-overlay">
-                <h3>PRONUNCHECK</h3>
-                <p></p>
-                <div class="project-description">
-                  Aplicación web para practicar y mejorar la pronunciación en
-                  inglés mediante ejercicios interactivos.
-                </div>
-              </div>
-            </div>
-            <div class="project-links">
-              <a
-                href="https://pronuncheck.netlify.app/"
-                class="project-link"
-                target="_blank"
-                >VISITAR</a
-              >
-              <a
-                href="https://github.com/jgcamiloaga/PronunCheck"
-                class="project-link"
-                target="_blank"
-                >CODIGO</a
-              >
-            </div>
-          </div>
-
-          <!-- Proyecto 2 -->
-          <div class="project-card scroll-animation from-bottom delay-2">
-            <div class="project-preview">
-              <img
-                src="img/projects/project_2.png"
-                alt="Vista previa de VERBO LOGIC"
-                class="project-image"
-              />
-              <div class="project-overlay">
-                <h3>VERBO LOGIC</h3>
-                <p></p>
-                <div class="project-description">
-                  Plataforma educativa para aprender conjugación de verbos en
-                  diferentes idiomas.
-                </div>
-              </div>
-            </div>
-            <div class="project-links">
-              <a
-                href="https://verbologic.netlify.app/"
-                class="project-link"
-                target="_blank"
-                >VISITAR</a
-              >
-              <a
-                href="https://github.com/jgcamiloaga/VerboLogic"
-                class="project-link"
-                target="_blank"
-                >CODIGO</a
-              >
-            </div>
-          </div>
-
-          <!-- Proyecto 3 -->
-          <div class="project-card scroll-animation from-right delay-3">
-            <div class="project-preview">
-              <img
-                src="img/proyecto3.jpg"
-                alt="Vista previa de POKE DETAILS"
-                class="project-image"
-              />
-              <div class="project-overlay">
-                <h3>POKE DETAILS</h3>
-                <p></p>
-                <div class="project-description">
-                  Aplicación que muestra información detallada sobre Pokémon
-                  utilizando la PokeAPI.
-                </div>
-              </div>
-            </div>
-            <div class="project-links">
-              <a
-                href="https://pokedetails.netlify.app/"
-                class="project-link"
-                target="_blank"
-                >VISITAR</a
-              >
-              <a
-                href="https://github.com/jgcamiloaga/PokeDetails"
-                class="project-link"
-                target="_blank"
-                >CODIGO</a
-              >
-            </div>
-          </div>
-
-          <!-- Proyecto 4 -->
-          <div class="project-card scroll-animation from-left delay-4">
-            <div class="project-preview">
-              <img
-                src="img/proyecto4.jpg"
-                alt="Vista previa de PROYECTO 04"
-                class="project-image"
-              />
-              <div class="project-overlay">
-                <h3>PORTFOLIO</h3>
-                <p></p>
-                <div class="project-description">
-                  Portafolio personal con diseño minimalista y animaciones
-                  interactivas.
-                </div>
-              </div>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link" target="_blank">VISITAR</a>
-              <a href="#" class="project-link" target="_blank">CODIGO</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="section fade-in-section">
-      <div class="container">
-        <h2 class="section-title scroll-animation from-top">EDUCACIÓN</h2>
-        <div class="education-grid">
-          <div class="education-card scroll-animation from-left delay-1">
-            <div class="education-year">2022 - 2027</div>
-            <h3 class="education-title">Ingeniería de Sistemas</h3>
-            <p class="education-school">Universidad Tecnológica del Perú</p>
-            <p class="education-description">
-              Especialización en desarrollo web y aplicaciones móviles.
-              Participación en proyectos de innovación tecnológica.
-            </p>
-          </div>
-          <div class="education-card scroll-animation from-right delay-2">
-            <div class="education-year">2024</div>
-            <h3 class="education-title">Desarrollo Back-End</h3>
-            <p class="education-school">Alura Latam</p>
-            <p class="education-description">
-              Certificación en tecnologías Back-End modernas incluyendo java,
-              spring boot y bases de datos.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section fade-in-section">
-      <div class="container">
-        <h2 class="section-title scroll-animation from-bottom">SKILLS</h2>
-        <div class="skills-grid">
-          <div class="skill-card scroll-animation from-left delay-1">
-            <h3>HTML</h3>
-            <div class="skill-level" data-level="90"></div>
-          </div>
-          <div class="skill-card scroll-animation from-left delay-2">
-            <h3>CSS</h3>
-            <div class="skill-level" data-level="85"></div>
-          </div>
-          <div class="skill-card scroll-animation from-left delay-3">
-            <h3>JAVASCRIPT</h3>
-            <div class="skill-level" data-level="80"></div>
-          </div>
-          <div class="skill-card scroll-animation from-left delay-4">
-            <h3>REACT</h3>
-            <div class="skill-level" data-level="60"></div>
-          </div>
-          <div class="skill-card scroll-animation from-right delay-1">
-            <h3>PYTHON</h3>
-            <div class="skill-level" data-level="75"></div>
-          </div>
-          <div class="skill-card scroll-animation from-right delay-2">
-            <h3>FLASK</h3>
-            <div class="skill-level" data-level="60"></div>
-          </div>
-          <div class="skill-card scroll-animation from-right delay-3">
-            <h3>MYSQL</h3>
-            <div class="skill-level" data-level="75"></div>
-          </div>
-          <div class="skill-card scroll-animation from-right delay-4">
-            <h3>FIGMA</h3>
-            <div class="skill-level" data-level="80"></div>
-          </div>
-          <div class="skill-card scroll-animation zoom-in delay-5">
-            <h3>TAILWIND</h3>
-            <div class="skill-level" data-level="65"></div>
-          </div>
-          <div class="skill-card scroll-animation zoom-in delay-6">
-            <h3>JAVA</h3>
-            <div class="skill-level" data-level="80"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section fade-in-section">
-      <div class="container">
-        <h2 class="section-title scroll-animation from-top">CONTACTO</h2>
-        <form
-          id="contact-form"
-          class="contact-form scroll-animation from-bottom delay-1"
-        >
-          <div class="form-group">
-            <input type="text" id="name" required />
-            <label for="name">NOMBRE</label>
-          </div>
-          <div class="form-group">
-            <input type="email" id="email" required />
-            <label for="email">EMAIL</label>
-          </div>
-          <div class="form-group">
-            <textarea id="message" required></textarea>
-            <label for="message">MENSAJE</label>
-          </div>
-          <button type="submit" class="submit-button">ENVIAR</button>
-        </form>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <footer class="footer">
       <div class="container">
@@ -325,6 +461,8 @@
             class="footer-link"
             href="https://www.github.com/jgcamiloaga"
             target="_blank"
+            rel="noopener"
+            aria-label="Perfil de GitHub de Johann Camiloaga"
             >Johann Camiloaga</a
           >
           | Febrero 2025
@@ -334,6 +472,51 @@
 
     <!-- Botón de volver arriba -->
     <button class="scroll-top-button" aria-label="Volver arriba">↑</button>
+
+    <!-- Schema.org para Rich Snippets -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Johann Camiloaga Cuenca",
+        "url": "https://jgcamiloaga.me",
+        "image": "img/foto.png",
+        "jobTitle": "Desarrollador Frontend",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Universidad Tecnológica del Perú"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jgcamiloaga/",
+          "https://github.com/jgcamiloaga"
+        ],
+        "knowsAbout": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React",
+          "Python",
+          "Java",
+          "MySQL",
+          "Figma",
+          "Tailwind"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Portafolio de Johann Camiloaga",
+        "url": "https://jgcamiloaga.me",
+        "description": "Portafolio profesional de Johann Camiloaga, desarrollador frontend especializado en React, JavaScript y CSS."
+      }
+    </script>
 
     <script src="js/script.js"></script>
     <script src="js/mobile-project-cards.js"></script>
