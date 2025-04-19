@@ -1478,6 +1478,7 @@ body {
   width: 100%;
   margin-top: 0.5rem;
   -webkit-appearance: none;
+  appearance: none;
   /* Elimina estilos por defecto en iOS */
   border-radius: 0;
 }
