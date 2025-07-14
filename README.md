@@ -1,27 +1,72 @@
-# Mi Portafolio Web 🖥️
+# Portafolio Web Personal 🖥️
 
-[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![HTML](https://img.shields.io/badge/HTML-10.5%25-orange)](https://developer.mozilla.org/es/docs/Web/HTML)
-[![CSS](https://img.shields.io/badge/CSS-54.7%25-blue)](https://developer.mozilla.org/es/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-34.8%25-yellow)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+Bienvenido a mi portafolio web, un sitio diseñado para mostrar mis proyectos, habilidades y experiencia en desarrollo web.
+
+🔗 **Demo en vivo:** [jgcamiloaga.me](https://jgcamiloaga.me)
+
+---
 
 ## 📋 Descripción
 
-Este repositorio contiene el código fuente de mi sitio web de portafolio personal. El sitio muestra mis habilidades profesionales, proyectos y experiencia en desarrollo web.
-
-Visita el sitio: [jgcamiloaga.me](https://jgcamiloaga.me)
+Este repositorio contiene el código fuente de mi portafolio personal. Aquí podrás encontrar una selección de mis proyectos más destacados, información sobre mis habilidades técnicas y una breve presentación profesional.
 
 ## ✨ Características
 
-- **Diseño Responsivo**: Optimizado para todos los tamaños de dispositivos
-- **Accesibilidad**: Sigue las directrices WCAG para máxima accesibilidad
-- **Interfaz Moderna**: Diseño limpio y profesional
-- **Rendimiento Optimizado**: Tiempos de carga rápidos e interacciones fluidas
-- **Muestra de Habilidades**: Representación visual de habilidades técnicas con iconos personalizados
+- Diseño responsivo y adaptable a cualquier dispositivo
+- Interfaz moderna y minimalista
+- Accesibilidad siguiendo buenas prácticas (WCAG)
+- Optimización de rendimiento y carga rápida
+- Visualización de habilidades con iconos personalizados
+- Sección de proyectos con imágenes y descripciones
+- Enlaces a redes sociales y contacto
 
-## 🛠️ Tecnologías Utilizadas
+## 📁 Estructura del proyecto
 
-- **HTML5**: Estructura de marcado semántico
-- **CSS3**: Estilos avanzados con características modernas de CSS
-- **JavaScript**: Elementos interactivos y contenido dinámico
-- **Figma**: Utilizado para el diseño de UI/UX
+```
+├── index.html
+├── css/
+│   ├── style.css
+│   └── mobile-project-cards.css
+├── js/
+│   ├── script.js
+│   └── mobile-project-cards.js
+├── img/
+│   ├── foto.png
+│   ├── icon.ico
+│   ├── social-share.png
+│   ├── projects/
+│   └── skills/
+├── README.md
+├── LICENSE
+└── CNAME
+```
+
+## 🛠️ Tecnologías utilizadas
+
+- **HTML5**: Estructura semántica del sitio
+- **CSS3**: Estilos modernos y responsivos
+- **JavaScript**: Funcionalidad e interactividad
+- **Figma**: Diseño UI/UX
+
+## 🚀 Instalación y uso
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/jgcamiloaga/Portafolio.git
+   ```
+2. Abre el archivo `index.html` en tu navegador preferido.
+3. Personaliza el contenido según tus necesidades (opcional).
+
+No se requieren dependencias ni instalación adicional.
+
+## 📬 Contacto
+
+¿Te gustaría contactarme? Puedes encontrarme en:
+
+- [LinkedIn](https://www.linkedin.com/in/jgcamiloaga)
+- [Twitter](https://twitter.com/jgcamiloaga)
+- Email: jgcamiloaga@gmail.com
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más información.
