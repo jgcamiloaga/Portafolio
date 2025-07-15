@@ -149,11 +149,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(45deg,
-      #f5f5f5 0px,
-      #f5f5f5 10px,
-      #ffffff 10px,
-      #ffffff 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
   opacity: 0.3;
   z-index: 0;
 }
@@ -431,9 +433,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
   z-index: 2;
   opacity: 0.85;
   transition: opacity 0.5s ease, background 0.5s ease;
@@ -441,9 +445,11 @@ body {
 
 .project-card:hover .project-color-overlay {
   opacity: 0.75;
-  background: linear-gradient(135deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
 }
 
 /* Número de proyecto rediseñado */
@@ -474,11 +480,13 @@ body {
   right: 0;
   width: 100px;
   height: 100px;
-  background: repeating-linear-gradient(45deg,
-      rgba(255, 255, 255, 0.05) 0px,
-      rgba(255, 255, 255, 0.05) 10px,
-      transparent 10px,
-      transparent 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 10px,
+    transparent 10px,
+    transparent 20px
+  );
   z-index: 3;
   transition: all 0.5s ease;
   opacity: 0.5;
@@ -642,9 +650,11 @@ body {
   height: 100%;
   z-index: 4;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0) 60%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -743,11 +753,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg,
-      transparent 0%,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
   transform: translateY(100%);
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: -1;
@@ -783,10 +795,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.4) 50%,
-      transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
   transition: transform 0.6s ease;
 }
 
@@ -1254,18 +1268,18 @@ body {
   padding: 0 0.3rem;
 }
 
-.form-group input:focus~label,
-.form-group textarea:focus~label {
+.form-group input:focus ~ label,
+.form-group textarea:focus ~ label {
   pointer-events: none;
   font-weight: bold;
   background-color: transparent;
   padding: 0 0.3rem;
 }
 
-.form-group input:focus~label,
-.form-group textarea:focus~label,
-.form-group input:valid~label,
-.form-group textarea:valid~label,
+.form-group input:focus ~ label,
+.form-group textarea:focus ~ label,
+.form-group input:valid ~ label,
+.form-group textarea:valid ~ label,
 .form-group label.active {
   transform: translateY(-2.2rem);
   font-size: 0.9rem;
@@ -1294,10 +1308,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
   transition: transform 0.6s ease;
   z-index: -1;
 }
@@ -1344,10 +1360,10 @@ body {
     font-size: 0.95rem;
   }
 
-  .form-group input:focus~label,
-  .form-group textarea:focus~label,
-  .form-group input:valid~label,
-  .form-group textarea:valid~label,
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
   .form-group label.active {
     transform: translateY(-2rem);
     font-size: 0.85rem;
@@ -1396,10 +1412,10 @@ body {
     font-size: 0.9rem;
   }
 
-  .form-group input:focus~label,
-  .form-group textarea:focus~label,
-  .form-group input:valid~label,
-  .form-group textarea:valid~label,
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
   .form-group label.active {
     transform: translateY(-1.8rem);
     font-size: 0.8rem;
@@ -1446,10 +1462,10 @@ body {
     font-size: 0.85rem;
   }
 
-  .form-group input:focus~label,
-  .form-group textarea:focus~label,
-  .form-group input:valid~label,
-  .form-group textarea:valid~label,
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
   .form-group label.active {
     transform: translateY(-1.6rem);
     font-size: 0.75rem;
@@ -1519,7 +1535,6 @@ body {
 
 /* Modificar los estilos del menú hamburguesa para reducir el uso de negro */
 @media (max-width: 768px) {
-
   /* Enlaces mejorados dentro del menú hamburguesa */
   .nav-link {
     position: relative;
@@ -1681,11 +1696,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(-45deg,
-      #f5f5f5 0px,
-      #f5f5f5 10px,
-      #f9f9f9 10px,
-      #f9f9f9 20px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #f9f9f9 10px,
+    #f9f9f9 20px
+  );
   opacity: 0.5;
   z-index: 0;
 }
@@ -2455,11 +2472,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(-45deg,
-        rgba(0, 0, 0, 0.02) 0px,
-        rgba(0, 0, 0, 0.02) 10px,
-        transparent 10px,
-        transparent 20px);
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.02) 0px,
+      rgba(0, 0, 0, 0.02) 10px,
+      transparent 10px,
+      transparent 20px
+    );
     z-index: -1;
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -2652,7 +2671,6 @@ body {
 
 /* MEJORAS PARA MÓVIL - PREMIUM EXPERIENCE */
 @media (max-width: 768px) {
-
   /* ===== GLOBAL MOBILE ENHANCEMENTS ===== */
   body {
     overflow-x: hidden;
@@ -2980,10 +2998,12 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
     transition: transform 0.6s ease;
     z-index: -1;
   }
@@ -3111,9 +3131,11 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.2) 0%,
-        transparent 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 100%
+    );
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -3157,10 +3179,10 @@ body {
   }
 
   /* Animación mejorada para etiquetas de formulario */
-  .form-group input:focus~label,
-  .form-group textarea:focus~label,
-  .form-group input:valid~label,
-  .form-group textarea:valid~label,
+  .form-group input:focus ~ label,
+  .form-group textarea:focus ~ label,
+  .form-group input:valid ~ label,
+  .form-group textarea:valid ~ label,
   .form-group label.active {
     transform: translateY(-2.2rem) scale(0.9);
     color: black;
@@ -3185,10 +3207,12 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
     transition: transform 0.6s ease;
     z-index: 1;
   }
