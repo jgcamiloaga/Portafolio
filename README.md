@@ -43,10 +43,12 @@ Este repositorio contiene el código fuente de mi portafolio personal. Aquí pod
 
 ## 🛠️ Tecnologías utilizadas
 
-- **HTML5**: Estructura semántica del sitio
-- **CSS3**: Estilos modernos y responsivos
-- **JavaScript**: Funcionalidad e interactividad
-- **Figma**: Diseño UI/UX
+- **HTML5**: Para la estructura semántica y accesible del sitio web.
+- **CSS3**: Para los estilos modernos, responsivos y animaciones.
+- **JavaScript**: Para la funcionalidad, interactividad y manejo dinámico de los componentes.
+- **Figma**: Para el diseño UI/UX y prototipado previo al desarrollo.
+
+> ⚡ **Próximamente:** Este portafolio será migrado a **Astro** para aprovechar su rendimiento, flexibilidad y capacidades modernas de desarrollo web. ¡Mantente atento a futuras actualizaciones!
 
 ## 🚀 Instalación y uso
 
