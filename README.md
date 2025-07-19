@@ -10,6 +10,18 @@ Bienvenido a mi portafolio web, un sitio diseñado para mostrar mis proyectos, h
 
 Este repositorio contiene el código fuente de mi portafolio personal. Aquí podrás encontrar una selección de mis proyectos más destacados, información sobre mis habilidades técnicas y una breve presentación profesional.
 
+## 🖼️ Capturas de pantalla
+
+### Versión Escritorio
+
+<!-- Agrega aquí una imagen de la versión escritorio de tu portafolio -->
+<!-- ![Portafolio Desktop](img/projects/project_1.png) -->
+
+### Versión Móvil
+
+<!-- Agrega aquí una imagen de la versión móvil de tu portafolio -->
+<!-- ![Portafolio Mobile](img/projects/project_2.png) -->
+
 ## ✨ Características
 
 - Diseño responsivo y adaptable a cualquier dispositivo
