@@ -1173,27 +1173,32 @@ function initializeContactForm() {
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Recoger datos del formulario
-    const formData = {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      message: document.getElementById("message").value,
-    };
+    // Envío AJAX compatible con Netlify Forms
+    const myForm = e.target;
+    const formData = new FormData(myForm);
 
-    // Aquí iría la lógica para enviar los datos al servidor
-
-    // Resetear formulario y mostrar confirmación
-    this.reset();
-
-    // Resetear también las clases active de las etiquetas
-    formGroups.forEach((group) => {
-      const label = group.querySelector("label");
-      if (label) {
-        label.classList.remove("active");
-      }
-    });
-
-    alert("Gracias por tu mensaje! Te responderé pronto.");
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => {
+        myForm.reset();
+        // Resetear también las clases active de las etiquetas
+        formGroups.forEach((group) => {
+          const label = group.querySelector("label");
+          if (label) label.classList.remove("active");
+        });
+        // Mostrar modal de confirmación
+        var modal = document.getElementById('modal-confirm');
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      })
+      .catch((error) => {
+        alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
+      });
   });
 
   // Inicializar animaciones de scroll para el formulario
