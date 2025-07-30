@@ -1,33 +1,34 @@
 // Modal de confirmación para formulario de contacto
-document.addEventListener('DOMContentLoaded', function () {
-  var form = document.getElementById('contact-form');
-  var modal = document.getElementById('modal-confirm');
-  var closeBtn = document.getElementById('modal-close');
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.getElementById("contact-form");
+  var modal = document.getElementById("modal-confirm");
+  var closeBtn = document.getElementById("modal-close");
 
   if (form && modal && closeBtn) {
-    form.addEventListener('submit', function (e) {
+    form.addEventListener("submit", function (e) {
       // Mostrar modal
       setTimeout(function () {
-        modal.style.display = 'flex';
+        modal.style.display = "flex";
         // Opcional: bloquear scroll
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       }, 100);
     });
 
     function closeModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
+      modal.style.display = "none";
+      document.body.style.overflow = "";
     }
 
-    closeBtn.addEventListener('click', closeModal);
-    closeBtn.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') closeModal();
+    closeBtn.addEventListener("click", closeModal);
+    closeBtn.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "Escape")
+        closeModal();
     });
-    window.addEventListener('keydown', function (e) {
-      if (modal.style.display === 'flex' && e.key === 'Escape') closeModal();
+    window.addEventListener("keydown", function (e) {
+      if (modal.style.display === "flex" && e.key === "Escape") closeModal();
     });
     // Cerrar modal al hacer click fuera del contenido
-    modal.addEventListener('click', function (e) {
+    modal.addEventListener("click", function (e) {
       if (e.target === modal) closeModal();
     });
   }
@@ -1190,10 +1191,10 @@ function initializeContactForm() {
           if (label) label.classList.remove("active");
         });
         // Mostrar modal de confirmación
-        var modal = document.getElementById('modal-confirm');
+        var modal = document.getElementById("modal-confirm");
         if (modal) {
-          modal.style.display = 'flex';
-          document.body.style.overflow = 'hidden';
+          modal.style.display = "flex";
+          document.body.style.overflow = "hidden";
         }
       })
       .catch((error) => {
