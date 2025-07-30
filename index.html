@@ -423,7 +423,7 @@
             class="contact-form scroll-animation from-bottom delay-1"
             name="contact"
             method="POST"
-            netlify
+            data-netlify="true"
             aria-label="Formulario de contacto"
           >
             <input type="hidden" name="form-name" value="contact" />
@@ -441,6 +441,14 @@
             </div>
             <button type="submit" class="submit-button">ENVIAR</button>
           </form>
+          <!-- Modal de confirmación -->
+          <div id="modal-confirm" class="modal-confirm" aria-modal="true" role="dialog" tabindex="-1" style="display:none;">
+            <div class="modal-content">
+              <span class="modal-close" id="modal-close" tabindex="0" aria-label="Cerrar ventana">&times;</span>
+              <h3>¡Gracias por tu mensaje!</h3>
+              <p>Te responderé pronto.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -512,5 +520,69 @@
 
     <script src="js/script.js"></script>
     <script src="js/mobile-project-cards.js"></script>
+    <style>
+      .modal-confirm {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.2s;
+      }
+      .modal-content {
+        background: #fff;
+        color: #222;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 2.5rem 2rem 2rem 2rem;
+        max-width: 90vw;
+        width: 350px;
+        text-align: center;
+        position: relative;
+        font-family: inherit;
+      }
+      .modal-content h3 {
+        margin-top: 0;
+        color: #1e88e5;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .modal-content p {
+        margin: 1.2rem 0 0 0;
+        font-size: 1.05rem;
+      }
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1.2rem;
+        font-size: 1.5rem;
+        color: #888;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+        transition: color 0.2s;
+      }
+      .modal-close:hover, .modal-close:focus {
+        color: #1e88e5;
+      }
+      @media (max-width: 480px) {
+        .modal-content {
+          width: 95vw;
+          padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+        }
+        .modal-content h3 {
+          font-size: 1.1rem;
+        }
+        .modal-content p {
+          font-size: 0.98rem;
+        }
+      }
+    </style>
   </body>
 </html>
