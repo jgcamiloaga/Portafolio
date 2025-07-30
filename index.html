@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/resources/img/icon.ico" type="image/x-icon" />
     <!-- Metadatos principales -->
     <title>Mi Portafolio - Johann</title>
     <meta name="author" content="Johann Camiloaga" />
@@ -31,7 +31,7 @@
     />
     <meta
       property="og:image"
-      content="https://jgcamiloaga.me/img/social-share.png"
+      content="https://jgcamiloaga.me/resources/img/social-share.png"
     />
     <meta
       property="og:image:alt"
@@ -46,15 +46,15 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Johann Camiloaga | Desarrollador Frontend"
+      content="Johann Camiloaga | Desarrollador de Software"
     />
     <meta
       name="twitter:description"
-      content="Portafolio profesional de Johann Camiloaga, desarrollador frontend especializado en React, JavaScript y CSS."
+      content="Portafolio profesional de Johann Camiloaga, desarrollador de software especializado en React, JavaScript y CSS."
     />
     <meta
       name="twitter:image"
-      content="https://jgcamiloaga.me/img/social-share.png"
+      content="https://jgcamiloaga.me/resources/img/social-share.png"
     />
     <meta name="twitter:site" content="@jgcamiloaga" />
 
@@ -94,12 +94,12 @@
             Johann Camiloaga
           </h2>
           <p class="title scroll-animation from-bottom delay-2">
-            DESARROLLADOR FRONTEND
+            DESARROLLADOR DE SOFTWARE
           </p>
           <div class="redes-links scroll-animation fade delay-3">
             <a
               href="https://www.linkedin.com/in/jgcamiloaga/"
-              class="redes-link"
+              class="redes-link btn-link"
               target="_blank"
               rel="noopener"
               aria-label="Perfil de LinkedIn de Johann Camiloaga"
@@ -107,12 +107,32 @@
             >
             <a
               href="https://github.com/jgcamiloaga"
-              class="redes-link"
+              class="redes-link btn-link"
               target="_blank"
               rel="noopener"
               aria-label="Perfil de GitHub de Johann Camiloaga"
               >Github</a
             >
+            <a
+              href="resources/cv/CV_JohannCamiloaga.pdf"
+              class="redes-link btn-link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Descargar CV de Johann Camiloaga"
+              download
+              >Descargar CV</a
+            >
+    <style>
+      .btn-link {
+        min-width: 180px;
+        display: inline-block;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .redes-links {
+        gap: 1.5rem !important;
+      }
+    </style>
           </div>
         </div>
       </section>
@@ -138,7 +158,7 @@
               <div class="image-placeholder">
                 <img
                   class="contenido-imagen"
-                  src="img/foto.png"
+                  src="resources/img/foto.png"
                   alt="Johann Camiloaga - Desarrollador Frontend"
                   width="300"
                   height="300"
@@ -158,7 +178,7 @@
             <article class="project-card scroll-animation from-left delay-1">
               <div class="project-preview">
                 <img
-                  src="img/projects/project_1.png"
+                  src="resources/img/projects/project_1.png"
                   alt="FoodLy – Sistema ERP para negocios de comida rápida"
                   class="project-image"
                   width="400"
@@ -189,7 +209,7 @@
             <article class="project-card scroll-animation from-bottom delay-2">
               <div class="project-preview">
                 <img
-                  src="img/projects/project_2.png"
+                  src="resources/img/projects/project_2.png"
                   alt="NewtonsQuest – Juego educativo sobre física para niños"
                   class="project-image"
                   width="400"
@@ -220,7 +240,7 @@
             <article class="project-card scroll-animation from-right delay-3">
               <div class="project-preview">
                 <img
-                  src="img/projects/project_3.png"
+                  src="resources/img/projects/project_3.png"
                   alt="Zoonika – Landing page para veterinaria con comentarios de clientes"
                   class="project-image"
                   width="400"
@@ -251,7 +271,7 @@
             <article class="project-card scroll-animation from-left delay-4">
               <div class="project-preview">
                 <img
-                  src="img/projects/project_4.png"
+                  src="resources/img/projects/project_4.png"
                   alt="Sistema de Ventas – Aplicación de escritorio para ferretería"
                   class="project-image"
                   width="400"
@@ -401,10 +421,12 @@
           <form
             id="contact-form"
             class="contact-form scroll-animation from-bottom delay-1"
-            action="#"
+            name="contact"
             method="POST"
+            data-netlify="true"
             aria-label="Formulario de contacto"
           >
+            <input type="hidden" name="form-name" value="contact" />
             <div class="form-group">
               <input type="text" id="name" name="name" required />
               <label for="name">NOMBRE</label>
@@ -450,7 +472,7 @@
         "@type": "Person",
         "name": "Johann Camiloaga Cuenca",
         "url": "https://jgcamiloaga.me",
-        "image": "img/foto.png",
+        "image": "resources/img/foto.png",
         "jobTitle": "Desarrollador Frontend",
         "worksFor": {
           "@type": "Organization",
