@@ -729,52 +729,52 @@ function initializeSkillsAnimation() {
     {
       name: "HTML",
       level: 90,
-      logo: "img/skills/html-icon.png",
+      logo: "resources/img/skills/html-icon.png",
     },
     {
       name: "CSS",
       level: 85,
-      logo: "img/skills/css-icon.png",
+      logo: "resources/img/skills/css-icon.png",
     },
     {
       name: "JAVASCRIPT",
       level: 80,
-      logo: "img/skills/javascript-icon.png",
+      logo: "resources/img/skills/javascript-icon.png",
     },
     {
       name: "REACT",
       level: 60,
-      logo: "img/skills/react-icon.png",
+      logo: "resources/img/skills/react-icon.png",
     },
     {
       name: "PYTHON",
       level: 75,
-      logo: "img/skills/python-icon.png",
+      logo: "resources/img/skills/python-icon.png",
     },
     {
       name: "FLASK",
       level: 60,
-      logo: "img/skills/flask-icon.png",
+      logo: "resources/img/skills/flask-icon.png",
     },
     {
       name: "MYSQL",
       level: 75,
-      logo: "img/skills/mysql-icon.png",
+      logo: "resources/img/skills/mysql-icon.png",
     },
     {
       name: "FIGMA",
       level: 80,
-      logo: "img/skills/figma-icon.png",
+      logo: "resources/img/skills/figma-icon.png",
     },
     {
       name: "TAILWIND",
       level: 65,
-      logo: "img/skills/tailwind-icon.png",
+      logo: "resources/img/skills/tailwind-icon.png",
     },
     {
       name: "JAVA",
       level: 80,
-      logo: "img/skills/java-icon.png",
+      logo: "resources/img/skills/java-icon.png",
     },
   ];
 
