@@ -1173,32 +1173,37 @@ function initializeContactForm() {
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    // Envío AJAX compatible con Netlify Forms
     const myForm = e.target;
     const formData = new FormData(myForm);
-
-    fetch("/", {
+    // Cambia 'your-form-id' por el ID real de tu formulario Formspree
+    fetch("https://formspree.io/f/mzzvvgog", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
     })
-      .then(() => {
-        myForm.reset();
-        // Resetear también las clases active de las etiquetas
-        formGroups.forEach((group) => {
-          const label = group.querySelector("label");
-          if (label) label.classList.remove("active");
-        });
-        // Mostrar modal de confirmación
-        var modal = document.getElementById("modal-confirm");
-        if (modal) {
-          modal.style.display = "flex";
-          document.body.style.overflow = "hidden";
+      .then((response) => {
+        if (response.ok) {
+          myForm.reset();
+          formGroups.forEach((group) => {
+            const label = group.querySelector("label");
+            if (label) label.classList.remove("active");
+          });
+          var modal = document.getElementById("modal-confirm");
+          if (modal) {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        } else {
+          return response.json().then((data) => {
+            throw new Error(data.error || "Error al enviar el formulario.");
+          });
         }
       })
       .catch((error) => {
-        alert("Hubo un error al enviar el formulario. Intenta nuevamente.");
+        alert("Hubo un problema al enviar el formulario. Intenta nuevamente.");
+        console.error(error);
       });
   });
 
