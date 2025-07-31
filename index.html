@@ -421,23 +421,20 @@
           <form
             id="contact-form"
             class="contact-form scroll-animation from-bottom delay-1"
-            name="contact"
-            method="POST"
-            data-netlify="true"
             aria-label="Formulario de contacto"
+            method="POST"
+            action="https://formspree.io/f/mzzvvgog"
           >
-            <!-- Netlify Form -->
-            <input type="hidden" name="form-name" value="contact" />
             <div class="form-group">
-              <input type="text" id="name" name="name" required />
+              <input type="text" id="name" name="name" required autocomplete="name" />
               <label for="name">NOMBRE</label>
             </div>
             <div class="form-group">
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="email" required autocomplete="email" />
               <label for="email">EMAIL</label>
             </div>
             <div class="form-group">
-              <textarea id="message" name="message" required></textarea>
+              <textarea id="message" name="message" required autocomplete="off"></textarea>
               <label for="message">MENSAJE</label>
             </div>
             <button type="submit" class="submit-button">ENVIAR</button>
