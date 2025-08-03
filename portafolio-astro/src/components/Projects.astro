@@ -1,0 +1,87 @@
+---
+const projects = [
+  {
+    id: 1,
+    title: "FoodLy",
+    description: "Sistema ERP para restaurantes de comida rápida que gestiona pedidos, inventario y reportes de ventas de forma integral.",
+    image: "/resources/img/projects/project_1.webp",
+    alt: "FoodLy – Sistema ERP para negocios de comida rápida",
+    repository: "https://github.com/LIUNKS/FoodLy",
+    delay: "delay-1"
+  },
+  {
+    id: 2,
+    title: "NewtonsQuest",
+    description: "Juego educativo interactivo dirigido a niños, donde se aprenden conceptos de física a través de retos y dinámicas lúdicas, utilizando el enfoque de Aprendizaje Basado en Juegos (ABJ).",
+    image: "/resources/img/projects/project_2.webp",
+    alt: "NewtonsQuest – Juego educativo sobre física para niños",
+    repository: "https://github.com/LIUNKS/NewtonsQuest",
+    delay: "delay-2"
+  },
+  {
+    id: 3,
+    title: "Zoonika",
+    description: "Página web responsiva para una veterinaria, donde los usuarios pueden conocer los servicios ofrecidos y dejar reseñas sobre su experiencia, mejorando la confianza de nuevos clientes.",
+    image: "/resources/img/projects/project_3.webp",
+    alt: "Zoonika – Landing page para veterinaria con comentarios de clientes",
+    repository: "https://github.com/ieeecsutp/Zoonika-f",
+    delay: "delay-3"
+  },
+  {
+    id: 4,
+    title: "Sistema de Ventas",
+    description: "App de escritorio para ferreterías: gestiona inventario, ventas y análisis de ingresos fácilmente.",
+    image: "/resources/img/projects/project_4.webp",
+    alt: "Sistema de Ventas – Aplicación de escritorio para ferretería",
+    repository: "https://github.com/LIUNKS/SistemaDeVentas",
+    delay: "delay-4"
+  }
+];
+---
+
+<section id="projects" class="section fade-in-section">
+  <div class="container">
+    <h2 class="section-title scroll-animation from-bottom">PROYECTOS</h2>
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <article class={`project-card scroll-animation from-left ${project.delay}`} data-project-id={project.id}>
+          <div class="project-tilt-container">
+            <div class="project-image-container">
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.alt}
+                class="project-image"
+                width="400"
+                height="225"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-color-overlay"></div>
+            <div class="project-pattern"></div>
+            <div class="project-number">{String(index + 1).padStart(2, '0')}</div>
+            <div class="project-content">
+              <div class="project-title-container">
+                <h3 class="project-title">{project.title}</h3>
+              </div>
+              <div class="project-description">
+                {project.description}
+              </div>
+              <div class="project-links">
+                <a
+                  href={project.repository}
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={`Ver código fuente de ${project.title} en GitHub`}
+                >
+                  Repositorio
+                </a>
+              </div>
+            </div>
+            <div class="project-shine"></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

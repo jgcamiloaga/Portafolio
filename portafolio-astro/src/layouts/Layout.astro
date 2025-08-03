@@ -1,0 +1,106 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicons optimizados para portafolio -->
+    <link rel="icon" href="/resources/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/resources/img/icon.ico" sizes="16x16" type="image/x-icon" />
+    <link rel="icon" href="/resources/img/icon.ico" sizes="32x32" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/resources/img/icon.ico" />
+    
+    <!-- Meta para PWA y móviles -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Johann Camiloaga" />
+    
+    <!-- Metadatos principales para portafolio -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Johann Camiloaga, desarrollador frontend, React, JavaScript, CSS, HTML, portafolio web, desarrollo web, programador, UTP, portfolio developer, frontend developer Peru" />
+    <meta name="author" content="Johann Camiloaga" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Spanish" />
+    <meta name="revisit-after" content="7 days" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/resources/img/social-share.webp" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/resources/img/social-share.webp" />
+    
+    <!-- Estilos y precargas optimizadas -->
+    <link rel="preload" href="/styles/main.css" as="style" />
+    <link rel="preload" href="/resources/img/foto.webp" as="image" />
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <slot />
+    
+    <!-- Schema.org JSON-LD optimizado para portafolio -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Johann Camiloaga Cuenca",
+        "url": "https://jgcamiloaga.me",
+        "image": "/resources/img/foto.webp",
+        "jobTitle": "Desarrollador Frontend",
+        "description": "Desarrollador frontend especializado en React, JavaScript y CSS. Creador de experiencias web modernas y responsivas.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "PE"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Universidad Tecnológica del Perú"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jgcamiloaga/",
+          "https://github.com/jgcamiloaga"
+        ],
+        "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Python", "Java", "MySQL", "Figma", "Tailwind", "Frontend Development", "Web Development"],
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Desarrollador Frontend",
+          "description": "Especialización en desarrollo frontend moderno"
+        },
+        "workExample": [
+          {
+            "@type": "WebSite",
+            "name": "FoodLy",
+            "description": "Sistema ERP para restaurantes de comida rápida",
+            "url": "https://github.com/LIUNKS/FoodLy"
+          },
+          {
+            "@type": "WebSite", 
+            "name": "NewtonsQuest",
+            "description": "Juego educativo interactivo sobre física",
+            "url": "https://github.com/LIUNKS/NewtonsQuest"
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>
