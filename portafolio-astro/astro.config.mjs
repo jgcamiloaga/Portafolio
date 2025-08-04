@@ -5,7 +5,6 @@ export default defineConfig({
   site: 'https://jgcamiloaga.me',
   compressHTML: true,
   integrations: [
-    // Sitemap automático para portafolio
     sitemap()
   ],
   build: {
@@ -15,14 +14,7 @@ export default defineConfig({
   vite: {
     build: {
       cssMinify: true,
-      minify: 'terser',
-      rollupOptions: {
-        output: {
-          entryFileNames: '_astro/[name].[hash].js',
-          chunkFileNames: '_astro/[name].[hash].js',
-          assetFileNames: '_astro/[name].[hash].[ext]'
-        }
-      }
+      minify: 'terser'
     }
   }
 });
