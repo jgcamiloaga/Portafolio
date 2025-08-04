@@ -11,5 +11,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.4.2",
     "astro": "^5.12.6"
+  },
+  "devDependencies": {
+    "terser": "^5.43.1"
   }
 }
