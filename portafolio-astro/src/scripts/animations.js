@@ -1,41 +1,70 @@
-// Modal de confirmación para formulario de contacto
+/**
+ * Script principal de animaciones del portafolio
+ * 
+ * Gestiona todas las animaciones e interacciones del sitio:
+ * - Modal de confirmación del formulario de contacto
+ * - Smooth scrolling entre secciones
+ * - Efectos 3D en tarjetas de proyectos (desktop) y táctiles (móvil)
+ * - Animaciones de skills con logos interactivos
+ * - Tarjetas de educación con efectos hover/touch
+ * - Sistema avanzado de scroll animations con IntersectionObserver
+ * - Partículas de fondo animadas
+ * - Botón scroll-to-top con feedback
+ * - Detección automática de dispositivos táctiles
+ * - Responsive design y optimización de rendimiento
+ */
+
+/**
+ * Modal de confirmación para formulario de contacto
+ * Sistema simple de modal con backdrop y accesibilidad
+ */
 document.addEventListener("DOMContentLoaded", () => {
-  var form = document.getElementById("contact-form")
-  var modal = document.getElementById("modal-confirm")
-  var closeBtn = document.getElementById("modal-close")
+  const form = document.getElementById("contact-form")
+  const modal = document.getElementById("modal-confirm")
+  const closeBtn = document.getElementById("modal-close")
 
   if (form && modal && closeBtn) {
     form.addEventListener("submit", (e) => {
-      // Mostrar modal
+      // Mostrar modal con pequeño delay para mejor UX
       setTimeout(() => {
         modal.style.display = "flex"
-        // Opcional: bloquear scroll
         document.body.style.overflow = "hidden"
       }, 100)
     })
 
+    /**
+     * Función para cerrar la modal
+     * Restaura el scroll del body y oculta la modal
+     */
     function closeModal() {
       modal.style.display = "none"
       document.body.style.overflow = ""
     }
 
+    // Event listeners para cerrar la modal
     closeBtn.addEventListener("click", closeModal)
     closeBtn.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " " || e.key === "Escape") closeModal()
     })
+    
+    // Cerrar con Escape desde cualquier lugar
     window.addEventListener("keydown", (e) => {
       if (modal.style.display === "flex" && e.key === "Escape") closeModal()
     })
-    // Cerrar modal al hacer click fuera del contenido
+    
+    // Cerrar haciendo click en el backdrop
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal()
     })
   }
 })
-// Esperar a que el DOM esté completamente cargado
+
+/**
+ * Inicialización principal de componentes
+ * Se ejecuta cuando el DOM está completamente cargado
+ */
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== INICIALIZACIÓN DE COMPONENTES =====
-  // initializeNavigation() // Desactivado - se usa navigation.js
+  // Inicializar todos los componentes del portafolio
   initializeSmoothScrolling()
   initializeProjectCards()
   initializeSkillsAnimation()
@@ -43,8 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeScrollAnimations()
   createParticles()
   initializeScrollTopButton()
-
-  // Inicializar animaciones para tarjetas de educación
   initializeEducationCards()
 })
 
@@ -279,19 +306,32 @@ function initializeSmoothScrolling() {
     `
     document.head.appendChild(style)
   } catch (error) {
-    console.error("Error en smooth scrolling:", error)
+    // Fallback silencioso en caso de errores
+    return
   }
 }
 
-// ===== TARJETAS DE PROYECTOS - DISEÑO TILT 3D INTERACTIVO PREMIUM =====
+/**
+ * Sistema de tarjetas de proyectos con efectos interactivos
+ * 
+ * Características:
+ * - Detección automática de dispositivos táctiles vs no-táctiles
+ * - Efecto tilt 3D para desktop con seguimiento del mouse
+ * - Interacciones táctiles optimizadas para móviles
+ * - Animaciones de scroll con IntersectionObserver
+ * - Efectos de entrada y salida basados en viewport
+ */
 function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card")
 
-  // Función mejorada para detectar dispositivos táctiles
+  /**
+   * Detecta dispositivos táctiles y aplica clases CSS apropiadas
+   * Permite diferentes comportamientos según el tipo de dispositivo
+   */
   function detectTouchDevice() {
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
-    // Añadir clase al body para poder aplicar estilos específicos
+    // Agregar clases CSS específicas para dispositivos táctiles/no táctiles
     if (isTouchDevice) {
       document.body.classList.add("touch-device")
     } else {
@@ -456,7 +496,17 @@ function setupExitAnimation(card) {
   exitObserver.observe(card)
 }
 
-// ===== NUEVA SECCIÓN DE SKILLS CON DISEÑO NEOBRUTALIST REFINADO =====
+/**
+ * Sistema de habilidades técnicas con diseño neobrutalist
+ * 
+ * Características:
+ * - Grid responsivo de tarjetas de skills con logos
+ * - Ajuste automático de tamaños según viewport
+ * - Interacciones táctiles y de hover diferenciadas
+ * - Animaciones de scroll escalonadas (alternando izquierda/derecha)
+ * - Logos optimizados con lazy loading implícito
+ * - Responsive design con breakpoints adaptativos
+ */
 function initializeSkillsAnimation() {
   const skillsSection = document.querySelector("#skills")
   if (!skillsSection) return
@@ -642,7 +692,17 @@ function initializeSkillsScroll() {
   }
 }
 
-// ===== TARJETAS DE EDUCACIÓN =====
+/**
+ * Sistema de tarjetas de educación interactivas
+ * 
+ * Características:
+ * - Efectos hover sofisticados para desktop (elevación, animación de texto)
+ * - Interacciones táctiles simplificadas para móviles
+ * - Animaciones escalonadas en la entrada
+ * - Feedback visual diferenciado según tipo de dispositivo
+ * - Estados activos con transiciones suaves
+ * - Control de z-index para overlays temporales
+ */
 function initializeEducationCards() {
   const educationCards = document.querySelectorAll("#education .education-card")
 
@@ -816,7 +876,18 @@ function initializeEducationScroll() {
   }
 }
 
-// ===== FORMULARIO DE CONTACTO =====
+/**
+ * Sistema de formulario de contacto con animaciones
+ * 
+ * Características:
+ * - Animaciones de campos con floating labels
+ * - Envío asíncrono a Formspree con validación
+ * - Modal de confirmación integrada
+ * - Animaciones de scroll para elementos del formulario
+ * - Soporte táctil mejorado para móviles
+ * - Feedback visual durante estados focus/blur
+ * - Manejo de errores con fallbacks elegantes
+ */
 function initializeContactForm() {
   const contactForm = document.getElementById("contact-form")
   if (!contactForm) return
@@ -901,9 +972,8 @@ function initializeContactForm() {
           })
         }
       })
-      .catch((error) => {
+      .catch(() => {
         alert("Hubo un problema al enviar el formulario. Intenta nuevamente.")
-        console.error(error)
       })
   })
 
@@ -943,7 +1013,12 @@ function initializeContactScroll() {
   }
 }
 
-// Función mejorada para inicializar las animaciones de scroll
+/**
+ * Sistema avanzado de animaciones de scroll
+ * 
+ * Utiliza IntersectionObserver para detectar elementos en viewport
+ * y aplicar animaciones de entrada/salida con mejor rendimiento
+ */
 function initializeScrollAnimations() {
   // Inicializar animaciones de fade-in
   const fadeInSections = document.querySelectorAll(".fade-in-section")
@@ -1023,7 +1098,12 @@ function handleScrollAnimations() {
   })
 }
 
-// Función mejorada para inicializar el botón de scroll to top
+/**
+ * Botón scroll-to-top con animaciones y feedback táctil
+ * 
+ * Aparece/desaparece según la posición del scroll
+ * Incluye feedback táctil para dispositivos móviles
+ */
 function initializeScrollTopButton() {
   const scrollTopButton = document.querySelector(".scroll-top-button")
   if (!scrollTopButton) return
@@ -1081,7 +1161,12 @@ function startPageAnimations() {
   }
 }
 
-// Función para crear partículas en el fondo
+/**
+ * Sistema de partículas de fondo animadas
+ * 
+ * Crea elementos decorativos flotantes en todas las secciones
+ * con posiciones, tamaños y duraciones aleatorias para dinamismo visual
+ */
 function createParticles() {
   const sections = document.querySelectorAll(".section")
 
