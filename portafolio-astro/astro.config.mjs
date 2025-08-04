@@ -9,12 +9,20 @@ export default defineConfig({
     sitemap()
   ],
   build: {
-    inlineStylesheets: 'auto'
+    inlineStylesheets: 'auto',
+    assets: '_astro'
   },
   vite: {
     build: {
       cssMinify: true,
-      minify: 'terser'
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          entryFileNames: '_astro/[name].[hash].js',
+          chunkFileNames: '_astro/[name].[hash].js',
+          assetFileNames: '_astro/[name].[hash].[ext]'
+        }
+      }
     }
   }
 });
