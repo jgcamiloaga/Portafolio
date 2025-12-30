@@ -347,7 +347,7 @@ function initializeProjectCards() {
   projectCards.forEach((card, index) => {
     const tiltContainer = card.querySelector(".project-tilt-container")
     
-    if (!isTouchDevice && tiltContainer) {
+      if (tiltContainer) {
       // DISEÑO DESKTOP - Efecto tilt 3D
       card.addEventListener("mousemove", function (e) {
         const rect = this.getBoundingClientRect()
@@ -363,9 +363,9 @@ function initializeProjectCards() {
         const container = this.querySelector(".project-tilt-container")
         
         if (container) {
-          container.style.transform = `perspective(1200px) rotateX(${
-            percentY * -8
-          }deg) rotateY(${percentX * 8}deg) scale3d(1.02, 1.02, 1.02)`
+          // Inclinación y escala más sutil
+          container.style.transform = `perspective(1200px) rotateX(${percentY * -16}deg) rotateY(${percentX * 16}deg) scale3d(1.035, 1.035, 1.035)`;
+          container.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
         }
       })
 
@@ -375,20 +375,8 @@ function initializeProjectCards() {
           container.style.transform = "perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1)"
         }
       })
-    } else if (isTouchDevice) {
-      // MÓVIL - Mantener estructura Astro, solo agregar interactividad táctil
-      card.addEventListener("touchstart", function(e) {
-        // Alternar clase activa para mostrar contenido en móvil si es necesario
-        this.classList.add("touch-active")
-      }, { passive: true })
-
-      card.addEventListener("touchend", function() {
-        // Remover clase después de un tiempo
-        setTimeout(() => {
-          this.classList.remove("touch-active")
-        }, 2000)
-      }, { passive: true })
-    }
+      }
+      // En móvil NO aplicar animación 3D, solo mostrar contenido normalmente
   })
 
   // Inicializar las animaciones de scroll para las tarjetas de proyectos
