@@ -1,0 +1,365 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicons optimizados para portafolio -->
+    <link rel="icon" href="/resources/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/resources/img/icon.ico" sizes="16x16" type="image/x-icon" />
+    <link rel="icon" href="/resources/img/icon.ico" sizes="32x32" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/resources/img/icon.ico" />
+    
+    <!-- Meta para PWA y móviles -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Johann Camiloaga" />
+    
+    <!-- Metadatos principales para portafolio -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Johann Camiloaga, desarrollador frontend, React, JavaScript, CSS, HTML, portafolio web, desarrollo web, programador, UTP, portfolio developer, frontend developer Peru" />
+    <meta name="author" content="Johann Camiloaga" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Spanish" />
+    <meta name="revisit-after" content="7 days" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/resources/img/social-share.webp" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/resources/img/social-share.webp" />
+    
+    <!-- Estilos y precargas optimizadas -->
+    <link rel="preload" href="/styles/main.css" as="style" />
+    <link rel="preload" href="/resources/img/foto.webp" as="image" />
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <slot />
+    
+    <!-- Schema.org JSON-LD optimizado para portafolio -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Johann Camiloaga Cuenca",
+        "url": "https://jgcamiloaga.me",
+        "image": "/resources/img/foto.webp",
+        "jobTitle": "Desarrollador Frontend",
+        "description": "Desarrollador frontend especializado en React, JavaScript y CSS. Creador de experiencias web modernas y responsivas.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "PE"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Universidad Tecnológica del Perú"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jgcamiloaga/",
+          "https://github.com/jgcamiloaga"
+        ],
+        "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Python", "Java", "MySQL", "Figma", "Tailwind", "Frontend Development", "Web Development"],
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Desarrollador Frontend",
+          "descripción": "Especialización en desarrollo frontend moderno"
+        },
+        "workExample": [
+          {
+            "@type": "WebSite",
+            "name": "FoodLy",
+            "description": "Sistema ERP para restaurantes de comida rápida",
+            "url": "https://github.com/LIUNKS/FoodLy"
+          },
+          {
+            "@type": "WebSite", 
+            "name": "NewtonsQuest",
+            "description": "Juego educativo interactivo sobre física",
+            "url": "https://github.com/LIUNKS/NewtonsQuest"
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>
+
+<script is:inline>
+  // JavaScript integrado directamente en el HTML
+  document.addEventListener("DOMContentLoaded", () => {
+    // Navegación
+    const menuToggle = document.querySelector(".menu-toggle")
+    const navLinks = document.querySelector(".nav-links")
+    const navLinksItems = document.querySelectorAll(".nav-link")
+    const body = document.body
+
+    if (menuToggle && navLinks) {
+      function toggleMenu() {
+        menuToggle.classList.toggle("active")
+        navLinks.classList.toggle("active")
+
+        if (menuToggle.classList.contains("active")) {
+          body.style.overflow = "hidden"
+          navLinksItems.forEach((link, index) => {
+            link.style.opacity = "0"
+            link.style.transform = "translateX(-100px) rotate(-5deg)"
+            link.style.filter = "blur(5px)"
+            setTimeout(() => {
+              link.style.opacity = "1"
+              link.style.transform = "translateX(0) rotate(0deg)"
+              link.style.filter = "blur(0px)"
+            }, 150 + index * 100)
+          })
+        } else {
+          body.style.overflow = ""
+          navLinksItems.forEach((link, index) => {
+            setTimeout(() => {
+              link.style.opacity = "0"
+              link.style.transform = "translateX(100px) rotate(5deg)"
+              link.style.filter = "blur(5px)"
+            }, index * 50)
+          })
+        }
+      }
+
+      menuToggle.addEventListener("click", (e) => {
+        e.preventDefault()
+        toggleMenu()
+      })
+
+      navLinksItems.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (menuToggle.classList.contains("active")) {
+            toggleMenu()
+          }
+        })
+      })
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuToggle.classList.contains("active")) {
+          toggleMenu()
+        }
+      })
+
+      // Resaltado de sección activa
+      const sections = document.querySelectorAll("section")
+      window.addEventListener("scroll", () => {
+        let current = ""
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop
+          const sectionHeight = section.clientHeight
+          if (pageYOffset >= sectionTop - sectionHeight / 3) {
+            current = section.getAttribute("id")
+          }
+        })
+
+        navLinksItems.forEach((link) => {
+          link.classList.remove("active-link")
+          if (link.getAttribute("href").slice(1) === current) {
+            link.classList.add("active-link")
+          }
+        })
+      })
+    }
+
+    // Contacto y modal
+    const contactForm = document.getElementById("contact-form")
+    const modal = document.getElementById("modal-confirm")
+    const modalClose = document.getElementById("modal-close")
+
+    if (contactForm && modal && modalClose) {
+      function closeModal() {
+        modal.style.display = "none"
+        document.body.style.overflow = ""
+      }
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const formData = new FormData(contactForm)
+        
+        fetch("https://formspree.io/f/mzzvvgog", {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
+        })
+        .then(response => {
+          if (response.ok) {
+            contactForm.reset()
+            const labels = contactForm.querySelectorAll("label")
+            labels.forEach(label => label.classList.remove("active"))
+            modal.style.display = "flex"
+            document.body.style.overflow = "hidden"
+            modalClose.focus()
+          } else {
+            alert("Hubo un problema al enviar el formulario. Intenta nuevamente.")
+          }
+        })
+        .catch(() => {
+          alert("Hubo un problema al enviar el formulario. Intenta nuevamente.")
+        })
+      })
+
+      modalClose.addEventListener("click", closeModal)
+      modalClose.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+          closeModal()
+        }
+      })
+
+      window.addEventListener("keydown", (e) => {
+        if (modal.style.display === "flex" && e.key === "Escape") {
+          closeModal()
+        }
+      })
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal()
+        }
+      })
+    }
+
+    // Animaciones de scroll
+    function handleScrollAnimations() {
+      const scrollElements = document.querySelectorAll(".scroll-animation")
+      const sections = document.querySelectorAll(".section")
+
+      scrollElements.forEach((element) => {
+        const { isVisible, isCompletelyOutOfView } = isElementVisible(element)
+        
+        if (isVisible) {
+          element.classList.add("active")
+        } else if (element.classList.contains("exit-enabled") && isCompletelyOutOfView) {
+          element.classList.remove("active")
+          element.classList.add("exit-active")
+        } else if (element.classList.contains("exit-enabled") && !isCompletelyOutOfView) {
+          element.classList.remove("exit-active")
+        }
+      })
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight
+        
+        if (rect.top <= windowHeight * 0.5 && rect.bottom >= windowHeight * 0.5) {
+          section.classList.add("in-view")
+        } else {
+          section.classList.remove("in-view")
+        }
+      })
+    }
+
+    function isElementVisible(element) {
+      const rect = element.getBoundingClientRect()
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight
+      
+      return {
+        isVisible: rect.top <= windowHeight * 0.85 && rect.bottom >= windowHeight * 0.15,
+        isCompletelyOutOfView: rect.bottom <= 0 || rect.top >= windowHeight
+      }
+    }
+
+    // Formulario interactivo
+    const formGroups = document.querySelectorAll(".form-group")
+    formGroups.forEach((group) => {
+      const input = group.querySelector("input, textarea")
+      const label = group.querySelector("label")
+      
+      if (input && label) {
+        if (input.value.trim() !== "") {
+          label.classList.add("active")
+        }
+        
+        input.addEventListener("focus", () => {
+          label.classList.add("active")
+          input.classList.add("active")
+        })
+        
+        input.addEventListener("blur", () => {
+          if (input.value.trim() === "") {
+            label.classList.remove("active")
+          }
+          input.classList.remove("active")
+        })
+      }
+    })
+
+    // Navegación suave
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault()
+        const targetId = this.getAttribute("href")
+        if (targetId === "#") return
+        
+        const targetElement = document.querySelector(targetId)
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" })
+        }
+      })
+    })
+
+    // Botón scroll to top
+    const scrollTopButton = document.querySelector(".scroll-top-button")
+    if (scrollTopButton) {
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          scrollTopButton.style.display = "block"
+          setTimeout(() => scrollTopButton.classList.add("active"), 10)
+        } else {
+          scrollTopButton.classList.remove("active")
+          setTimeout(() => {
+            if (!scrollTopButton.classList.contains("active")) {
+              scrollTopButton.style.display = "none"
+            }
+          }, 300)
+        }
+      })
+
+      scrollTopButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      })
+    }
+
+    // Inicializar animaciones
+    handleScrollAnimations()
+    window.addEventListener("scroll", handleScrollAnimations)
+    window.addEventListener("resize", handleScrollAnimations)
+
+    // Secciones fade-in
+    const fadeInSections = document.querySelectorAll(".fade-in-section")
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible")
+        }
+      })
+    }, { threshold: 0.1 })
+
+    fadeInSections.forEach((section) => {
+      fadeObserver.observe(section)
+    })
+  })
+</script>
+<script src="/src/scripts/animations.js" type="module" defer></script>

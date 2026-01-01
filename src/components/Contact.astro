@@ -1,0 +1,35 @@
+<section id="contact" class="section fade-in-section">
+  <div class="container">
+    <h2 class="section-title scroll-animation from-top">CONTACTO</h2>
+    <form
+      id="contact-form"
+      class="contact-form scroll-animation from-bottom delay-1"
+      aria-label="Formulario de contacto"
+      method="POST"
+      action="https://formspree.io/f/mzzvvgog"
+    >
+      <div class="form-group">
+        <input type="text" id="name" name="name" required autocomplete="name" />
+        <label for="name">NOMBRE</label>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" name="email" required autocomplete="email" />
+        <label for="email">EMAIL</label>
+      </div>
+      <div class="form-group">
+        <textarea id="message" name="message" required autocomplete="off"></textarea>
+        <label for="message">MENSAJE</label>
+      </div>
+      <button type="submit" class="submit-button">ENVIAR</button>
+    </form>
+    
+    <!-- Modal de confirmación -->
+    <div id="modal-confirm" class="modal-confirm" aria-modal="true" role="dialog" tabindex="-1" style="display:none;">
+      <div class="modal-content">
+        <span class="modal-close" id="modal-close" tabindex="0" aria-label="Cerrar ventana">&times;</span>
+        <h3>¡Gracias por tu mensaje!</h3>
+        <p>Te responderé pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>

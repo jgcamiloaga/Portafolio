@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Permitir acceso a recursos importantes
+Allow: /resources/
+Allow: /styles/
+Allow: /cv/
+
+# Bloquear archivos innecesarios para SEO
+Disallow: /src/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Sitemap (se generará automáticamente)
+Sitemap: https://jgcamiloaga.me/sitemap-index.xml
+
+# Crawl-delay para ser respetuoso
+Crawl-delay: 1

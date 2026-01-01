@@ -1,0 +1,34 @@
+---
+// Importar componentes
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Projects from '../components/Projects.astro';
+import Education from '../components/Education.astro';
+import Skills from '../components/Skills.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+// Metadatos optimizados para portafolio
+const pageTitle = "Johann Camiloaga | Desarrollador Frontend React & JavaScript | Portafolio 2025";
+const pageDescription = "Portafolio profesional de Johann Camiloaga: desarrollador frontend especializado en React, JavaScript, CSS y desarrollo web moderno. Proyectos, experiencia y CV disponible.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Navigation />
+  
+  <main>
+    <Hero />
+    <About />
+    <Projects />
+    <Education />
+    <Skills />
+    <Contact />
+  </main>
+  
+  <Footer />
+  
+  <!-- Botón de volver arriba -->
+  <button class="scroll-top-button" aria-label="Volver arriba">↑</button>
+</Layout>
