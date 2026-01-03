@@ -360,33 +360,17 @@ body {
   background-color: white;
   margin-bottom: 0.5rem;
   position: relative;
-  overflow: hidden;
   min-width: 180px;
   display: inline-block;
   text-align: center;
   box-sizing: border-box;
 }
 
-.redes-link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: black;
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: -1;
-}
-
 .redes-link:hover {
+  background-color: black;
+  color: white;
   transform: translate(-4px, -4px);
   box-shadow: 4px 4px 0 black;
-  color: white;
-}
-
-.redes-link:hover::before {
-  transform: translateX(100%);
 }
 
 .redes-link:active {
@@ -836,35 +820,15 @@ body {
   font-size: 0.75rem;
   letter-spacing: 1.5px;
   border: 2px solid white;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.project-link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: -1;
 }
 
 .project-link:hover {
+  background-color: white;
   color: black;
-  transform: translate(-5px, -5px);
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
-}
-
-.project-link:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
+  transform: translate(-3px, -3px);
+  box-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5);
 }
 
 .project-shine {
