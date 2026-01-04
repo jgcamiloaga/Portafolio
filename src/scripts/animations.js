@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 document.addEventListener("DOMContentLoaded", () => {
   // Inicializar todos los componentes del portafolio
+  initializeNavigation()
   initializeSmoothScrolling()
   initializeProjectCards()
   initializeSkillsAnimation()
