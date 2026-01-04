@@ -1,11 +1,3 @@
-/**
- * Módulo de tarjetas de educación
- * Maneja interacciones hover/touch y animaciones de scroll
- */
-
-/**
- * Inicializa las tarjetas de educación con efectos interactivos
- */
 export function initializeEducationCards() {
   const educationCards = document.querySelectorAll("#education .education-card")
 
@@ -15,7 +7,6 @@ export function initializeEducationCards() {
     card.style.transitionDelay = `${index * 0.05}s`
 
     if (!isTouchDevice) {
-      // Para desktop - efectos hover
       card.addEventListener("mouseenter", () => {
         card.style.zIndex = "10"
 
@@ -58,7 +49,6 @@ export function initializeEducationCards() {
         }
       })
     } else {
-      // Para móvil - interacciones táctiles
       card.addEventListener("click", function (e) {
         educationCards.forEach((otherCard) => {
           if (otherCard !== this) {
@@ -136,9 +126,6 @@ export function initializeEducationCards() {
   initializeEducationScroll()
 }
 
-/**
- * Animaciones de scroll para las tarjetas de educación
- */
 function initializeEducationScroll() {
   const educationCards = document.querySelectorAll("#education .education-card")
 

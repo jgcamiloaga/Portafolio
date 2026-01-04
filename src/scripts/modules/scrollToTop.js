@@ -1,11 +1,3 @@
-/**
- * Módulo de botón scroll-to-top
- * Maneja el botón flotante para volver al inicio de la página
- */
-
-/**
- * Inicializa el botón scroll-to-top
- */
 export function initializeScrollTopButton() {
   const scrollTopButton = document.querySelector(".scroll-top-button")
   if (!scrollTopButton) return
@@ -34,7 +26,6 @@ export function initializeScrollTopButton() {
     })
   })
 
-  // Feedback táctil para móviles
   if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
     scrollTopButton.addEventListener("touchstart", function () {
       this.style.transform = "scale(0.9)"

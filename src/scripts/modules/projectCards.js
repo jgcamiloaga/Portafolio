@@ -1,17 +1,6 @@
-/**
- * Módulo de tarjetas de proyectos
- * Maneja efectos 3D, animaciones táctiles y animaciones de scroll
- */
-
-/**
- * Inicializa las tarjetas de proyectos con efectos interactivos
- */
 export function initializeProjectCards() {
   const projectCards = document.querySelectorAll("#projects .project-card")
 
-  /**
-   * Detecta dispositivos táctiles y aplica clases CSS apropiadas
-   */
   function detectTouchDevice() {
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
@@ -30,7 +19,6 @@ export function initializeProjectCards() {
     const tiltContainer = card.querySelector(".project-tilt-container")
     
     if (tiltContainer) {
-      // DISEÑO DESKTOP - Efecto tilt 3D
       card.addEventListener("mousemove", function (e) {
         const rect = this.getBoundingClientRect()
         const x = e.clientX - rect.left
@@ -59,13 +47,9 @@ export function initializeProjectCards() {
     }
   })
 
-  // Inicializar las animaciones de scroll
   initializeProjectScroll()
 }
 
-/**
- * Animaciones de scroll para las tarjetas de proyectos
- */
 function initializeProjectScroll() {
   const projectCards = document.querySelectorAll("#projects .project-card")
   const isTouchDevice = document.body.classList.contains("touch-device")
@@ -129,9 +113,6 @@ function initializeProjectScroll() {
   }
 }
 
-/**
- * Configura animaciones de salida cuando la tarjeta sale del viewport
- */
 function setupExitAnimation(card) {
   const exitObserver = new IntersectionObserver(
     (entries) => {

@@ -1,11 +1,3 @@
-/**
- * Módulo de formulario de contacto
- * Maneja validación, envío y animaciones del formulario
- */
-
-/**
- * Inicializa el formulario de contacto con todas sus funcionalidades
- */
 export function initializeContactForm() {
   const contactForm = document.getElementById("contact-form")
   if (!contactForm) return
@@ -21,12 +13,10 @@ export function initializeContactForm() {
     const label = group.querySelector("label")
 
     if (input && label) {
-      // Verificar si el campo ya tiene valor al cargar
       if (input.value.trim() !== "") {
         label.classList.add("active")
       }
 
-      // Eventos para la animación del label
       input.addEventListener("focus", () => {
         label.classList.add("active")
         input.classList.add("active")
@@ -39,7 +29,6 @@ export function initializeContactForm() {
         input.classList.remove("active")
       })
 
-      // Mejorar experiencia táctil en móviles
       if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
         input.addEventListener("touchstart", () => {
           setTimeout(() => {
@@ -50,13 +39,11 @@ export function initializeContactForm() {
     }
   })
 
-  // Animación para el botón de envío
   const submitButton = contactForm.querySelector(".submit-button")
   if (submitButton) {
     submitButton.classList.add("scroll-animation", "from-bottom", "delay-4")
   }
 
-  // Manejo del envío del formulario
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault()
     const myForm = e.target
@@ -81,7 +68,6 @@ export function initializeContactForm() {
             modal.style.display = "flex"
             document.body.style.overflow = "hidden"
             
-            // Enfocar el botón de cerrar para accesibilidad
             const closeBtn = document.getElementById("modal-close")
             if (closeBtn) closeBtn.focus()
           }
@@ -96,32 +82,23 @@ export function initializeContactForm() {
       })
   })
 
-  // Configurar cierre del modal
   initializeModalClose()
   initializeContactScroll()
 }
 
-/**
- * Configura los event listeners para cerrar el modal de confirmación
- */
 function initializeModalClose() {
   const modal = document.getElementById("modal-confirm")
   const closeBtn = document.getElementById("modal-close")
   
   if (!modal || !closeBtn) return
 
-  /**
-   * Función para cerrar el modal
-   */
   function closeModal() {
     modal.style.display = "none"
     document.body.style.overflow = ""
   }
 
-  // Cerrar con click en el botón X
   closeBtn.addEventListener("click", closeModal)
   
-  // Cerrar con teclado (Enter, Espacio, Escape)
   closeBtn.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
       e.preventDefault()
@@ -129,14 +106,12 @@ function initializeModalClose() {
     }
   })
 
-  // Cerrar con Escape desde cualquier lugar cuando la modal está abierta
   window.addEventListener("keydown", (e) => {
     if (modal.style.display === "flex" && e.key === "Escape") {
       closeModal()
     }
   })
 
-  // Cerrar haciendo click fuera del contenido de la modal
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       closeModal()
@@ -144,9 +119,6 @@ function initializeModalClose() {
   })
 }
 
-/**
- * Animaciones de scroll para el formulario de contacto
- */
 function initializeContactScroll() {
   const contactForm = document.querySelector("#contact .contact-form")
   const formGroups = document.querySelectorAll("#contact .form-group")
