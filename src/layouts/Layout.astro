@@ -17,10 +17,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Favicons optimizados para portafolio -->
-    <link rel="icon" href="/resources/img/icon.ico" type="image/x-icon" />
-    <link rel="icon" href="/resources/img/icon.ico" sizes="16x16" type="image/x-icon" />
-    <link rel="icon" href="/resources/img/icon.ico" sizes="32x32" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/resources/img/icon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
     
     <!-- Meta para PWA y móviles -->
     <meta name="theme-color" content="#ffffff" />
@@ -42,7 +42,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/resources/img/social-share.webp" />
+    <meta property="og:image" content="/social-share.webp" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
     
@@ -50,10 +50,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/resources/img/social-share.webp" />
+    <meta name="twitter:image" content="/social-share.webp" />
     
     <!-- Precargas optimizadas -->
-    <link rel="preload" href="/resources/img/foto.webp" as="image" />
   </head>
   <body>
     <slot />
@@ -65,7 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "@type": "Person",
         "name": "Johann Camiloaga Cuenca",
         "url": "https://jgcamiloaga.me",
-        "image": "/resources/img/foto.webp",
+        "image": "/social-share.webp",
         "jobTitle": "Desarrollador Frontend",
         "description": "Desarrollador frontend especializado en React, JavaScript y CSS. Creador de experiencias web modernas y responsivas.",
         "address": {
