@@ -17,9 +17,9 @@ const education = [
 ];
 ---
 
-<section id="education" class="section fade-in-section">
+<section id="education" class="section fade-in-section" aria-labelledby="education-title">
   <div class="container">
-    <h2 class="section-title scroll-animation from-top">EDUCACIÓN</h2>
+    <h2 id="education-title" class="section-title scroll-animation from-top">EDUCACIÓN</h2>
     <div class="education-grid">
       {education.map(item => (
         <article class={`education-card scroll-animation from-left ${item.delay}`}>
