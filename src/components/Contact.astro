@@ -1,12 +1,12 @@
-<section id="contact" class="section fade-in-section">
+<section id="contact" class="section fade-in-section" aria-labelledby="contact-title">
   <div class="container">
-    <h2 class="section-title scroll-animation from-top">CONTACTO</h2>
+    <h2 id="contact-title" class="section-title scroll-animation from-top">CONTACTO</h2>
     <form
       id="contact-form"
       class="contact-form scroll-animation from-bottom delay-1"
       aria-label="Formulario de contacto"
       method="POST"
-      action="https://formspree.io/f/mzzvvgog"
+      action={import.meta.env.PUBLIC_FORMSPREE_URL}
     >
       <div class="form-group">
         <input type="text" id="name" name="name" required autocomplete="name" />
@@ -24,7 +24,7 @@
     </form>
     
     <!-- Modal de confirmación -->
-    <div id="modal-confirm" class="modal-confirm" aria-modal="true" role="dialog" tabindex="-1" style="display:none;">
+    <div id="modal-confirm" class="modal-confirm" aria-modal="true" role="dialog" aria-live="polite" aria-atomic="true" tabindex="-1" style="display:none;">
       <div class="modal-content">
         <span class="modal-close" id="modal-close" tabindex="0" aria-label="Cerrar ventana">&times;</span>
         <h3>¡Gracias por tu mensaje!</h3>
