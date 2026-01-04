@@ -1,4 +1,6 @@
 ---
+import '../styles/main.css';
+
 export interface Props {
   title: string;
   description: string;
@@ -50,10 +52,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/resources/img/social-share.webp" />
     
-    <!-- Estilos y precargas optimizadas -->
-    <link rel="preload" href="/styles/main.css" as="style" />
+    <!-- Precargas optimizadas -->
     <link rel="preload" href="/resources/img/foto.webp" as="image" />
-    <link rel="stylesheet" href="/styles/main.css" />
   </head>
   <body>
     <slot />
