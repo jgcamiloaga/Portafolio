@@ -1,3 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import fotoPersonal from '../assets/img/foto.webp';
+---
+
 <section id="about" class="section fade-in-section" aria-labelledby="about-title">
   <div class="container">
     <h2 id="about-title" class="section-title scroll-animation from-left">SOBRE MI</h2>
@@ -17,12 +22,15 @@
       </div>
       <div class="about-image scroll-animation zoom-in delay-2">
         <div class="image-placeholder">
-          <img
+          <Image
             class="contenido-imagen"
-            src="/resources/img/foto.webp"
+            src={fotoPersonal}
             alt="Johann Camiloaga - Desarrollador Frontend"
-            width="300"
-            height="300"
+            width={400}
+            height={400}
+            densities={[1, 2, 3]}
+            formats={['avif', 'webp']}
+            quality="high"
             loading="lazy"
           />
         </div>
