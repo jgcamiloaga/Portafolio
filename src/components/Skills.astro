@@ -13,9 +13,9 @@ const skills = [
 ];
 ---
 
-<section id="skills" class="section fade-in-section">
+<section id="skills" class="section fade-in-section" aria-labelledby="skills-title">
   <div class="container">
-    <h2 class="section-title scroll-animation from-bottom">SKILLS</h2>
+    <h2 id="skills-title" class="section-title scroll-animation from-bottom">SKILLS</h2>
     <div class="skills-grid">
       {skills.map(skill => (
         <div class={`skill-card scroll-animation from-left ${skill.delay}`}>
