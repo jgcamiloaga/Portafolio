@@ -14,11 +14,11 @@ const navItems = [
     <div class="nav-content">
       <div class="nav-header">
         <span class="logo">PORTA<br />FOLIO</span>
-        <button class="menu-toggle" aria-label="Abrir menú de navegación">
+        <button class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-links">
           <span class="hamburger"></span>
         </button>
       </div>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         {navItems.map(item => (
           <a href={item.href} class="nav-link">{item.label}</a>
         ))}
