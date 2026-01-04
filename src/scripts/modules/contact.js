@@ -80,6 +80,10 @@ export function initializeContactForm() {
           if (modal) {
             modal.style.display = "flex"
             document.body.style.overflow = "hidden"
+            
+            // Enfocar el botón de cerrar para accesibilidad
+            const closeBtn = document.getElementById("modal-close")
+            if (closeBtn) closeBtn.focus()
           }
         } else {
           return response.json().then((data) => {
@@ -92,7 +96,52 @@ export function initializeContactForm() {
       })
   })
 
+  // Configurar cierre del modal
+  initializeModalClose()
   initializeContactScroll()
+}
+
+/**
+ * Configura los event listeners para cerrar el modal de confirmación
+ */
+function initializeModalClose() {
+  const modal = document.getElementById("modal-confirm")
+  const closeBtn = document.getElementById("modal-close")
+  
+  if (!modal || !closeBtn) return
+
+  /**
+   * Función para cerrar el modal
+   */
+  function closeModal() {
+    modal.style.display = "none"
+    document.body.style.overflow = ""
+  }
+
+  // Cerrar con click en el botón X
+  closeBtn.addEventListener("click", closeModal)
+  
+  // Cerrar con teclado (Enter, Espacio, Escape)
+  closeBtn.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+      e.preventDefault()
+      closeModal()
+    }
+  })
+
+  // Cerrar con Escape desde cualquier lugar cuando la modal está abierta
+  window.addEventListener("keydown", (e) => {
+    if (modal.style.display === "flex" && e.key === "Escape") {
+      closeModal()
+    }
+  })
+
+  // Cerrar haciendo click fuera del contenido de la modal
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal()
+    }
+  })
 }
 
 /**
