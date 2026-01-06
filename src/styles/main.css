@@ -110,7 +110,7 @@ body {
   text-decoration: none;
   color: black;
   font-weight: bold;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   border: 3px solid transparent;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -3341,4 +3341,222 @@ body {
   box-shadow: 0 16px 48px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.10);
   border-color: #111;
   transition-property: box-shadow, border-color;
+}
+
+/* Experiencia */
+.experience-timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #000, #666, #000, #666, #000);
+  background-size: 200% 200%;
+  transform: translateX(-50%);
+  animation: gradientFlow 4s linear infinite, glowPulse 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); }
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.experience-item {
+  position: relative;
+  margin-bottom: 80px;
+  width: 48%;
+}
+
+.experience-item.left {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+}
+
+.experience-item.right {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: left;
+}
+
+.experience-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #000;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #000;
+}
+
+.experience-item.left .experience-marker {
+  right: -26px;
+}
+
+.experience-item.right .experience-marker {
+  left: -26px;
+}
+
+.experience-content {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.experience-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.experience-item.left .experience-content {
+  border-right: 4px solid #000;
+}
+
+.experience-item.right .experience-content {
+  border-left: 4px solid #000;
+}
+
+.experience-header {
+  margin-bottom: 15px;
+}
+
+.experience-role {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.experience-company {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.experience-dates {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.experience-description p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.experience-skills h4 {
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.experience-item.left .skills-tags {
+  justify-content: flex-start;
+}
+
+.skill-tag {
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.skill-tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.skill-tag:hover::before {
+  transform: translateX(200%);
+}
+
+.experience-details {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .experience-timeline {
+    padding: 0 10px;
+    position: relative;
+  }
+  
+  .experience-timeline::before {
+    left: 20px;
+    transform: none;
+  }
+  
+  .experience-item {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left !important;
+    padding-left: 60px;
+  }
+  
+  .experience-item.left .experience-content,
+  .experience-item.right .experience-content {
+    border-left: 4px solid #000;
+    border-right: none;
+  }
+  
+  .experience-marker {
+    left: 3px !important;
+    right: auto !important;
+  }
+  
+  .skills-tags {
+    justify-content: flex-start !important;
+  }
 }
