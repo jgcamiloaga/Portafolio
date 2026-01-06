@@ -22,7 +22,21 @@ const skillsCollection = defineCollection({
   }),
 });
 
+const experienceCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    company: z.string(),
+    role: z.string(),
+    startDate: z.date(),
+    endDate: z.date().optional(),
+    description: z.string(),
+    skills: z.array(z.string()),
+    order: z.number(),
+  }),
+});
+
 export const collections = {
   'projects': projectsCollection,
   'skills': skillsCollection,
+  'experience': experienceCollection,
 };
