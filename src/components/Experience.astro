@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+
+// Obtener experiencias de la colección y ordenarlas
+const experiences = (await getCollection('experience')).sort(
+  (a, b) => b.data.order - a.data.order // Más recientes primero
+);
+---
+
+<section id="experience" class="section fade-in-section" aria-labelledby="experience-title">
+  <div class="container">
+    <h2 id="experience-title" class="section-title scroll-animation from-bottom">EXPERIENCIA</h2>
+    <div class="experience-timeline">
+      {experiences.map((exp, index) => {
+        const startDate = exp.data.startDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' });
+        const endDate = exp.data.endDate
+          ? exp.data.endDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })
+          : 'Presente';
+        const isLeft = index % 2 === 0;
+
+        return (
+          <div class={`experience-item ${isLeft ? 'left' : 'right'} scroll-animation ${isLeft ? 'from-left' : 'from-right'} delay-${(index % 3) + 1}`}>
+            <div class="experience-marker"></div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <h3 class="experience-role">{exp.data.role}</h3>
+                <p class="experience-company">{exp.data.company}</p>
+                <p class="experience-dates">{startDate} - {endDate}</p>
+              </div>
+              <div class="experience-description">
+                <p>{exp.data.description}</p>
+                {exp.data.skills && exp.data.skills.length > 0 && (
+                  <div class="experience-skills">
+                    <h4>Habilidades aplicadas:</h4>
+                    <div class="skills-tags">
+                      {exp.data.skills.map(skill => (
+                        <span class="skill-tag">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {exp.body && (
+                  <div class="experience-details">
+                    {exp.rendered?.html ? <div set:html={exp.rendered.html} /> : <p>{exp.body}</p>}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
