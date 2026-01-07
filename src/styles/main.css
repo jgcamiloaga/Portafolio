@@ -1,22 +1,22 @@
 .project-card.touch-active .project-title {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .project-card.touch-active .project-description {
-    max-height: 90px;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .project-card.touch-active .project-links {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .project-card.touch-active .project-number {
-    color: rgba(255, 255, 255, 0.07);
-    transform: translateZ(40px) translateX(-10px) translateY(-10px);
-    opacity: 1;
-  }
-/* Reset y estilos base */
+  transform: translateY(0);
+  opacity: 1;
+}
+.project-card.touch-active .project-description {
+  max-height: 90px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card.touch-active .project-links {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card.touch-active .project-number {
+  color: rgba(255, 255, 255, 0.07);
+  transform: translateZ(40px) translateX(-10px) translateY(-10px);
+  opacity: 1;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -32,14 +32,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Añadir espacio superior en móvil para evitar que el contenido quede oculto tras la barra de navegación fija */
 @media (max-width: 600px) {
   body {
     padding-top: 70px;
   }
 }
 
-/* Navegación */
 .nav {
   position: fixed;
   top: 0;
@@ -53,7 +51,6 @@ body {
   animation-delay: 0.2s;
 }
 
-/* Animación de entrada del navbar */
 @keyframes navSlideDown {
   0% {
     opacity: 0;
@@ -89,7 +86,6 @@ body {
   animation-delay: 0.6s;
 }
 
-/* Animación del logo */
 @keyframes logoFadeIn {
   0% {
     opacity: 0;
@@ -119,15 +115,25 @@ body {
   animation: navLinkFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Delays escalonados para los enlaces */
-.nav-link:nth-child(1) { animation-delay: 0.8s; }
-.nav-link:nth-child(2) { animation-delay: 0.9s; }
-.nav-link:nth-child(3) { animation-delay: 1.0s; }
-.nav-link:nth-child(4) { animation-delay: 1.1s; }
-.nav-link:nth-child(5) { animation-delay: 1.2s; }
-.nav-link:nth-child(6) { animation-delay: 1.3s; }
+.nav-link:nth-child(1) {
+  animation-delay: 0.8s;
+}
+.nav-link:nth-child(2) {
+  animation-delay: 0.9s;
+}
+.nav-link:nth-child(3) {
+  animation-delay: 1s;
+}
+.nav-link:nth-child(4) {
+  animation-delay: 1.1s;
+}
+.nav-link:nth-child(5) {
+  animation-delay: 1.2s;
+}
+.nav-link:nth-child(6) {
+  animation-delay: 1.3s;
+}
 
-/* Animación de entrada para enlaces */
 @keyframes navLinkFadeIn {
   0% {
     opacity: 0;
@@ -145,7 +151,6 @@ body {
   box-shadow: 4px 4px 0 black;
 }
 
-/* Modificar el estilo del enlace activo para que no tenga fondo negro */
 .active-link {
   border-color: black;
   background-color: transparent;
@@ -154,7 +159,6 @@ body {
   text-decoration: underline;
 }
 
-/* Menú hamburguesa */
 .menu-toggle {
   display: none;
   background: none;
@@ -167,7 +171,6 @@ body {
   animation-delay: 0.6s;
 }
 
-/* Animación del botón hamburguesa */
 @keyframes hamburgerFadeIn {
   0% {
     opacity: 0;
@@ -235,13 +238,22 @@ body {
   animation: menuBounce 0.6s ease-out;
 }
 
-/* Animación de rebote para el menú */
 @keyframes menuBounce {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.1) rotate(5deg); }
-  50% { transform: scale(0.95) rotate(-2deg); }
-  75% { transform: scale(1.05) rotate(1deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  50% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 .menu-toggle.active .hamburger::before {
@@ -252,7 +264,6 @@ body {
   transform: rotate(-45deg);
 }
 
-/* Estructura base */
 .section {
   padding: 6rem 2rem;
   min-height: 100vh;
@@ -264,7 +275,6 @@ body {
   cursor: default;
 }
 
-/* Efectos hover minimalistas para las secciones */
 .section:hover {
   transform: translateY(-1px);
 }
@@ -273,7 +283,6 @@ body {
   opacity: 0.02;
 }
 
-/* Overlay sutil para secciones en hover */
 .section::before {
   content: "";
   position: absolute;
@@ -296,7 +305,6 @@ body {
   z-index: 2;
 }
 
-/* Sección de inicio */
 #start {
   background-color: white;
   text-align: center;
@@ -310,7 +318,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(45deg, #f5f5f5 0px, #f5f5f5 10px, #ffffff 10px, #ffffff 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
   opacity: 0.3;
   z-index: 0;
 }
@@ -336,7 +350,6 @@ body {
   z-index: 2;
 }
 
-/* Estilos base para los contenedores de enlaces */
 .redes-links {
   display: flex;
   gap: 1.5rem;
@@ -378,7 +391,6 @@ body {
   box-shadow: 2px 2px 0 black;
 }
 
-/* Sección About */
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -462,7 +474,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Sección Projects con DISEÑO COMPLETAMENTE NUEVO */
 .section-title {
   font-size: 2.5rem;
   position: relative;
@@ -480,7 +491,6 @@ body {
   height: 4px;
   background-color: black;
 }
-
 
 .projects-grid {
   display: grid;
@@ -515,7 +525,6 @@ body {
   }
 }
 
-/* DISEÑO TILT 3D INTERACTIVO DE TARJETAS DE PROYECTOS - VERSIÓN PREMIUM */
 .project-card {
   position: relative;
   height: 400px;
@@ -524,13 +533,14 @@ body {
   cursor: pointer;
   perspective: 1400px;
   margin-bottom: 30px;
-  transition: box-shadow 0.3s cubic-bezier(0.23,1,0.32,1), transform 0.3s cubic-bezier(0.23,1,0.32,1);
+  transition: box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   will-change: transform, box-shadow;
 }
 
 .project-card:active {
   transform: scale(0.98) rotateZ(-1deg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .project-tilt-container {
@@ -538,7 +548,8 @@ body {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s cubic-bezier(0.23,1,0.32,1);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   border: 5px solid black;
   overflow: hidden;
   box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.18);
@@ -548,12 +559,10 @@ body {
 }
 
 .project-card.touch-active .project-tilt-container {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   border-color: #222;
 }
 
-
-/* Decoración de esquina */
 .project-tilt-container::before {
   content: "";
   position: absolute;
@@ -566,7 +575,6 @@ body {
   z-index: 10;
 }
 
-/* Líneas decorativas */
 .project-tilt-container::after {
   content: "";
   position: absolute;
@@ -616,7 +624,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
   z-index: 2;
   opacity: 0.85;
   transition: opacity 0.5s ease, background 0.5s ease;
@@ -624,10 +636,13 @@ body {
 
 .project-card:hover .project-color-overlay {
   opacity: 0.75;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
 }
 
-/* Número de proyecto rediseñado */
 .project-number {
   position: absolute;
   top: 0;
@@ -648,7 +663,6 @@ body {
   transform: translateZ(40px) translateX(-10px) translateY(-10px);
 }
 
-/* Patrón decorativo */
 .project-pattern {
   position: absolute;
   top: 0;
@@ -697,7 +711,6 @@ body {
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Línea decorativa para el título */
 .project-title-container::after {
   content: "";
   position: absolute;
@@ -718,7 +731,6 @@ body {
   transform: translateY(0);
 }
 
-/* Estado inicial: solo mostrar imagen */
 .project-title {
   font-size: 1.8rem;
   font-weight: bold;
@@ -771,7 +783,6 @@ body {
   opacity: 0;
 }
 
-/* Estados de hover: mostrar todo el contenido */
 .project-card:hover .project-title {
   transform: translateY(0);
   opacity: 1;
@@ -809,7 +820,6 @@ body {
   opacity: 1;
 }
 
-/* Botones rediseñados */
 .project-link {
   text-decoration: none;
   color: white;
@@ -839,7 +849,12 @@ body {
   height: 100%;
   z-index: 4;
   pointer-events: none;
-  background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0) 100%);
+  background: radial-gradient(
+    circle at 60% 40%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -848,7 +863,6 @@ body {
   opacity: 1;
 }
 
-/* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
   .project-content {
     padding: 1.2rem;
@@ -895,7 +909,6 @@ body {
   }
 }
 
-/* Sección Education con animación mejorada */
 .education-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -963,7 +976,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
   transition: transform 0.6s ease;
 }
 
@@ -1028,7 +1046,6 @@ body {
   opacity: 1;
 }
 
-/* Mejoras responsive para las tarjetas de educación */
 @media (max-width: 1200px) {
   .education-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1155,7 +1172,6 @@ body {
   }
 }
 
-/* Mejoras para dispositivos táctiles */
 .touch-device .education-card {
   cursor: pointer;
 }
@@ -1170,8 +1186,6 @@ body {
   background-color: #fafafa;
 }
 
-/* NUEVA Sección Skills con diseño coherente con la página */
-/* COMPLETELY REDESIGNED NEOBRUTALIST SKILL CARDS */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -1242,7 +1256,6 @@ body {
   border-top: 2px solid black;
 }
 
-/* Hover effects */
 .skill-card:hover {
   transform: translate(-5px, -5px);
   box-shadow: 12px 12px 0 black;
@@ -1261,7 +1274,6 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Active state for touch devices */
 .touch-device .skill-card.touch-active {
   transform: translate(-5px, -5px);
   box-shadow: 12px 12px 0 black;
@@ -1280,7 +1292,6 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
   .skills-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -1360,7 +1371,6 @@ body {
   }
 }
 
-/* Ocultar los puntos indicadores de nivel */
 .skill-level-indicator {
   display: none;
 }
@@ -1369,7 +1379,6 @@ body {
   display: none;
 }
 
-/* RESTAURACIÓN DEL FORMULARIO DE CONTACTO */
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
@@ -1471,7 +1480,12 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
   transition: transform 0.6s ease;
   z-index: -1;
 }
@@ -1485,7 +1499,6 @@ body {
   transform: translateX(200%);
 }
 
-/* Estilos para la modal de confirmación */
 .modal-confirm {
   position: fixed;
   top: 0;
@@ -1575,7 +1588,6 @@ body {
   }
 }
 
-/* Mejoras responsivas para el formulario de contacto */
 @media (max-width: 768px) {
   .contact-form {
     padding: 2rem;
@@ -1727,11 +1739,9 @@ body {
   }
 }
 
-/* Mejoras para dispositivos táctiles */
 .touch-device .form-group input,
 .touch-device .form-group textarea {
   font-size: 16px;
-  /* Evita el zoom automático en iOS */
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
 }
@@ -1742,25 +1752,21 @@ body {
   margin-top: 0.5rem;
   -webkit-appearance: none;
   appearance: none;
-  /* Elimina estilos por defecto en iOS */
   border-radius: 0;
 }
 
 .touch-device .form-group input:focus,
 .touch-device .form-group textarea:focus {
   transform: none;
-  /* Evitar transformaciones que puedan causar problemas en móviles */
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Mejora para el estado activo del botón en dispositivos táctiles */
 .touch-device .submit-button:active {
   transform: translate(-2px, -2px);
   box-shadow: 2px 2px 0 black;
   background-color: #333;
 }
 
-/* Añadir animaciones de scroll para las tarjetas de proyecto */
 .project-card.scroll-animate {
   opacity: 0;
   transform: translateY(30px);
@@ -1780,9 +1786,7 @@ body {
   transition: all 0.6s ease;
 }
 
-/* Modificar los estilos del menú hamburguesa para reducir el uso de negro */
 @media (max-width: 768px) {
-  /* Enlaces mejorados dentro del menú hamburguesa */
   .nav-link {
     position: relative;
     padding: 0.8rem 1rem;
@@ -1802,7 +1806,6 @@ body {
     transition: all 0.3s ease;
   }
 
-  /* Efecto hover para los enlaces */
   .nav-link:hover {
     background-color: #f5f5f5;
     color: black;
@@ -1810,7 +1813,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* Efecto focus para los enlaces */
   .nav-link:focus {
     background-color: #f0f0f0;
     color: black;
@@ -1819,7 +1821,6 @@ body {
     box-shadow: 0 0 0 2px white;
   }
 
-  /* Efecto active para los enlaces */
   .nav-link:active {
     background-color: #e8e8e8;
     color: black;
@@ -1827,7 +1828,6 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
-  /* Estilo para el enlace activo */
   .nav-link.active-link {
     background-color: white;
     color: black;
@@ -1837,7 +1837,6 @@ body {
     position: relative;
   }
 
-  /* Indicador para el enlace activo */
   .nav-link.active-link::after {
     content: "";
     position: absolute;
@@ -1849,39 +1848,32 @@ body {
     background-color: black;
   }
 
-  /* Efecto hover para el enlace activo */
   .nav-link.active-link:hover {
     background-color: #f5f5f5;
     transform: translateY(-2px);
   }
 }
 
-/* Eliminar el movimiento no deseado en las tarjetas de proyectos */
 .project-card.scroll-animate .project-image {
   opacity: 0.9;
-  /* Eliminar la transformación que causa el movimiento */
   transform: scale(1.05);
 }
 
 .project-card.scroll-animate .project-content {
   opacity: 0;
-  /* Eliminar la transformación que causa el movimiento */
   transform: translateY(0);
 }
 
 .project-card.in-view .project-image.animated {
   opacity: 1;
-  /* Mantener la escala consistente */
   transform: scale(1.05);
 }
 
 .project-card.in-view .project-content.animated {
   opacity: 1;
-  /* Eliminar la transformación que causa el movimiento */
   transform: translateY(0);
 }
 
-/* Ajustar la animación de entrada para las tarjetas de proyecto */
 .project-card.scroll-animate {
   opacity: 0;
   transform: translateY(20px);
@@ -1921,13 +1913,10 @@ body {
   transform: translateY(0);
 }
 
-/* Asegurar que los elementos de scroll no interfieran con la interacción */
 .touch-device .section {
   touch-action: pan-y;
-  /* Permitir solo scroll vertical */
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 2.5rem 2rem;
@@ -1943,7 +1932,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(-45deg, #f5f5f5 0px, #f5f5f5 10px, #f9f9f9 10px, #f9f9f9 20px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #f5f5f5 0px,
+    #f5f5f5 10px,
+    #f9f9f9 10px,
+    #f9f9f9 20px
+  );
   opacity: 0.5;
   z-index: 0;
 }
@@ -1981,7 +1976,6 @@ body {
   width: 100%;
 }
 
-/* Animación inicial de carga */
 .initial-loading {
   position: fixed;
   top: 0;
@@ -2010,7 +2004,6 @@ body {
   will-change: opacity;
 }
 
-/* Animaciones para la sección de inicio */
 .animate-title {
   opacity: 0;
   transform: translateY(50px);
@@ -2022,18 +2015,17 @@ body {
   transform: translateY(0);
 }
 
-/* Efecto glitch mejorado */
 .glitch {
   font-size: 3rem;
   font-weight: bold;
   position: relative;
-  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0
-    rgba(0, 0, 255, 0.75);
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   animation: glitch 500ms infinite;
   will-change: text-shadow;
 }
 
-/* ANIMACIONES DE SCROLL MEJORADAS */
 .scroll-animation {
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2042,8 +2034,6 @@ body {
   perspective: 1000px;
 }
 
-/* Animaciones de entrada */
-/* Animación para las secciones al hacer scroll */
 .fade-in-section {
   opacity: 0;
   transform: translateY(50px);
@@ -2056,7 +2046,6 @@ body {
   transform: translateY(0);
 }
 
-/* Asegúrate de que esta regla sea específica */
 .scroll-animation.active {
   opacity: 1 !important;
   transform: translate(0) scale(1) rotate(0) rotateX(0) rotateY(0) !important;
@@ -2102,7 +2091,6 @@ body {
   transform: rotateY(90deg);
 }
 
-/* Nuevas animaciones de entrada */
 .scroll-animation.fade {
   opacity: 0;
   transform: translateY(0);
@@ -2123,13 +2111,11 @@ body {
   transform: translate(-100px, 100px);
 }
 
-/* Estado activo para todas las animaciones */
 .scroll-animation.active {
   opacity: 1;
   transform: translate(0) scale(1) rotate(0) rotateX(0) rotateY(0);
 }
 
-/* Animaciones de salida */
 .scroll-animation.exit-enabled {
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2164,7 +2150,6 @@ body {
   opacity: 0;
 }
 
-/* Ajustes de tiempo para las animaciones */
 .scroll-animation.delay-1 {
   transition-delay: 0.1s;
 }
@@ -2197,7 +2182,6 @@ body {
   transition-delay: 0.8s;
 }
 
-/* Duración de las animaciones */
 .scroll-animation.duration-fast {
   transition-duration: 0.5s;
 }
@@ -2210,7 +2194,6 @@ body {
   transition-duration: 1.2s;
 }
 
-/* Efectos de fondo para secciones */
 .section-background {
   position: absolute;
   top: 0;
@@ -2226,7 +2209,6 @@ body {
   opacity: 1;
 }
 
-/* Efecto de partículas para secciones */
 .particles {
   position: absolute;
   top: 0;
@@ -2264,7 +2246,6 @@ body {
   }
 }
 
-/* Keyframes */
 @keyframes loadingText {
   0% {
     opacity: 0.3;
@@ -2281,38 +2262,43 @@ body {
 
 @keyframes glitch {
   0% {
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   14% {
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   15% {
-    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   49% {
-    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.05em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   50% {
-    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   99% {
-    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 
   100% {
-    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0
-      rgba(0, 0, 255, 0.75);
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 }
 
@@ -2363,7 +2349,6 @@ body {
   }
 }
 
-/* Botón de volver arriba */
 .scroll-top-button {
   position: fixed;
   bottom: 2rem;
@@ -2393,7 +2378,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Media queries para responsive */
 @media (max-width: 1400px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2412,9 +2396,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-  /* TABLETS: Usar estilos similares a móviles */
-  
-  /* Mostrar menú hamburguesa en tablets */
   .nav-content {
     display: flex;
     justify-content: space-between;
@@ -2457,8 +2438,9 @@ body {
     max-height: 0;
     opacity: 0;
     transform: translateY(-20px);
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s
-      cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     z-index: 1000;
   }
@@ -2469,7 +2451,8 @@ body {
     opacity: 1;
     transform: translateY(0);
     padding: 2rem 0;
-    animation: mobileMenuSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: mobileMenuSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      forwards;
   }
 
   .nav-link {
@@ -2519,32 +2502,30 @@ body {
     box-shadow: 10px 10px 0 black;
   }
 
-  /* Animaciones escalonadas para los enlaces del menú móvil */
   .nav-links.active .nav-link:nth-child(1) {
     animation-delay: 0.1s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(2) {
     animation-delay: 0.2s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(3) {
     animation-delay: 0.3s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(4) {
     animation-delay: 0.4s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(5) {
     animation-delay: 0.5s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(6) {
     animation-delay: 0.6s;
   }
 
-  /* Hero: Layout móvil para tablets */
   .title {
     font-size: 1.8rem;
     font-weight: 400;
@@ -2581,7 +2562,6 @@ body {
     z-index: 3;
   }
 
-  /* Distribución de botones: Layout móvil */
   .redes-links {
     display: flex;
     flex-wrap: wrap;
@@ -2621,7 +2601,6 @@ body {
     box-shadow: 3px 3px 0 black;
   }
 
-  /* About: Layout móvil (columna única) */
   .about-content {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -2650,7 +2629,6 @@ body {
     max-width: 350px;
   }
 
-  /* Projects: Layout de 2 columnas para tablets (mejor aprovechamiento del espacio) */
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -2688,18 +2666,15 @@ body {
     margin-right: 0.6rem;
   }
 
-  /* Ajustes de hover específicos para tablets */
   .project-card:hover .project-description {
     max-height: 110px;
   }
 
-  /* Ajustar número de proyecto para tablets */
   .project-number {
     font-size: 5rem;
     padding: 15px;
   }
 
-  /* General */
   .section {
     padding: 5rem 2rem;
   }
@@ -2708,7 +2683,6 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
 
-  /* Modal responsive para tablets */
   .modal-content {
     padding: 2.5rem 2rem;
     max-width: 450px;
@@ -2724,12 +2698,11 @@ body {
 }
 
 @media (max-width: 767px) {
-  /* Estilos específicos para Hero en móviles */
   .title {
     font-size: 1.5rem;
     font-weight: 400;
     color: black;
-    margin: 2rem 0; /* Espaciado equilibrado arriba y abajo */
+    margin: 2rem 0;
     position: relative;
     z-index: 2;
     padding: 0.5rem 1rem;
@@ -2739,7 +2712,6 @@ body {
     letter-spacing: 1px;
   }
 
-  /* Elementos decorativos en las esquinas */
   .title::before {
     content: "";
     position: absolute;
@@ -2762,7 +2734,6 @@ body {
     z-index: 3;
   }
 
-  /* Distribución especial de botones: 2 arriba, 1 abajo centrado */
   .redes-links {
     display: flex;
     flex-wrap: wrap;
@@ -2776,14 +2747,12 @@ body {
     margin-right: auto;
   }
 
-  /* Primera fila: LinkedIn y GitHub lado a lado */
   .redes-links .redes-link:nth-child(1),
   .redes-links .redes-link:nth-child(2) {
     flex: 0 0 calc(50% - 0.5rem);
     max-width: 140px;
   }
 
-  /* Segunda fila: CV centrado en nueva línea */
   .redes-links .redes-link:nth-child(3) {
     flex: 0 0 140px;
     margin-top: 0.5rem;
@@ -2846,8 +2815,9 @@ body {
     max-height: 0;
     opacity: 0;
     transform: translateY(-20px);
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s
-      cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     z-index: 1000;
   }
@@ -2858,7 +2828,8 @@ body {
     opacity: 1;
     transform: translateY(0);
     padding: 2rem 0;
-    animation: mobileMenuSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: mobileMenuSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      forwards;
   }
 
   .nav-link {
@@ -2883,7 +2854,6 @@ body {
     animation: mobileLinkStagger 0.5s ease-out forwards;
   }
 
-  /* Efecto hover minimalista para los enlaces */
   .nav-link:hover {
     background-color: white;
     color: black;
@@ -2892,7 +2862,6 @@ body {
     border-color: black;
   }
 
-  /* Efecto focus para los enlaces */
   .nav-link:focus {
     background-color: white;
     color: black;
@@ -2902,7 +2871,6 @@ body {
     box-shadow: 6px 6px 0 black;
   }
 
-  /* Efecto active para los enlaces */
   .nav-link:active {
     background-color: white;
     color: black;
@@ -2910,7 +2878,6 @@ body {
     box-shadow: 4px 4px 0 black;
   }
 
-  /* Estilo minimalista para el enlace activo */
   .nav-link.active-link {
     background-color: white;
     color: black;
@@ -2922,34 +2889,32 @@ body {
     font-weight: 900;
   }
 
-  /* Efecto hover para el enlace activo */
   .nav-link.active-link:hover {
     background-color: white;
     transform: translateX(-10px) translateY(-10px);
     box-shadow: 10px 10px 0 black;
   }
 
-  /* Animaciones escalonadas para los enlaces del menú móvil */
   .nav-links.active .nav-link:nth-child(1) {
     animation-delay: 0.1s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(2) {
     animation-delay: 0.2s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(3) {
     animation-delay: 0.3s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(4) {
     animation-delay: 0.4s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(5) {
     animation-delay: 0.5s;
   }
-  
+
   .nav-links.active .nav-link:nth-child(6) {
     animation-delay: 0.6s;
   }
@@ -3013,7 +2978,6 @@ body {
     font-size: 0.75rem;
   }
 
-  /* Ajustes de hover específicos para móviles */
   .project-card:hover .project-description {
     max-height: 95px;
   }
@@ -3043,7 +3007,6 @@ body {
     gap: 1.5rem;
   }
 
-  /* Modal responsive para móviles */
   .modal-content {
     padding: 2rem 1.5rem;
     max-width: 90%;
@@ -3109,7 +3072,6 @@ body {
   .project-description {
     font-size: 0.9rem;
     line-height: 1.3;
- 
   }
 
   .project-link {
@@ -3117,7 +3079,6 @@ body {
     font-size: 0.7rem;
   }
 
-  /* Ajustes de hover específicos para pantallas pequeñas */
   .project-card:hover .project-description {
     max-height: 85px;
   }
@@ -3132,7 +3093,7 @@ body {
   .title {
     font-size: 1.3rem;
     font-weight: 400;
-    margin: 2rem 0; /* Espaciado equilibrado arriba y abajo */
+    margin: 2rem 0;
     padding: 0.4rem 0.8rem;
     background-color: rgba(240, 240, 240, 0.8);
     border: 2px solid rgba(0, 0, 0, 0.1);
@@ -3141,7 +3102,6 @@ body {
     position: relative;
   }
 
-  /* Elementos decorativos más pequeños para 480px */
   .title::before {
     content: "";
     position: absolute;
@@ -3164,7 +3124,6 @@ body {
     z-index: 3;
   }
 
-  /* Ajuste específico para botones en pantallas de 480px */
   .redes-links {
     max-width: 280px;
     margin-left: auto;
@@ -3232,7 +3191,6 @@ body {
     font-size: 0.9rem;
   }
 
-  /* Modal responsive para pantallas muy pequeñas */
   .modal-content {
     padding: 1.5rem;
     max-width: 95%;
@@ -3254,7 +3212,6 @@ body {
   }
 }
 
-/* Media queries para dispositivos móviles pequeños */
 @media (max-width: 375px) {
   .section {
     padding: 3.5rem 0.8rem;
@@ -3269,7 +3226,7 @@ body {
   .title {
     font-size: 1.1rem;
     font-weight: 400;
-    margin: 1.5rem 0; /* Espaciado equilibrado arriba y abajo */
+    margin: 1.5rem 0;
     padding: 0.3rem 0.6rem;
     background-color: rgba(240, 240, 240, 0.8);
     border: 2px solid rgba(0, 0, 0, 0.1);
@@ -3278,7 +3235,6 @@ body {
     position: relative;
   }
 
-  /* Elementos decorativos aún más pequeños para 375px */
   .title::before {
     content: "";
     position: absolute;
@@ -3301,7 +3257,6 @@ body {
     z-index: 3;
   }
 
-  /* Optimización adicional para botones en pantallas muy pequeñas */
   .redes-links {
     max-width: 260px;
     gap: 0.6rem;
@@ -3336,14 +3291,12 @@ body {
   }
 }
 
-/* Elimina cualquier transform en hover, solo deja box-shadow y border-color */
 .project-card:hover .project-tilt-container {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.10);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.1);
   border-color: #111;
   transition-property: box-shadow, border-color;
 }
 
-/* Experiencia */
 .experience-timeline {
   position: relative;
   max-width: 1000px;
@@ -3352,7 +3305,7 @@ body {
 }
 
 .experience-timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 0;
@@ -3361,24 +3314,39 @@ body {
   background: linear-gradient(180deg, #000, #666, #000, #666, #000);
   background-size: 200% 200%;
   transform: translateX(-50%);
-  animation: gradientFlow 4s linear infinite, glowPulse 2s ease-in-out infinite alternate;
+  animation: gradientFlow 4s linear infinite,
+    glowPulse 2s ease-in-out infinite alternate;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes gradientFlow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 0% 100%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
 }
 
 @keyframes glowPulse {
-  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
-  100% { box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); }
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  }
 }
 
 @keyframes gradientFlow {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 .experience-item {
@@ -3423,14 +3391,14 @@ body {
   background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: all 0.3s ease;
 }
 
 .experience-content:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .experience-item.left .experience-content {
@@ -3505,14 +3473,19 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
   transition: transform 0.6s ease;
   z-index: -1;
 }
 
 .skill-tag:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .skill-tag:hover::before {
@@ -3525,18 +3498,17 @@ body {
   border-top: 1px solid #ddd;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .experience-timeline {
     padding: 0 10px;
     position: relative;
   }
-  
+
   .experience-timeline::before {
     left: 20px;
     transform: none;
   }
-  
+
   .experience-item {
     width: 100%;
     margin-left: 0;
@@ -3544,18 +3516,18 @@ body {
     text-align: left !important;
     padding-left: 60px;
   }
-  
+
   .experience-item.left .experience-content,
   .experience-item.right .experience-content {
     border-left: 4px solid #000;
     border-right: none;
   }
-  
+
   .experience-marker {
     left: 3px !important;
     right: auto !important;
   }
-  
+
   .skills-tags {
     justify-content: flex-start !important;
   }
