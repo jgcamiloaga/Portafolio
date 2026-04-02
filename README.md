@@ -1,43 +1,140 @@
-# Astro Starter Kit: Minimal
+# Portafolio Profesional - Johann Camiloaga
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Sitio web de portafolio profesional desarrollado con Astro. Este proyecto presenta perfil, experiencia, habilidades, proyectos, educacion y contacto en una landing optimizada para rendimiento y SEO basico.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Resumen
 
-## 🚀 Project Structure
+- Framework: Astro 5
+- Estilo: CSS personalizado
+- Contenido: Astro Content Collections (`src/content`)
+- SEO: sitemap mediante `@astrojs/sitemap`
+- Objetivo: mostrar perfil profesional y proyectos de forma clara y mantenible
 
-Inside of your Astro project, you'll see the following folders and files:
+## Caracteristicas
+
+- Secciones modulares reutilizables en componentes Astro
+- Contenido editable desde archivos Markdown
+- Animaciones e inicializadores en JavaScript separados por modulo
+- Arquitectura simple y escalable para agregar mas proyectos/experiencia
+
+## Tecnologias
+
+- Astro
+- JavaScript
+- TypeScript (configuracion de proyecto)
+- CSS
+
+## Estructura del proyecto
 
 ```text
-/
+.
 ├── public/
+│   ├── resources/
+│   │   └── cv/
+│   └── robots.txt
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/
+│   │   └── img/
+│   │       ├── projects/
+│   │       └── skills/
+│   ├── components/
+│   │   ├── About.astro
+│   │   ├── Contact.astro
+│   │   ├── Education.astro
+│   │   ├── Experience.astro
+│   │   ├── Footer.astro
+│   │   ├── Hero.astro
+│   │   ├── Navigation.astro
+│   │   ├── Projects.astro
+│   │   └── Skills.astro
+│   ├── content/
+│   │   ├── config.ts
+│   │   ├── experience/
+│   │   ├── projects/
+│   │   └── skills/
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   └── index.astro
+│   ├── scripts/
+│   │   ├── animations.js
+│   │   ├── initializers/
+│   │   └── modules/
+│   └── styles/
+│       └── main.css
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Requisitos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Node.js 18+
+- npm 9+
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Instalacion y uso local
 
-## 🧞 Commands
+1. Instala dependencias:
 
-All commands are run from the root of the project, from a terminal:
+```bash
+npm install
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+2. Inicia el servidor de desarrollo:
 
-## 👀 Want to learn more?
+```bash
+npm run dev
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+3. Abre en navegador:
+
+```text
+http://localhost:4321
+```
+
+## Scripts disponibles
+
+| Script                    | Descripcion                        |
+| :------------------------ | :--------------------------------- |
+| `npm run dev`             | Levanta entorno de desarrollo      |
+| `npm run build`           | Genera build de produccion         |
+| `npm run preview`         | Sirve localmente el build generado |
+| `npm run astro -- --help` | Ayuda de la CLI de Astro           |
+
+## Gestion de contenido
+
+El contenido principal se administra desde `src/content`:
+
+- Experiencia: `src/content/experience/*.md`
+- Proyectos: `src/content/projects/*.md`
+- Habilidades: `src/content/skills/*.md`
+- Esquemas de colecciones: `src/content/config.ts`
+
+Para agregar una entrada nueva, crea un archivo `.md` en la coleccion correspondiente siguiendo la estructura de frontmatter existente.
+
+## Personalizacion
+
+- Componentes visuales: `src/components`
+- Estilos globales: `src/styles/main.css`
+- Animaciones e interacciones: `src/scripts/modules` y `src/scripts/initializers`
+- Estructura base de pagina: `src/layouts/Layout.astro`
+
+## Build y despliegue
+
+Generar build de produccion:
+
+```bash
+npm run build
+```
+
+Previsualizar build:
+
+```bash
+npm run preview
+```
+
+El output final se genera en `dist/` y puede desplegarse en plataformas como Netlify, Vercel, GitHub Pages o cualquier hosting estatico.
+
+## Licencia
+
+Este proyecto incluye un archivo `LICENSE` en la raiz. Ajusta la licencia segun el nivel de uso permitido para terceros.
