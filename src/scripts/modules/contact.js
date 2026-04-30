@@ -41,7 +41,7 @@ export function initializeContactForm() {
 
   const submitButton = contactForm.querySelector(".submit-button")
   if (submitButton) {
-    submitButton.classList.add("scroll-animation", "from-bottom", "delay-4")
+    submitButton.classList.add("scroll-animation", "from-bottom")
   }
 
   contactForm.addEventListener("submit", (e) => {
