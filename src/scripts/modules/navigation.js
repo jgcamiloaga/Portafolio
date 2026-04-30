@@ -90,7 +90,9 @@ export function initializeNavigation() {
 
   navLinksItems.forEach((link) => {
     link.addEventListener("click", () => {
-      toggleMenu()
+      if (menuToggle.classList.contains("active")) {
+        toggleMenu()
+      }
     })
 
     link.style.opacity = "0"
