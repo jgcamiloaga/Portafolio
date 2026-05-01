@@ -8,8 +8,6 @@ export function initializeSmoothScrolling() {
 
         const target = document.querySelector(targetId)
         if (target) {
-          document.body.classList.add("scrolling")
-
           const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
 
           const startPosition = window.pageYOffset
@@ -32,8 +30,6 @@ export function initializeSmoothScrolling() {
             if (timeElapsed < duration) {
               requestAnimationFrame(animation)
             } else {
-              document.body.classList.remove("scrolling")
-
               window.scrollTo(0, targetPosition)
             }
           }
@@ -46,18 +42,6 @@ export function initializeSmoothScrolling() {
         }
       })
     })
-
-    const style = document.createElement("style")
-    style.textContent = `
-      body.scrolling section {
-        transition: opacity 0.3s ease;
-        opacity: 0.7;
-      }
-      section {
-        transition: opacity 0.5s ease;
-      }
-    `
-    document.head.appendChild(style)
   } catch (error) {
     return
   }
