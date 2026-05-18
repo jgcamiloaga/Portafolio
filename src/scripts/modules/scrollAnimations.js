@@ -6,6 +6,8 @@ export function initializeScrollAnimations() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible")
+        } else {
+          entry.target.classList.remove("visible")
         }
       })
     },
@@ -46,11 +48,8 @@ function handleScrollAnimations() {
 
     if (isVisible) {
       animation.classList.add("active")
-    } else if (animation.classList.contains("exit-enabled") && isCompletelyOutOfView) {
+    } else {
       animation.classList.remove("active")
-      animation.classList.add("exit-active")
-    } else if (animation.classList.contains("exit-enabled") && !isCompletelyOutOfView) {
-      animation.classList.remove("exit-active")
     }
   })
 
