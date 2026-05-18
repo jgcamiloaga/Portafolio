@@ -85,8 +85,7 @@ function initializeProjectScroll() {
               if (pattern) pattern.classList.add("animated")
             }
 
-            setupExitAnimation(entry.target)
-          } else if (entry.boundingClientRect.top > 0) {
+          } else {
             entry.target.classList.remove("in-view")
 
             const elements = entry.target.querySelectorAll(".animated")
@@ -113,26 +112,3 @@ function initializeProjectScroll() {
   }
 }
 
-function setupExitAnimation(card) {
-  const exitObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          card.classList.add("exit-animation")
-
-          setTimeout(() => {
-            card.classList.remove("exit-animation")
-          }, 500)
-
-          exitObserver.unobserve(card)
-        }
-      })
-    },
-    {
-      threshold: 0,
-      rootMargin: "-20% 0px 0px 0px",
-    },
-  )
-
-  exitObserver.observe(card)
-}
