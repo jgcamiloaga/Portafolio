@@ -3,7 +3,7 @@ title: "Zoonika"
 description: "Página web responsiva para una veterinaria, donde los usuarios pueden conocer los servicios ofrecidos y dejar reseñas sobre su experiencia, mejorando la confianza de nuevos clientes."
 image: "../../assets/img/projects/project_3.webp"
 alt: "Zoonika – Landing page para veterinaria con comentarios de clientes"
-repository: "https://github.com/ieeecsutp/Zoonika-f"
+repository: "https://github.com/ieeecsutpdev/Zoonika-f"
 order: 3
 ---
 
